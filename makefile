@@ -7,7 +7,7 @@ RM = rm -rf
 SRCS    := $(shell find ./src -iname "*.c")
 OBJS    := ${SRCS:.c=.o}
 
-LIBFT   := ./lib/libft
+LIBFT   := ./lib/libft/libft.a
 READFLAG:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
 
