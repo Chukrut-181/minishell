@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/02 20:29:30 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/04 10:29:55 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char *get_name(char **env)
 			pwd = *env + 4;
 		env++;
 	}
-	char *prompt = ft_strjoin(user, "@minishell ");
+	char *prompt = ft_strjoin(user, "@minishell $ ");
 	char *result = ft_strjoin(prompt, pwd);
-	free(prompt);
-	return (result);
+	free(result);
+	return (prompt);
 }
 
 int main(int argc, char **argv, char **env)

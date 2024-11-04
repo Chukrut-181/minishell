@@ -7,9 +7,8 @@ RM = rm -rf
 SRCS    := $(shell find ./src -iname "*.c")
 OBJS    := ${SRCS:.c=.o}
 
-LIBFT   := ./lib/libft
+LIBFT   := ./lib/libft/libft.a
 READFLAG:= -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
-
 
 CLR_RMV := \033[0m
 RED := \033[1;31m
