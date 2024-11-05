@@ -6,26 +6,79 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:23:07 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/04 14:03:33 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:30:19 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-t_token	*tokenize(char *line)
+// Initialize the head of the token linked list to NULL
+// Create a buffer to temporarily store characters of each token
+// Set up indices for iterating over 'line' and the buffer
+// Variable to track if we are inside a quote. This is set to '"' or '\'' if inside quotes, otherwise '\0'
+// Main loop: Iterate through each character of the input line
+    // Case 1: Handle spaces outside of quotes (indicates the end of a token)
+            // Check if there is any text in the buffer to create a token
+t_token *tokenize(char *line)
 {
-	t_token *head;
-	char	**array;
-	int		i;
+    t_token *head = NULL;
+    
+    char buffer[1024];
+    int i = 0, buf_index = 0;
 
-	array = ft_split(line, ' ');
-	i = 0;
-	while (array[i])
+    char quote = '\0';  // 
+
+    while (line[i] != '\0') 
 	{
-		add_token(&head, array[i]);
-		i++;
-	}
-	return (head);
+        if (line[i] == ' ' && !quote) 
+		{ 
+            if (buf_index > 0) 
+			{
+                buffer[buf_index] = '\0';  // Null-terminate the buffer
+                add_token(&head, buffer);  // Add the buffer as a token to the list
+                buf_index = 0;             // Reset buffer index for the next token
+            }
+        }
+
+        // Case 2: Handle quote characters (either double " or single ')
+        else if (line[i] == '"' || line[i] == '\'')
+		{  
+            // Check if we're already inside a quote
+            if (!quote)
+                quote = line[i];  // Start of a quote, store the quote character
+            else if (quote == line[i])
+                quote = '\0';  // End of the current quote, reset quote to '\0'
+            else
+                buffer[buf_index++] = line[i];  // Add character to buffer if inside quotes
+        }
+
+        // Case 3: Handle operators (|, >, <) outside of quotes
+        else if (ft_strchr("|<>", line[i]) && !quote)
+		{ 
+            // If there are characters in the buffer, finalize and add the current token
+            if (buf_index > 0) { 
+                buffer[buf_index] = '\0';
+                add_token(&head, buffer);
+                buf_index = 0;
+            }
+            // Add the operator itself as a separate token
+            buffer[0] = line[i];
+            buffer[1] = '\0';  // Null-terminate the operator string
+            add_token(&head, buffer);
+        }
+        // Case 4: Normal character, add to the current buffer
+        else
+		{
+            buffer[buf_index++] = line[i];
+        }
+        i++;  // Move to the next character in the line
+    }
+    // After the loop, check if there’s any remaining token in the buffer
+    if (buf_index > 0) {
+        buffer[buf_index] = '\0';  // Null-terminate the buffer
+        add_token(&head, buffer);  // Add the final token to the list
+    }
+    return (head);  // Return the head of the linked list containing all tokens
 }
 
 t_token	*add_token(t_token **head, char *str)
@@ -37,7 +90,7 @@ t_token	*add_token(t_token **head, char *str)
 /* 	if (!new_token)
 		return (NULL); */
 	new_token->value = ft_strdup(str);
-	new_token->type = determine_token_type(new_token);
+	new_token->type = determine_token_type(new_token->value);
 	new_token->next = NULL;
 	if (head == NULL)
 	{
@@ -53,14 +106,22 @@ t_token	*add_token(t_token **head, char *str)
 	return (new_token);
 }
 
-t_token_type	determine_token_type(t_token *new_token)
+t_token_type	determine_token_type(char *str)
 {
-	if (new_token->value == '|')
-		return (PIPE);
-	if (new_token->value[0] == '-')
+	if (ft_strcmp(str, "-") == 0)
 		return (ARGUMENT);
-	if (new_token->value == '<' || new_token->value == '>')
+	else if (ft_strcmp(str, "|") == 0)
+		return (PIPE);
+	else if (ft_strcmp(str, "<") == 0)
 		return (REDIRECT_IN);
-	if (new_token->value == '>')
+	else if (ft_strcmp(str, ">") == 0)
 		return (REDIRECT_OUT);
+	else if (ft_strcmp(str, ">>") == 0)
+		return(APPEND);
+	else if (strcmp(str, "&&") == 0)
+        return (AND);
+	else if (strcmp(str, "||") == 0)
+        return (OR);
+	else
+		return (COMMAND);
 }
