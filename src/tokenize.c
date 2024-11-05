@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:23:07 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/05 10:58:02 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:14:11 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_token	*add_token(t_token **head, char *str)
 	new_token->value = ft_strdup(str);
 	new_token->type = determine_token_type(new_token->value);
 	new_token->next = NULL;
-	if (head == NULL)
+	if (*head == NULL)
 	{
 		*head = new_token;
 	}
@@ -137,3 +137,54 @@ t_token_type	determine_token_type(char *str)
 	else
 		return (COMMAND);
 }
+
+void print_tokens(t_token *head)
+{
+    t_token *current = head;
+    while (current != NULL)
+    {
+        // Print the value and type of each token
+        printf("Token: '%s', Type: %d\n", current->value, current->type);
+        current = current->next;
+    }
+}
+
+int main(int argc, char **argv, char **env)
+{
+	(void)argc;
+	(void)argv;
+	(void)env;
+    char *line;
+    t_token *tokens;
+
+    // Get input from the user
+    line = readline("minishell> ");
+    if (!line)
+    {
+        perror("readline");
+        return (EXIT_FAILURE);
+    }
+
+    // Tokenize the input line
+    tokens = tokenize(line);
+
+    // Print the tokens
+    print_tokens(tokens);
+
+    // Free allocated memory for the tokens
+    t_token *temp;
+    while (tokens != NULL)
+    {
+        temp = tokens;
+        tokens = tokens->next;
+        free(temp->value);
+        free(temp);
+    }
+
+    // Free the input line
+    free(line);
+    
+    return (EXIT_SUCCESS);
+}
+
+/* cc -Wall -Wextra -Werror -lreadline tokenize.c ../lib/libft/libft.a */
