@@ -1,3 +1,5 @@
 gitignore 
 minishell
 *.o
+.vscode
+a.out
