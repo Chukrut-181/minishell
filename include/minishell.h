@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/05 12:35:34 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/07 13:19:01 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include <signal.h>
 #include "../lib/libft/libft.h"
 
+#define HOME "/home/eandres"
+#define MAX_PATH 1024
+
 #define RED			"\033[0;31m"
 # define GREEN		"\033[0;32m"
 # define GREENB		"\033[32;1m"
@@ -33,5 +36,26 @@
 # define CYAN		"\033[0;36m"
 # define BOLD		"\033[0;1m"
 # define X			"\033[0;0m"
+
+typedef struct s_prompt
+{
+	t_list	*cmds;
+	pid_t	pid;
+}			t_prompt;
+
+typedef struct s_mini
+{
+	char	**full_cmd;
+	char	*full_path;
+	char	**envp;
+	int		is_builtins;
+	int		infile;
+	int		outfile;
+}			t_mini;
+
+int		management_builtins(t_mini *mini);
+void	management_cd(t_mini *mini);
+char	*my_getenv(char *str, char *error);
+void	update_pwd(t_mini *mini);
 
 #endif
