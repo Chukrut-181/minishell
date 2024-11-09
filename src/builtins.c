@@ -6,69 +6,83 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/07 15:45:33 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/09 08:05:51 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	management_builtins(t_mini *mini)
+int management_builtins(t_mini *mini)
 {
-	if (ft_strncmp(mini->full_cmd[0], "cd", 2))
-		management_cd(mini);
-	else if (ft_strcnmp(mini->full_cmd[0], "pwd", 3))
-		management_pwd(mini);
-	/* else if (ft_strcnmp(mini->full_cmd[0], "echo", 4))
-		management_echo(mini);
-	else if (ft_strcnmp(mini->full_cmd[0], "env", 3))
-		management_env(mini);
-	else if (ft_strcnmp(mini->full_cmd[0], "export", 6))
-		management_export(mini);
-	else if (ft_strcnmp(mini->full_cmd[0], "unset", 5))
-		management_unset(mini); */
-	return (0);
+    if (ft_strcmp(mini->full_cmd[0], "cd") == 0)
+        management_cd(mini);
+    else if (ft_strcmp(mini->full_cmd[0], "pwd") == 0)
+        management_pwd();
+    else if (ft_strcmp(mini->full_cmd[0], "env") == 0)
+        management_env(mini);
+    else if (ft_strcmp(mini->full_cmd[0], "unset") == 0)
+        management_unset(mini);
+    else
+        return (1);
+    return (0);
 }
 
-void    management_cd(t_mini *mini)
+void management_cd(t_mini *mini)
 {
-    char    *home;
-	char	*oldpwd;
+    char *home;
 
     if (mini->full_cmd[1] == NULL || (ft_strcmp(mini->full_cmd[1], "$HOME") == 0))
     {
-        home = my_getenv("HOME", "error al cambiar al directorio");
-        if (chdir(home) != 0)
+        home = my_getenvp("HOME", mini->env_copy);
+        if (!home || chdir(home) != 0)
             perror("cd: error al cambiar al directorio HOME");
     }
-    else if (strcmp(mini->full_cmd[1], "-") == 0)
+    else if (chdir(mini->full_cmd[1]) != 0)
     {
-        oldpwd = my_getenv("OLDPWD", "error al conseguir el oldpwd");
-        if (chdir(oldpwd) != 0)
-            perror("cd: error al cambiar al directorio anterior");
-        else
-            printf("%s\n", oldpwd);
-    }
-    else if(chdir(mini->full_cmd[1]) != 0)
-    {
-        perror("error");
+        perror("cd: error");
         return;
     }
-	update_pwd(mini);
+    update_pwd(mini);
 }
 
-void	update_pwd(t_mini *mini)
+void update_pwd(t_mini *mini)
 {
-	char    new_path[MAX_PATH];
+    char new_path[MAX_PATH];
 
-	if (getcwd(new_path, sizeof(new_path)) != NULL)
-	{
-		// tengo que modificar la funcion setenv por export
-		// setenv actualiza una variable del env
-		setenv("OLDPWD", mini->full_path, 1);
-        setenv("PWD", new_path, 1);
+    if (getcwd(new_path, sizeof(new_path)) != NULL)
+    {
+        my_setenv("OLDPWD", mini->full_path, 1, mini);
+        my_setenv("PWD", new_path, 1, mini);
         free(mini->full_path);
         mini->full_path = strdup(new_path);
-	}
-	else
-		perror("cd: error obteniendo el directorio actual");
+    }
+    else
+        perror("cd: error obteniendo el directorio actual");
+}
+
+void management_pwd(void)
+{
+    char cwd[MAX_PATH];
+
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+        printf("%s\n", cwd);
+    else
+        perror("getcwd() error");
+}
+
+void management_env(t_mini *mini)
+{
+    int i = 0;
+    
+    if (!mini->env_copy)
+    {
+        fprintf(stderr, "Error: Environment variables not available\n");
+        return;
+    }
+    
+    while (mini->env_copy[i])
+    {
+        printf("%s\n", mini->env_copy[i]);
+        i++;
+    }
 }
