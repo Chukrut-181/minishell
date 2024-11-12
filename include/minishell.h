@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/09 07:56:36 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/12 14:26:40 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,21 @@ typedef struct s_mini
 	int		outfile;
 }			t_mini;
 
-void management_unset(t_mini *mini);
-int count_val(const char *val);
-char **create_env_copy(char **env);
-void update_env_copy(t_mini *mini);
-char *my_getenvp(const char *name, char **env_copy);
-int my_setenv(const char *name, const char *value, int overwrite, t_mini *mini);
+// builtins
+int management_builtins(t_mini *mini);
 void management_pwd(void);
-void management_env(t_mini *mini);
 void management_cd(t_mini *mini);
+void management_env(t_mini *mini);
+void management_unset(t_mini *mini);
+void management_echo(t_mini *mini);
+int management_export(t_mini *mini);
+void management_exit(t_mini *mini);
+
+//builtins utils
 void update_pwd(t_mini *mini);
+char **create_env_copy(char **env);
+char *my_getenvp(const char *name, char **env_copy);
+int set_env_var(t_mini *mini, const char *name, const char *value);
+
 
 #endif

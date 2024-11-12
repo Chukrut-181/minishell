@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   management_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 12:22:23 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/07 12:26:59 by eandres          ###   ########.fr       */
+/*   Created: 2024/11/11 11:11:50 by eandres           #+#    #+#             */
+/*   Updated: 2024/11/11 11:12:19 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-char	*my_getenv(char *str, char *error)
+void management_env(t_mini *mini)
 {
-	char *home;
-
-	home = getenv(str);
-	if (!home)
-	{
-		perror(error);
-		return NULL;
-	}
-	return (home);
+    int i = 0;
+    
+    if (!mini->env_copy)
+    {
+        fprintf(stderr, "Error: Environment variables not available\n");
+        return;
+    }
+    
+    while (mini->env_copy[i])
+    {
+        printf("%s\n", mini->env_copy[i]);
+        i++;
+    }
 }
