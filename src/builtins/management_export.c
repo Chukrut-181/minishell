@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 13:49:23 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:35:25 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ int set_env_var(t_mini *mini, const char *name, const char *value)
 
 int management_export(t_mini *mini)
 {
-	char *name;
-	char *value;
+	char	*value;
 
 	if (!mini->full_cmd[1] || !mini->env_copy)
 		return (-1);
-	name = mini->full_cmd[1];
-	value = ft_strchr(name, '=');
+	if (!ft_strchr(mini->full_cmd[1], '='))
+		return (perror("error con el env"), -1);
+	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{
 		*value = '\0';
@@ -115,5 +115,5 @@ int management_export(t_mini *mini)
 	{
 		value = "";
 	}
-	return (set_env_var(mini, name, value));
+	return (set_env_var(mini, mini->full_cmd[1], value));
 }
