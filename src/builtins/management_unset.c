@@ -6,11 +6,23 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 16:27:34 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:23:59 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	is_valid(char *str)
+{
+	int len;
+
+	if (str == NULL || *str == '\0')
+        return (-1);
+    len = ft_strlen(str);
+	if (str[len - 1] == '=')
+		return (0);
+	return (-1);
+}
 
 static int count_val(const char *val)
 {
@@ -56,7 +68,7 @@ void management_unset(t_mini *mini)
 
 	i = 1;
 	j = 0;
-	if (!mini->env_copy || !mini->full_cmd[1])
+	if (!mini->env_copy || is_valid(mini->full_cmd[1]))
 	{
 		fprintf(stderr, "unset: invalid arguments\n");
 		return;
