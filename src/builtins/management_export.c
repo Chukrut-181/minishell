@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/13 13:35:25 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/14 15:51:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int management_export(t_mini *mini)
 
 	if (!mini->full_cmd[1] || !mini->env_copy)
 		return (-1);
-	if (!ft_strchr(mini->full_cmd[1], '='))
-		return (perror("error con el env"), -1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{

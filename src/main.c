@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/13 16:53:26 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:33:26 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static void free_args(char **args)
+void free_args(char **args)
 {
 	for (int i = 0; args[i]; i++)
 		free(args[i]);
@@ -48,20 +48,6 @@ char *get_name(char **env)
 	return (prompt);
 }
 
-int process_command(t_mini *mini, char *line)
-{
-	char **args = ft_split(line, ' ');
-	if (!args)
-		return 0;
-
-	mini->full_cmd = args;
-	int result = management_builtins(mini);
-	free_args(args);
-	mini->full_cmd = NULL;
-
-	return result;
-}
-
 int main(int argc, char **argv, char **env)
 {
 	(void)argv;
@@ -89,29 +75,25 @@ int main(int argc, char **argv, char **env)
 	mini->outfile = STDOUT_FILENO;
 	while (1)
 	{
-		name = get_name(mini->env_copy);
-		if (!name)
-		{
-			perror("Error: No se pudo obtener el nombre del prompt\n");
-			break;
-		}
-		line = readline(name);
-		free(name);
-		if (!line)
-		{
-			printf("\nSaliendo de minishell\n");
-			break;
-		}
-		if (ft_strlen(line) > 0)
-		{
-			add_history(line);
-			if (process_command(mini, line) == 1)
-			{
-				// Aquí puedes manejar comandos no builtin
-				printf("Comando no reconocido: %s\n", line);
-			}
-		}
-		free(line);
+	    name = get_name(mini->env_copy);
+	    if (!name)
+	    {
+	        perror("Error: No se pudo obtener el nombre del prompt\n");
+	        break;
+	    }
+	    line = readline(name);
+	    free(name);
+	    if (!line)
+	    {
+	        printf("\nSaliendo de minishell\n");
+	        break;
+	    }
+	    if (ft_strlen(line) > 0)
+	    {
+	        add_history(line);
+	        process_command(mini, line);
+	    }
+	    free(line);
 	}
 	if (mini->full_path)
 		free(mini->full_path);

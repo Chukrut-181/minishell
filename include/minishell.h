@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 14:26:40 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:33:41 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,12 @@ char **create_env_copy(char **env);
 char *my_getenvp(const char *name, char **env_copy);
 int set_env_var(t_mini *mini, const char *name, const char *value);
 
+//execute command
+char	*get_path(t_mini *mini);
+int		process_command(t_mini *mini, char *line);
+void	execute_external_command(t_mini *mini);
+
+//other
+void free_args(char **args);
 
 #endif
