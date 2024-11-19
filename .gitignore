@@ -3,3 +3,5 @@ minishell
 *.o
 a.out
 .vscode
+test.c
+readline.supp

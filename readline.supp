@@ -1,0 +1,7 @@
+{
+   ignore_readline_leak
+   match-leak-kinds: definite, indirect, possible
+   fun:malloc
+   fun:realloc
+   obj:*libreadline.so*
+}
