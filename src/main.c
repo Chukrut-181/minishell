@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 10:33:26 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:42:03 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int main(int argc, char **argv, char **env)
 	    free(name);
 	    if (!line)
 	    {
-	        printf("\nSaliendo de minishell\n");
+	        printf("\nhola\n");
 	        break;
 	    }
 	    if (ft_strlen(line) > 0)
