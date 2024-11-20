@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 17:23:59 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:54:38 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 int	is_valid(char *str)
 {
-	int len;
+	int i;
 
+	i = 0;
 	if (str == NULL || *str == '\0')
         return (-1);
-    len = ft_strlen(str);
-	if (str[len - 1] == '=')
-		return (0);
+    while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
 	return (-1);
 }
 
@@ -63,34 +67,40 @@ char **create_env_copy(char **env)
 
 void management_unset(t_mini *mini)
 {
-	int i, j, k;
-	int len;
+    int i, j;
+    int len;
+    int found;
 
-	i = 1;
-	j = 0;
-	if (!mini->env_copy || is_valid(mini->full_cmd[1]))
-	{
-		fprintf(stderr, "unset: invalid arguments\n");
-		return;
-	}
-	while (mini->full_cmd[i])
-	{
-		len = count_val(mini->full_cmd[i]);
-		while (mini->env_copy[j])
-		{
-			if (ft_strncmp(mini->full_cmd[i], mini->env_copy[j], len) == 0 && mini->env_copy[j][len] == '=')
-			{
-				free(mini->env_copy[j]);
-				k = j;
-				while (mini->env_copy[k])
-				{
-					mini->env_copy[k] = mini->env_copy[k + 1];
-					k++;
-				}
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
+    i = 1;
+    if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))
+    {
+        fprintf(stderr, "unset: invalid arguments\n");
+        return;
+    }
+    while (mini->full_cmd[i])
+    {
+        len = count_val(mini->full_cmd[i]);
+        j = 0;
+        found = 0;
+        while (mini->env_copy[j])
+        {
+            if (ft_strncmp(mini->full_cmd[i], mini->env_copy[j], len) == 0 && mini->env_copy[j][len] == '=')
+            {
+                free(mini->env_copy[j]);
+                while (mini->env_copy[j])
+                {
+                    mini->env_copy[j] = mini->env_copy[j + 1];
+                    j++;
+                }
+                found = 1;
+                break;
+            }
+            j++;
+        }
+        if (!found)
+        {
+            fprintf(stderr, "unset: %s: variable not found\n", mini->full_cmd[i]);
+        }
+        i++;
+    }
 }

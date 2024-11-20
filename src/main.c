@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 10:33:26 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:40:46 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ char *get_name(char **env)
 	{
 		if (ft_strncmp("USER=", env[i], 5) == 0)
 		{
-			user = ft_strjoin(GREEN, env[i] + 5);
+			user = ft_strjoin(PURPLEB, env[i] + 5);
 			break;
 		}
 		i++;
 	}
 	if (!user)
-		user = ft_strjoin(GREEN, "unknown");
+		user = ft_strjoin(PURPLEB, "unknown");
 	//pwd = ft_strjoin(pwd, BLUE" $ "X);
-	char *prompt = ft_strjoin(user, YELLOW"@minishell $ "X);
+	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	//char *result = ft_strjoin(prompt, pwd);
 	free(user);
 	//free(pwd);
