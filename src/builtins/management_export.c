@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 17:24:29 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/20 10:49:14 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int management_export(t_mini *mini)
 {
 	char	*value;
 
-	if (is_valid(mini->full_cmd[1]) || !mini->env_copy)
-		return (-1);
+	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->env_copy)
+		return (perror("not found"), -1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{

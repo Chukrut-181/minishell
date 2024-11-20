@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/19 13:42:03 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:30:41 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char *get_name(char **env)
 
 int main(int argc, char **argv, char **env)
 {
+	if (argc == 2)
+		return (0);
 	(void)argv;
 	(void)argc;
 	char *line;
