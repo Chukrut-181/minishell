@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/19 15:21:03 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:03:34 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ char *get_name(char **env)
 
 int main(int argc, char **argv, char **env)
 {
+	char		*line;
+	char		*name;
+	t_mini		*mini;
+	//t_prompt	*prompt;
+
 	(void)argv;
 	(void)argc;
-	char *line;
-	char *name;
-	t_mini *mini;
-
 	mini = initialize_mini(env);
 	while (1)
 	{
