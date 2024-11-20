@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/19 15:18:01 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:42:59 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <limits.h>
 #include <signal.h>
 #include "../lib/libft/libft.h"
+#include <stdbool.h>
 
 #define HOME "/home/eandres"
 #define MAX_PATH 1024
@@ -81,5 +82,7 @@ void free_args(char **args);
 
 //parse
 t_mini	*initialize_mini(char **env);
+char	*ft_strtrim_quotes(char const *s1, int squote, int dquote);
+int		count_quotes(char const *s1);
 
 #endif
