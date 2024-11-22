@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/20 14:04:05 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:40:39 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,19 @@
 # define BOLD		"\033[0;1m"
 # define X			"\033[0;0m"
 
-typedef struct s_prompt
-{
-	t_list	*cmds;
-	pid_t	pid;
-}			t_prompt;
-
 typedef struct s_mini
 {
-	char	**full_cmd;
-	char	*full_path;
-	char	**envp;
-	char	**env_copy;
-	int		is_builtins;
-	int		infile;
-	int		outfile;
-}			t_mini;
+	char			*command;
+	char			**full_cmd;
+	char			*full_path;
+	char			**envp;
+	char			**env_copy;
+	int				is_builtin;
+	int				infile;
+	int				outfile;
+	pid_t			pid;
+	struct s_mini	*next;
+}					t_mini;
 
 // builtins
 int management_builtins(t_mini *mini);
