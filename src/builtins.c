@@ -6,13 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 16:28:10 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/27 15:51:13 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int management_builtins(t_mini *mini)
+int	management_builtins(t_mini *mini)
 {
 	if (!mini->full_cmd || !mini->full_cmd[0])
 		return (1);
