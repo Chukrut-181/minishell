@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 10:45:55 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:42:53 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,11 @@ char	get_quote_context(const char *s, int index)
 	i = 0;
 	while (i < index)
 	{
-		if (*aux == '\'' || *aux == '\"')
+		if (aux[i] == '\'' || aux[i] == '\"')
 		{
 			if (quote == 0)
-				quote = *aux;
-			else if (quote == *aux)
+				quote = aux[i];
+			else if (quote == aux[i])
 				quote = 0;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 10:39:50 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:12:40 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,7 @@ char	*expand_variable(char *word, int index)
 	int		name_len;
 	char	*var_value;
 	char	*expanded;
-	char	quote;
 
-	quote = get_quote_context(word, index);
-	if (quote == '\'')
-		return (ft_strdup(word));
 	name_len = get_var_name_len(&word[index + 1]);
 	var_name = ft_substr(&word[index + 1], 0, name_len);
 	var_value = getenv(var_name);
@@ -143,7 +139,7 @@ char	**expand(char **temp)
 		{
 			if (temp[i][0] == '~')
 				temp[i] = expand_path(temp[i], j);
-			else if (temp[i][j] == '$')
+			else if (temp[i][j] == '$' && get_quote_context(temp[i], j) != '\'')
 			{
 				prefix = ft_substr(temp[i], 0, j);
 				temp[i] = ft_strjoin(prefix, expand_variable(temp[i], j));
