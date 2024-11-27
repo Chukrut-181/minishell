@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 11:12:07 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:11:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	**create_temp_array(char **array, int i, int j)
 		return (NULL);
 	}
 	temp_array[0] = ft_substr(&array[i][0], 0, j);
-	temp_array[1] = ft_strdup(&array[i][ft_strlen(array[i]) - 1]);
+	temp_array[1] = ft_strdup(&array[i][j]);
 	temp_array[2] = NULL;
 	return (temp_array);
 }

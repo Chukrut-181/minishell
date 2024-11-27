@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 11:19:25 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:03:38 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(void)
 
 /*
 
-cc -Wall -Wextra -Werror -lreadline parse.c prompt_trim.c expand.c trim_quotes.c extract_operators.c free.c ./lib/libft/libft.a && ./a.out
+cc -Wall -Wextra -Werror -lreadline parse.c prompt_trim.c expand.c trim_quotes.c extract_operators.c free.c ../lib/libft/libft.a && ./a.out
 
 <Makefile cat| echo "$PWD 'hola'" ~/src | 'tr' -d / >Outfile
 

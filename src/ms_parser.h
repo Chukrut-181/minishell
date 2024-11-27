@@ -6,14 +6,14 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:40:11 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 11:04:47 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:02:35 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_PARSER_H
 # define MS_PARSER_H
 
-# include "./lib/libft/libft.h"
+# include "../lib/libft/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <readline/readline.h>
