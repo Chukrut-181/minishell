@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 15:38:03 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:42:59 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,27 @@
  *
  * Return: A null-terminated array of processed strings. NULL on error.
  */
-char	**process_input(char *line)
+char	**ft_process_input(char *line)
 {
 	char	**array;
 
-	if (count_quotes(line) == -1)
+	if (!line)
+		return (NULL);
+	if (ft_count_quotes(line) == -1)
 	{
 		printf("Warning: Unclosed quotes\n");
 		return (NULL);
 	}
 	array = ft_split_prompt(line, ' ');
-	array = expand(array);
+	if (!array)
+	{
+		printf("Error splitting input line\n");
+		return (NULL);
+	}
+	free (line);
+	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
-	array = final_trim(array);
+	array = ft_final_trim(array);
 	return (array);
 }
 
@@ -63,7 +71,7 @@ int	main(void)
 	while (1)
 	{
 		test_line = readline("Parse this shit: ");
-		result = process_input(test_line);
+		result = ft_process_input(test_line);
 		free(test_line);
 		if (!result)
 		{

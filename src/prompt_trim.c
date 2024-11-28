@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:14:17 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 10:33:30 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:39:12 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
  * i: The current index in the string.
  * quote: The type of quote to handle (single quote `'` or double quote `"`).
  *
- * Return: The index after the closing quote or the current index
+ * Return: The index after the closing quote, or the current index
  * if no closing quote is found.
  */
-static size_t	handle_quotes(const char *s, size_t i, char quote)
+static size_t	ft_handle_quotes(const char *s, size_t i, char quote)
 {
 	i++;
 	while (s[i] && s[i] != quote)
@@ -65,7 +65,7 @@ static size_t	ft_nb_words(char const *s, char c)
 	while (s[i])
 	{
 		if (s[i] == '\'' || s[i] == '\"')
-			i = handle_quotes(s, i, s[i]);
+			i = ft_handle_quotes(s, i, s[i]);
 		else if (s[i] == c)
 		{
 			nb_words++;

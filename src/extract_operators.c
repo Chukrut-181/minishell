@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 12:11:31 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:42:10 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index)
 		index++;
 	}
 	new_array[i] = NULL;
-	free_array(array);
+	ft_free_array(array);
 	return (new_array);
 }
 
@@ -100,24 +100,23 @@ char	**ft_extract_operators(char **array, const char *operators)
 	char	**temp_array;
 	int		i;
 
-	if (!array || !operators)
-		return (NULL);
 	i = 0;
 	while (array[i])
 	{
 		if (ft_strchr(operators, array[i][0]) && array[i][1] != '\0')
 		{
-			temp_array = create_temp_array(array, i, 1);
+			temp_array = ft_create_temp_array(array, i, 1);
 			array = ft_concatenate_array(array, temp_array, i);
-			free_array(temp_array);
+			ft_free_array(temp_array);
 		}
 		else if (ft_strchr(operators, array[i][ft_strlen(array[i]) - 1])
 			&& array[i][ft_strlen(array[i]) - 2])
 		{
-			temp_array = create_temp_array(array, i, (ft_strlen(array[i]) - 1));
+			temp_array = ft_create_temp_array(array, i,
+					(ft_strlen(array[i]) - 1));
 			array = ft_concatenate_array(array, temp_array, i);
 			i++;
-			free_array(temp_array);
+			ft_free_array(temp_array);
 		}
 		i++;
 	}
@@ -140,7 +139,7 @@ char	**ft_extract_operators(char **array, const char *operators)
  * Return: 	A null-terminated array of two strings.
  * 			Returns NULL if memory allocation fails.
  */
-char	**create_temp_array(char **array, int i, int j)
+char	**ft_create_temp_array(char **array, int i, int j)
 {
 	char	**temp_array;
 

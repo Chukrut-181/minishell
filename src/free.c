@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 11:15:19 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:30:15 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * - If the array is NULL, the function does nothing.
  * - Ensures that all pointers are set to NULL after deallocation.
  */
-void	free_array(char **array)
+void	ft_free_array(char **array)
 {
 	int	i;
 

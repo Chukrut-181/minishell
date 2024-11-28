@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 14:42:53 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:31:59 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * Return: The total number of valid quote characters in the string.
  *         Returns -1 if the quotes are improperly paired.
  */
-int	count_quotes(char const *s1)
+int	ft_count_quotes(char const *s1)
 {
 	int		count;
 	int		i;
@@ -76,7 +76,7 @@ char	*ft_strtrim_quotes(char const *s1, int squote, int dquote)
 
 	i[1] = -1;
 	i[0] = 0;
-	count = count_quotes(s1);
+	count = ft_count_quotes(s1);
 	if (!s1 || count == -1)
 		return (NULL);
 	trimmed = malloc(sizeof(char) * (ft_strlen(s1) - count + 1));
@@ -111,7 +111,7 @@ char	*ft_strtrim_quotes(char const *s1, int squote, int dquote)
  *         - '\'' if in a single-quote context.
  *         - '\"' if in a double-quote context.
  */
-char	get_quote_context(const char *s, int index)
+char	ft_get_quote_context(const char *s, int index)
 {
 	char		quote;
 	const char	*aux;
@@ -145,7 +145,7 @@ char	get_quote_context(const char *s, int index)
  *
  * Return: The modified array with quotes removed, or NULL if **array is NULL.
  */
-char	**final_trim(char **array)
+char	**ft_final_trim(char **array)
 {
 	int		i;
 	char	*trimmed;

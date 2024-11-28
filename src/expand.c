@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/27 15:12:40 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 10:40:45 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
  * Return: A newly allocated string with the expanded path, or NULL on failure.
  *         The caller is responsible for freeing the returned string.
  */
-char	*expand_path(char *word, int index)
+char	*ft_expand_path(char *word, int index)
 {
 	const char	*home_dir;
 	char		*expanded;
 	char		quote;
 
-	quote = get_quote_context(word, index);
+	quote = ft_get_quote_context(word, index);
 	if (word[0] != '~')
 		return (ft_strdup(word));
 	home_dir = getenv("HOME");
@@ -62,14 +62,14 @@ char	*expand_path(char *word, int index)
  * 
  * The caller is responsible for freeing the returned string.
  */
-char	*expand_variable(char *word, int index)
+char	*ft_expand_variable(char *word, int index)
 {
 	char	*var_name;
 	int		name_len;
 	char	*var_value;
 	char	*expanded;
 
-	name_len = get_var_name_len(&word[index + 1]);
+	name_len = ft_get_var_name_len(&word[index + 1]);
 	var_name = ft_substr(&word[index + 1], 0, name_len);
 	var_value = getenv(var_name);
 	if (!var_value)
@@ -98,17 +98,17 @@ char	*expand_variable(char *word, int index)
  *
  * Return: The length of the variable name.
  */
-int	get_var_name_len(const char *var_name)
+int	ft_get_var_name_len(const char *var_name)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	while (*var_name && (ft_isalnum(*var_name) || *var_name == '_'))
 	{
-		i++;
+		len++;
 		var_name++;
 	}
-	return (i);
+	return (len);
 }
 
 /**
@@ -125,7 +125,7 @@ int	get_var_name_len(const char *var_name)
  * Return: 	The array with expanded strings. If a string is replaced,
  * 			its original memory is freed. Returns NULL if `temp` is NULL.
  */
-char	**expand(char **temp)
+char	**ft_expand(char **temp)
 {
 	int		i;
 	int		j;
@@ -138,11 +138,12 @@ char	**expand(char **temp)
 		while (temp[i][j])
 		{
 			if (temp[i][0] == '~')
-				temp[i] = expand_path(temp[i], j);
-			else if (temp[i][j] == '$' && get_quote_context(temp[i], j) != '\'')
+				temp[i] = ft_expand_path(temp[i], j);
+			else if (temp[i][j] == '$'
+				&& ft_get_quote_context(temp[i], j) != '\'')
 			{
 				prefix = ft_substr(temp[i], 0, j);
-				temp[i] = ft_strjoin(prefix, expand_variable(temp[i], j));
+				temp[i] = ft_strjoin(prefix, ft_expand_variable(temp[i], j));
 				free(prefix);
 			}
 			j++;
