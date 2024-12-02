@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/22 10:40:39 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/11/28 12:24:44 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mini
 	char			**full_cmd;
 	char			*full_path;
 	char			**envp;
-	char			**env_copy;
+	char			**env_copy; 
 	int				is_builtin;
 	int				infile;
 	int				outfile;

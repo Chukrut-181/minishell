@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/28 10:42:59 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/02 10:00:11 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@
  *
  * Return: A null-terminated array of processed strings. NULL on error.
  */
-char	**ft_process_input(char *line)
+char	**ft_process_input(char *line, char **envp)
 {
 	char	**array;
+	t_mini	*mini;
 
 	if (!line)
 		return (NULL);
@@ -49,6 +50,13 @@ char	**ft_process_input(char *line)
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
+	mini = ft_initialize_mini_node(envp);
+	int i = 0;
+	while (mini->env_vars && mini->env_vars[i])
+	{
+		printf("%s\n", mini->env_vars[i]);
+		i++;
+	}
 	return (array);
 }
 
@@ -62,8 +70,10 @@ char	**ft_process_input(char *line)
  *
  * Return: Always returns 0 on success. Returns 1 if input processing fails.
  */
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
 	char	*test_line;
 	char	**result;
 	int		i;
@@ -71,28 +81,28 @@ int	main(void)
 	while (1)
 	{
 		test_line = readline("Parse this shit: ");
-		result = ft_process_input(test_line);
-		free(test_line);
+		result = ft_process_input(test_line, envp);
+		//free(test_line);
 		if (!result)
 		{
 			printf("Error: Unable to split the input string.\n");
 			return (1);
 		}
 		i = 0;
-		while (result[i])
+		while (result && result[i])
 		{
 			printf("%s\n", result[i]);
 			free(result[i]);
 			i++;
 		}
-		free(result);
 	}
+	free(result);
 	return (0);
 }
 
 /*
 
-cc -Wall -Wextra -Werror -lreadline parse.c prompt_trim.c expand.c trim_quotes.c extract_operators.c free.c ../lib/libft/libft.a && ./a.out
+cc -Wall -Wextra -Werror -lreadline parse.c prompt_trim.c expand.c trim_quotes.c extract_operators.c free.c initialize.c envp.c ../lib/libft/libft.a && ./a.out
 
 <Makefile cat| echo "$PWD 'hola'" ~/src | 'tr' -d / >Outfile
 
