@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/27 16:33:23 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:11:44 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_mini
 	int		is_builtins;
 	int		infile;
 	int		outfile;
+	int		last_exit_status;
 }			t_mini;
 
 // builtins

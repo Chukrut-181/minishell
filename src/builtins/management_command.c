@@ -6,11 +6,33 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/27 16:22:01 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:01:53 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static void	handle_redirections(t_mini *mini)
+{
+	if (mini->infile != STDIN_FILENO)
+	{
+		if (dup2(mini->infile, STDIN_FILENO) == -1)
+		{
+			perror("dup2");
+			exit(EXIT_FAILURE);
+		}
+		close(mini->infile);
+	}
+	if (mini->outfile != STDOUT_FILENO)
+	{
+		if (dup2(mini->outfile, STDOUT_FILENO) == -1)
+		{
+			perror("dup2");
+			exit(EXIT_FAILURE);
+		}
+		close(mini->outfile);
+	}
+}
 
 void	execute_external_command(t_mini *mini)
 {
@@ -26,7 +48,7 @@ void	execute_external_command(t_mini *mini)
 	}
 	else if (pid == 0)
 	{
-		//Proceso hijo
+		handle_redirections(mini);
 		cmd_path = get_path(mini);
 		if (execve(cmd_path, mini->full_cmd, mini->envp) == -1)
 		{
@@ -36,8 +58,12 @@ void	execute_external_command(t_mini *mini)
 	}
 	else
 	{
-		//Proceso padre
 		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			// Puedes manejar el código de salida si es necesario
+			// int exit_status = WEXITSTATUS(status);
+		}
 	}
 }
 
