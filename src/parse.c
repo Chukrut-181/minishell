@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/02 10:00:11 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:41:13 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,9 @@ char	**ft_process_input(char *line, char **envp)
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
-	mini = ft_initialize_mini_node(envp);
-	int i = 0;
-	while (mini->env_vars && mini->env_vars[i])
-	{
-		printf("%s\n", mini->env_vars[i]);
-		i++;
-	}
+	
+	mini = ft_create_structure(array, envp);
+
 	return (array);
 }
 
@@ -82,7 +78,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		test_line = readline("Parse this shit: ");
 		result = ft_process_input(test_line, envp);
-		//free(test_line);
 		if (!result)
 		{
 			printf("Error: Unable to split the input string.\n");

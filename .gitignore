@@ -1,7 +1,8 @@
-gitignore
+.gitignore
 minishell
 *.o
 a.out
 .vscode
 test.c
 readline.supp
+infile_test.txt
