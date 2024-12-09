@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/09 15:38:27 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:09:38 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_get_full_command(t_mini *node, char **array)
 	}
 	node->full_cmd = malloc(sizeof(char *) * i);
 	j = 0;
-	while(j < i)
+	while (j < i)
 	{
 		node->full_cmd[j] = array[k - i];
 		j++;
@@ -38,6 +38,7 @@ void	ft_get_full_command(t_mini *node, char **array)
 	node->full_cmd[j] = NULL;
 	node->full_path = node->full_cmd[0];
 }
+
 void	ft_check_redirections(t_mini *node, char **array)
 {
 	if (array && *array[0] == '<')
@@ -45,9 +46,11 @@ void	ft_check_redirections(t_mini *node, char **array)
 		node->infile = open(array[1], O_RDONLY);
 		close(node->infile);
 	}
-	if (array && ft_arraylen(array) - 2 >= 0 && *array[ft_arraylen(array) - 2] == '>')
+	if (array && ft_arraylen(array) - 2 >= 0
+		&& *array[ft_arraylen(array) - 2] == '>')
 	{
-		node->outfile = open(array[ft_arraylen(array) - 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		node->outfile = open(array[ft_arraylen(array) - 1],
+				O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		close(node->outfile);
 	}
 }
@@ -66,6 +69,7 @@ t_mini	*ft_initialize_mini_node(char **envp)
 	new_node->next = NULL;
 	return (new_node);
 }
+
 t_mini	*ft_create_structure(char **array, char **envp)
 {
 	t_mini	*head;
@@ -76,13 +80,13 @@ t_mini	*ft_create_structure(char **array, char **envp)
 	ft_check_redirections(node, array);
 	ft_get_full_command(node, array);
 	if (!ft_strcmp(node->full_path, "echo") || !ft_strcmp(node->full_path, "cd")
-		|| !ft_strcmp(node->full_path, "pwd") || !ft_strcmp(node->full_path, "export")
-		|| !ft_strcmp(node->full_path, "unset") || !ft_strcmp(node->full_path, "env")
+		|| !ft_strcmp(node->full_path, "pwd")
+		|| !ft_strcmp(node->full_path, "export")
+		|| !ft_strcmp(node->full_path, "unset")
+		|| !ft_strcmp(node->full_path, "env")
 		|| !ft_strcmp(node->full_path, "exit"))
 	{
 		node->is_builtin = 1;
 	}
-	
-	
 	return (head);
 }

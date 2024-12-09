@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/09 15:32:48 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:11:30 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_mini	*ft_process_input(char *line, char **envp)
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
 	mini = ft_create_structure(array, envp);
-
 	return (mini);
 }
 
@@ -71,6 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char	*test_line;
 	t_mini	*result;
+	t_mini	*aux;
 
 	while (1)
 	{
@@ -81,13 +81,13 @@ int	main(int argc, char **argv, char **envp)
 			printf("Error: Unable to split the input string.\n");
 			return (1);
 		}
-		int i = 0;
+		int	i = 0;
 		while (result)
 		{
 			printf("\n***COMMAND Nº %i***\n", i);
-			int k = 0;
 			printf("In	fd: %i\n", result->infile);
 			printf("Out	fd: %i\n", result->outfile);
+			int k = 0;
 			while (result->full_cmd[k])
 			{
 				printf("full_cmd[%i]: %s\n", k, result->full_cmd[k]);
@@ -97,7 +97,9 @@ int	main(int argc, char **argv, char **envp)
 			printf("is_builtin: %i\n", result->is_builtin);
 			printf("Sample Env 13: %s\n", result->env_vars[13]);
 			printf("Sample Env 28: %s\n", result->env_vars[28]);
+			aux = result;
 			result = result->next;
+			free(aux);
 			i++;
 		}
 	}
