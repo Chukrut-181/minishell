@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/09 15:05:12 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:32:48 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(int argc, char **argv, char **envp)
 				k++;
 			}
 			printf("full_path: %s\n", result->full_path);
+			printf("is_builtin: %i\n", result->is_builtin);
 			printf("Sample Env 13: %s\n", result->env_vars[13]);
 			printf("Sample Env 28: %s\n", result->env_vars[28]);
 			result = result->next;

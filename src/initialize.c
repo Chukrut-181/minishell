@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/09 15:04:16 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:38:27 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ t_mini	*ft_create_structure(char **array, char **envp)
 	head = node;
 	ft_check_redirections(node, array);
 	ft_get_full_command(node, array);
+	if (!ft_strcmp(node->full_path, "echo") || !ft_strcmp(node->full_path, "cd")
+		|| !ft_strcmp(node->full_path, "pwd") || !ft_strcmp(node->full_path, "export")
+		|| !ft_strcmp(node->full_path, "unset") || !ft_strcmp(node->full_path, "env")
+		|| !ft_strcmp(node->full_path, "exit"))
+	{
+		node->is_builtin = 1;
+	}
+	
 	
 	return (head);
 }
