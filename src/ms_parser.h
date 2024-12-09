@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:40:11 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/03 11:14:27 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:23:25 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_mini
 	struct s_mini	*next;
 }					t_mini;
 
-char	**ft_process_input(char *line, char **envp);
+t_mini	*ft_process_input(char *line, char **envp);
 char	**ft_split_prompt(char const *s, char c);
 char	*ft_expand_path(char *word, int index);
 char	*ft_expand_variable(char *word, int index);

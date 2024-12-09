@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/03 12:02:45 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:04:16 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,39 @@ void	ft_get_full_command(t_mini *node, char **array)
 {
 	int	i;
 	int	j;
+	int	k;
 
+	k = 0;
+	if (array && array[k] && *array[k] == '<')
+		k = 2;
 	i = 0;
-	while(array && array[i] && *array[i] != '|')
+	while (array && array[k] && (*array[k] != '|' && *array[k] != '>'))
 	{
+		k++;
 		i++;
 	}
 	node->full_cmd = malloc(sizeof(char *) * i);
 	j = 0;
 	while(j < i)
 	{
-		node->full_cmd[j] = array[j];
+		node->full_cmd[j] = array[k - i];
 		j++;
+		k++;
 	}
 	node->full_cmd[j] = NULL;
+	node->full_path = node->full_cmd[0];
 }
 void	ft_check_redirections(t_mini *node, char **array)
 {
 	if (array && *array[0] == '<')
 	{
 		node->infile = open(array[1], O_RDONLY);
-		//close(node->infile);
+		close(node->infile);
 	}
-	if (array && *array[ft_arraylen(array) - 2] == '>')
+	if (array && ft_arraylen(array) - 2 >= 0 && *array[ft_arraylen(array) - 2] == '>')
 	{
 		node->outfile = open(array[ft_arraylen(array) - 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		//close(node->outfile);
+		close(node->outfile);
 	}
 }
 
@@ -63,20 +70,11 @@ t_mini	*ft_create_structure(char **array, char **envp)
 {
 	t_mini	*head;
 	t_mini	*node;
-	int		i;
 
 	node = ft_initialize_mini_node(envp);
 	head = node;
 	ft_check_redirections(node, array);
 	ft_get_full_command(node, array);
-	i = 0;
-	printf("In  fd: %d\n", node->infile);
-	printf("Out fd: %d\n", node->outfile);
-/* 	while (node && node->full_cmd && node->full_cmd[i])
-	{
-		printf("%s\n", node->full_cmd[i]);
-		i++;
-	} */
 	
 	return (head);
 }

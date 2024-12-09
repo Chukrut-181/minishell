@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/03 10:41:13 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:05:12 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  *
  * Return: A null-terminated array of processed strings. NULL on error.
  */
-char	**ft_process_input(char *line, char **envp)
+t_mini	*ft_process_input(char *line, char **envp)
 {
 	char	**array;
 	t_mini	*mini;
@@ -50,10 +50,9 @@ char	**ft_process_input(char *line, char **envp)
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
-	
 	mini = ft_create_structure(array, envp);
 
-	return (array);
+	return (mini);
 }
 
 /**
@@ -71,8 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	char	*test_line;
-	char	**result;
-	int		i;
+	t_mini	*result;
 
 	while (1)
 	{
@@ -83,15 +81,25 @@ int	main(int argc, char **argv, char **envp)
 			printf("Error: Unable to split the input string.\n");
 			return (1);
 		}
-		i = 0;
-		while (result && result[i])
+		int i = 0;
+		while (result)
 		{
-			printf("%s\n", result[i]);
-			free(result[i]);
+			printf("\n***COMMAND Nº %i***\n", i);
+			int k = 0;
+			printf("In	fd: %i\n", result->infile);
+			printf("Out	fd: %i\n", result->outfile);
+			while (result->full_cmd[k])
+			{
+				printf("full_cmd[%i]: %s\n", k, result->full_cmd[k]);
+				k++;
+			}
+			printf("full_path: %s\n", result->full_path);
+			printf("Sample Env 13: %s\n", result->env_vars[13]);
+			printf("Sample Env 28: %s\n", result->env_vars[28]);
+			result = result->next;
 			i++;
 		}
 	}
-	free(result);
 	return (0);
 }
 
