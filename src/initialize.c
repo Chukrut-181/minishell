@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/11 11:23:56 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:02:54 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	ft_locate_pipe(char **array, int *index)
 {
 	int	i;
 
-	i = *index + 1;
+	i = 1;
 	while (array && array[i])
 	{
 		if (!ft_strcmp(array[i], "|"))
 		{
-			*index = i;
+			*index = *index + i;
 			return (1);
 		}
 		else
@@ -30,17 +30,17 @@ int	ft_locate_pipe(char **array, int *index)
 	return (0);
 }
 
-void	ft_get_full_command(t_mini *node, char **array, int *index)
+void	ft_get_full_command(t_mini *node, char **array)
 {
 	int	i;
 	int	j;
 	int	k;
 
 	k = 0;
-	if (array && array[*index] && *array[*index] == '<')
+	if (array && array[k] && *array[k] == '<')
 		k += 2;
 	i = 0;
-	while (array && array[k + *index] && (*array[k + *index] != '|' && *array[k + *index] != '>'))
+	while (array && array[k] && (*array[k] != '|' && *array[k] != '>'))
 	{
 		k++;
 		i++;
@@ -49,7 +49,7 @@ void	ft_get_full_command(t_mini *node, char **array, int *index)
 	j = 0;
 	while (j < i)
 	{
-		node->full_cmd[j] = ft_strdup(array[k - i + *index]);
+		node->full_cmd[j] = ft_strdup(array[k - i]);
 		j++;
 		k++;
 	}
@@ -57,20 +57,20 @@ void	ft_get_full_command(t_mini *node, char **array, int *index)
 	node->full_path = node->full_cmd[0];
 }
 
-void	ft_check_redirections(t_mini *node, char **array, int *index)
+void	ft_check_redirections(t_mini *node, char **array)
 {
 	int	i;
 
-	i = *index;
+	i = 0;
 	if (!array || !array[i])
 		return ;	
 	if (array && array[i] && *array[i] == '<')
 	{
-		node->infile = open(array[1 + i], O_RDONLY);
+		node->infile = open(array[i + 1], O_RDONLY);
 		//close(node->infile);
 	}
-	if (array && ft_arraylen(array) - 2  + i >= 0
-		&& *array[ft_arraylen(array) - 2 + i] == '>')
+	if (array && ft_arraylen(array) - 2 >= 0
+		&& *array[ft_arraylen(array) - 2] == '>')
 	{
 		node->outfile = open(array[ft_arraylen(array) - 1 + i],
 				O_CREAT | O_TRUNC | O_WRONLY, 0644);
@@ -105,8 +105,8 @@ t_mini	*ft_create_structure(char **array, char **envp)
 	index = 0;
 	while (1)
 	{
-		ft_check_redirections(node, array, &index);
-		ft_get_full_command(node, array, &index);
+		ft_check_redirections(node, &array[index]);
+		ft_get_full_command(node, &array[index]);
 		if (!ft_strcmp(node->full_path, "echo") || !ft_strcmp(node->full_path, "cd")
 			|| !ft_strcmp(node->full_path, "pwd")
 			|| !ft_strcmp(node->full_path, "export")
@@ -116,7 +116,7 @@ t_mini	*ft_create_structure(char **array, char **envp)
 		{
 			node->is_builtin = 1;
 		}
-		if (!ft_locate_pipe(array, &index))
+		if (!ft_locate_pipe(&array[index], &index))
 			break ;
 		next_node = ft_initialize_mini_node(envp);
 		node->next = next_node;
