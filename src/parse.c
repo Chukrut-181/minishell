@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/09 16:11:30 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:08:05 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_mini	*ft_process_input(char *line, char **envp)
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
 	mini = ft_create_structure(array, envp);
+
 	return (mini);
 }
 
@@ -74,20 +75,20 @@ int	main(int argc, char **argv, char **envp)
 
 	while (1)
 	{
-		test_line = readline("Parse this shit: ");
+		test_line = readline("\nParse this shit: ");
 		result = ft_process_input(test_line, envp);
 		if (!result)
 		{
 			printf("Error: Unable to split the input string.\n");
 			return (1);
 		}
-		int	i = 0;
+		int	i = 1;
 		while (result)
 		{
 			printf("\n***COMMAND Nº %i***\n", i);
 			printf("In	fd: %i\n", result->infile);
 			printf("Out	fd: %i\n", result->outfile);
-			int k = 0;
+			int	k = 0;
 			while (result->full_cmd[k])
 			{
 				printf("full_cmd[%i]: %s\n", k, result->full_cmd[k]);
