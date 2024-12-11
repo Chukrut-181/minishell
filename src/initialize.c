@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/11 12:02:54 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:35:09 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_locate_pipe(char **array, int *index)
 	{
 		if (!ft_strcmp(array[i], "|"))
 		{
-			*index = *index + i;
+			*index = *index + i + 1;
 			return (1);
 		}
 		else
