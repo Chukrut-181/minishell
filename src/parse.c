@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/10 11:08:05 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:02:08 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ t_mini	*ft_process_input(char *line, char **envp)
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
+	int i = 0;
+	printf("\n");
+	while (array && array[i])
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
 	mini = ft_create_structure(array, envp);
 
 	return (mini);

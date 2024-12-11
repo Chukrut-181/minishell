@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/28 10:31:59 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:15:02 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,21 +149,22 @@ char	**ft_final_trim(char **array)
 {
 	int		i;
 	char	*trimmed;
+	int		len;
 
 	if (!array)
 		return (NULL);
 	i = 0;
 	while (array[i])
 	{
-		if ((ft_strlen(array[i]) > 1)
-			&& array[i][0] == array[i][ft_strlen(array[i]) - 1])
+		len = ft_strlen(array[i]);
+		if ((len > 1) && array[i][0] == array[i][len - 1])
 		{
 			if (array[i][0] == '\'' || array[i][0] == '\"')
-				trimmed = ft_substr(array[i], 1, (ft_strlen(array[i]) - 2));
-			else
-				return (array);
-			free(array[i]);
-			array[i] = trimmed;
+			{
+				trimmed = ft_substr(array[i], 1, (len - 2));
+				free(array[i]);
+				array[i] = trimmed;
+			}
 		}
 		i++;
 	}
