@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:40:11 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/11 11:59:11 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:28:14 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_check_redirections(t_mini *node, char **array);
 t_mini	*ft_create_structure(char **array, char **envp);
 void	ft_get_full_command(t_mini *node, char **array);
 int		ft_locate_pipe(char **array, int *index);
+void	ft_check_if_builtin(t_mini *node);
 
 void	ft_free_array(char **array);
 
