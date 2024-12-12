@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/12 11:27:53 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:05:05 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_get_full_command(t_mini *node, char **array)
 		k++;
 	}
 	node->full_cmd[j] = NULL;
-	node->full_path = node->full_cmd[0];
+	//node->full_path = node->full_cmd[0];
 }
 
 void	ft_check_redirections(t_mini *node, char **array)
@@ -116,15 +116,7 @@ t_mini	*ft_create_structure(char **array, char **envp)
 		ft_check_redirections(node, &array[index]);
 		ft_get_full_command(node, &array[index]);
 		ft_check_if_builtin(node);
-/* 		if (!ft_strcmp(node->full_path, "echo") || !ft_strcmp(node->full_path, "cd")
-			|| !ft_strcmp(node->full_path, "pwd")
-			|| !ft_strcmp(node->full_path, "export")
-			|| !ft_strcmp(node->full_path, "unset")
-			|| !ft_strcmp(node->full_path, "env")
-			|| !ft_strcmp(node->full_path, "exit"))
-		{
-			node->is_builtin = 1;
-		} */
+		ft_get_path(node);
 		if (!ft_locate_pipe(&array[index], &index))
 			break ;
 		next_node = ft_initialize_mini_node(envp);

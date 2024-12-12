@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/28 10:40:45 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:03:32 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ char	*ft_expand_path(char *word, int index)
 {
 	const char	*home_dir;
 	char		*expanded;
-	char		quote;
+	/* char		quote;
 
-	quote = ft_get_quote_context(word, index);
+	 quote = ft_get_quote_context(word, index);*/
+	(void)index;
 	if (word[0] != '~')
 		return (ft_strdup(word));
 	home_dir = getenv("HOME");
