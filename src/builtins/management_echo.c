@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:41:37 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 16:27:59 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:16:20 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	management_echo(t_mini *mini)
 {
-	char parameter;
-	int i;
+	char	parameter;
+	int		i;
 
 	i = 1;
 	parameter = 1;

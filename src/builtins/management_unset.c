@@ -6,13 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/20 12:20:36 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:23:28 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	is_valid(char *str)
+static	int	find_and_remove_var(char **env, const char *var_name)
 {
 	int i;
 
@@ -28,7 +28,7 @@ int	is_valid(char *str)
 	return (-1);
 }
 
-static int count_val(const char *val)
+int	count_val(const char *val)
 {
 	int i;
 
@@ -38,12 +38,30 @@ static int count_val(const char *val)
 	return (i);
 }
 
-char **create_env_copy(char **env)
+int	is_valid(char *str)
 {
-	int i = 0;
-	int len = 0;
-	char **env_copy;
+	int	i;
 
+	i = 0;
+	if (str == NULL || *str == '\0')
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (-1);
+}
+
+char	**create_env_copy(char **env)
+{
+	int		i;
+	int		len;
+	char	**env_copy;
+
+	i = 0;
+	len = 0;
 	while (env[len])
 		len++;
 	env_copy = malloc(sizeof(char *) * (len + 1));
@@ -65,11 +83,10 @@ char **create_env_copy(char **env)
 	return (env_copy);
 }
 
-void management_unset(t_mini *mini)
+void	management_unset(t_mini *mini)
 {
-    int i, j;
-    int len;
-    int found;
+	int i, j, k;
+	int len;
 
     i = 1;
     if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))

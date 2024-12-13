@@ -6,15 +6,15 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:09:43 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 16:27:41 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:13:29 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void management_pwd(void)
+void	management_pwd(void)
 {
-	char cwd[MAX_PATH];
+	char	cwd[MAX_PATH];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
@@ -22,9 +22,9 @@ void management_pwd(void)
 		perror("getcwd() error");
 }
 
-void update_pwd(t_mini *mini)
+void	update_pwd(t_mini *mini)
 {
-	char new_path[MAX_PATH];
+	char	new_path[MAX_PATH];
 
 	if (getcwd(new_path, sizeof(new_path)) != NULL)
 	{

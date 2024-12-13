@@ -6,15 +6,15 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/12 16:27:48 by eandres          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:15:11 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	bucle_free(char **str)
+static	void	bucle_free(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str)
