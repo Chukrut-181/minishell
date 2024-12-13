@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/12 15:08:18 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:30:56 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_mini	*ft_process_input(char *line, char **envp)
 		i++;
 	}
 	mini = ft_create_structure(array, envp);
+	ft_free_array(array);
 
 	return (mini);
 }

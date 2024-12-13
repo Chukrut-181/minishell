@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/10 15:13:21 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:27:16 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index)
 int	ft_arraylen(char **array)
 {
 	int	i;
+	
 	if (!array || !array[0])
 		return (0);
 	i = 0;
@@ -100,21 +101,21 @@ char	**ft_extract_operators(char **array, const char *operators)
 {
 	char	**temp_array;
 	int		i;
+	int		len;
 
 	i = 0;
 	while (array && array[i])
 	{
+		len = ft_strlen(array[i]);
 		if (ft_strchr(operators, array[i][0]) && array[i][1] != '\0')
 		{
 			temp_array = ft_create_temp_array(array, i, 1);
 			array = ft_concatenate_array(array, temp_array, i);
 			ft_free_array(temp_array);
 		}
-		else if (ft_strchr(operators, array[i][ft_strlen(array[i]) - 1])
-			&& array[i][ft_strlen(array[i]) - 2])
+		else if (len > 1 && ft_strchr(operators, array[i][len - 1]) && array[i][len - 2])
 		{
-			temp_array = ft_create_temp_array(array, i,
-					(ft_strlen(array[i]) - 1));
+			temp_array = ft_create_temp_array(array, i, (len - 1));
 			array = ft_concatenate_array(array, temp_array, i);
 			i++;
 			ft_free_array(temp_array);
