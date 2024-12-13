@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:27:15 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:38:46 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	execute_external_command(t_mini *mini)
 //  esto lo cree yo para hacer pruebas y que funcionase todo.
 //  IMPORTANTE: revisar.
 
-int	process_command(t_mini *mini, char *line)
+/* int	process_command(t_mini *mini, char *line)
 {
 	char	**args;
 	int		result;
@@ -113,4 +113,4 @@ char	*get_path(t_mini *mini)
 	}
 	ft_free(allpath);
 	return (ft_strdup(mini->full_cmd[0]));
-}
+} */
