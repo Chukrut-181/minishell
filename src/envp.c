@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:44 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:34:12 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_get_full_envp(t_mini *node, char **envp)
 	env_count = 0;
 	while (envp[env_count])
 		env_count++;
-	node->env_vars = malloc(sizeof(char *) * (env_count + 1));
-	if (!node->env_vars)
+	node->envp = malloc(sizeof(char *) * (env_count + 1));
+	if (!node->envp)
 	{
 		perror("malloc failed for env_vars\n");
 		return ;
@@ -29,15 +29,15 @@ void	ft_get_full_envp(t_mini *node, char **envp)
 	i = 0;
 	while (i < env_count)
 	{
-		node->env_vars[i] = malloc(sizeof(char) * (ft_strlen(envp[i])) + 1);
-		if (!node->env_vars[i])
+		node->envp[i] = malloc(sizeof(char) * (ft_strlen(envp[i])) + 1);
+		if (!node->envp[i])
 		{
 			perror("malloc failed for env_vars[i]\n");
-			ft_free_array(node->env_vars);
+			ft_free_array(node->envp);
 			return ;
 		}
-		ft_strlcpy(node->env_vars[i], envp[i], ft_strlen(envp[i]) + 1);
+		ft_strlcpy(node->envp[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
-	node->env_vars[i] = NULL;
+	node->envp[i] = NULL;
 }
