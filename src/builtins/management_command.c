@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/02 13:01:53 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/04 12:36:49 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ void	execute_external_command(t_mini *mini)
 	else
 	{
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-		{
-			// Puedes manejar el código de salida si es necesario
-			// int exit_status = WEXITSTATUS(status);
-		}
 	}
 }
 
