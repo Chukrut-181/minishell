@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:51:00 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 12:44:23 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_mini
 	char			*command;
 	char			**full_cmd;
 	char			*full_path;
-	char			**env_vars;
+	char			**envp;
 	char			**env_copy; 
 	int				is_builtin;
 	int				infile;
