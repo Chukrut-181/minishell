@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:25:39 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:26:46 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,14 @@ char *get_name(char **env)
 
 int main(int argc, char **argv, char **env)
 {
-	if (argc == 2)
-		return (0);
+	char		*line;
+	char		*name;
+	t_mini		*mini;
+	//t_prompt	*prompt;
+
 	(void)argv;
 	(void)argc;
-	char *line;
-	char *name;
-	t_mini *mini = (t_mini *)malloc(sizeof(t_mini));
-	if (!mini)
-	{
-		perror("Error: No se pudo asignar memoria para mini\n");
-		return (1);
-	}
-	mini->envp = env;
-	mini->env_copy = create_env_copy(env);
-	if (!mini->env_copy)
-	{
-		perror("Error: No se pudo crear una copia del entorno\n");
-		free(mini);
-		return (1);
-	}
-	mini->full_cmd = NULL;
-	mini->full_path = getcwd(NULL, 0);
-	mini->is_builtins = 0;
-	mini->infile = STDIN_FILENO;
-	mini->outfile = STDOUT_FILENO;
+	mini = initialize_mini(env);
 	while (1)
 	{
 	    name = get_name(mini->env_copy);

@@ -6,20 +6,22 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/02 13:11:44 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:26:57 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <limits.h>
-# include <signal.h>
-# include "../lib/libft/libft.h"
+// habria que incluir la libft y el pipex
+#include <readline/readline.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <limits.h>
+#include <signal.h>
+#include "../lib/libft/libft.h"
+#include <stdbool.h>
 
 # define HOME "/home/eandres"
 # define MAX_PATH 1024
@@ -79,5 +81,10 @@ void	execute_external_command(t_mini *mini);
 
 //other
 void	free_args(char **args);
+
+//parse
+t_mini	*initialize_mini(char **env);
+char	*ft_strtrim_quotes(char const *s1, int squote, int dquote);
+int		count_quotes(char const *s1);
 
 #endif
