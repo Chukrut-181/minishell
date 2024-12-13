@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/22 10:07:28 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:23:17 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char *get_name(char **env)
 	return (prompt);
 }
 
-int main(int argc, char **argv, char **env)
+/* int main(int argc, char **argv, char **env)
 {
 	char		*line;
 	char		*name;
@@ -90,4 +90,4 @@ int main(int argc, char **argv, char **env)
 	free(mini);
 	rl_clear_history();
 	return (0);
-}
+} */

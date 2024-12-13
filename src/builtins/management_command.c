@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/20 14:03:59 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:25:32 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ void execute_external_command(t_mini *mini)
 		//Proceso padre
 		waitpid(pid, &status, 0);
 	}
+}
+
+int	management_builtins(t_mini *mini)
+{
+	if (!mini->full_cmd || !mini->full_cmd[0])
+		return (1);
+	if (ft_strcmp(mini->full_cmd[0], "cd") == 0)
+		management_cd(mini);
+	else if (ft_strcmp(mini->full_cmd[0], "pwd") == 0)
+		management_pwd();
+	else if (ft_strcmp(mini->full_cmd[0], "env") == 0)
+		management_env(mini);
+	else if (ft_strcmp(mini->full_cmd[0], "unset") == 0)
+		management_unset(mini);
+	else if (ft_strcmp(mini->full_cmd[0], "echo") == 0)
+		management_echo(mini);
+	else if (ft_strcmp(mini->full_cmd[0], "export") == 0)
+		management_export(mini);
+	else if (ft_strcmp(mini->full_cmd[0], "exit") == 0)
+		management_exit(mini);
+	else
+		return (1);
+	return (0);
 }
 
 int process_command(t_mini *mini, char *line)
