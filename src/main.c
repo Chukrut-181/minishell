@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:26:46 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:29:39 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,13 @@ int main(int argc, char **argv, char **env)
 	char		*line;
 	char		*name;
 	t_mini		*mini;
-	//t_prompt	*prompt;
 
 	(void)argv;
 	(void)argc;
-	mini = initialize_mini(env);
+	mini = ft_calloc(1, sizeof(t_mini));
 	while (1)
 	{
-	    name = get_name(mini->env_copy);
+	    name = get_name(env);
 	    if (!name)
 	    {
 	        perror("Error: No se pudo obtener el nombre del prompt\n");
@@ -70,7 +69,7 @@ int main(int argc, char **argv, char **env)
 	    free(name);
 	    if (!line)
 	    {
-	        printf("\nhola\n");
+	        printf("Error al leer la línea.\n");
 	        break;
 	    }
 	    if (ft_strlen(line) > 0)

@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   trim_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/20 18:26:18 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/11 14:15:02 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "ms_parser.h"
 
-int	count_quotes(char const *s1)
+/**
+ * count_quotes - 	Counts the number of quotes in a string and verifies
+ * 					proper pairing.
+ *
+ * This function counts single (') and double (") quotes in the input string,
+ * ensuring they are properly paired. Quotes within a context of the opposite
+ * type are ignored (e.g., single quotes inside double quotes are treated
+ * as literals).
+ *
+ * *s1: The input string to analyze.
+ *
+ * Return: The total number of valid quote characters in the string.
+ *         Returns -1 if the quotes are improperly paired.
+ */
+int	ft_count_quotes(char const *s1)
 {
-	int	count;
-	int	i;
-	bool	dquote;	// Booleano: 1 si estamos dentro de comillas dobles.
-	bool	squote;	// Ídem, pero comilla simple.
+	int		count;
+	int		i;
+	bool	dquote;
+	bool	squote;
 
 	i = 0;
 	count = 0;
@@ -25,17 +39,35 @@ int	count_quotes(char const *s1)
 	squote = 0;
 	while (s1 && s1[i])
 	{
-		squote = (squote + (!dquote && s1[i] == '\'')) % 2;	//tomamos el módulo (0 ó 1) que será el bool.
-		dquote = (dquote + (!squote && s1[i] == '\"')) % 2;	//tomamos el módulo (0 ó 1)
-		if ((s1[i] == '\"' && !squote) || (s1[i] == '\'' && !dquote)) //si hay " fuera de '' || si hay ' fuera de ""...
-			count++;	//...contamos.
-		i++;	//avanzamos por el string.
+		squote = (squote + (!dquote && s1[i] == '\'')) % 2;
+		dquote = (dquote + (!squote && s1[i] == '\"')) % 2;
+		if ((s1[i] == '\"' && !squote) || (s1[i] == '\'' && !dquote))
+			count++;
+		i++;
 	}
-	if (squote || dquote)	//si los booleanos no terminan en 0 significa que hay comillas impares; es un error.
+	if (squote || dquote)
 		return (-1);
-	return (count);	//retornamos la cuenta.
+	return (count);
 }
 
+/**
+ * ft_strtrim_quotes - 	Removes quotes from a string while preserving
+ * 						content integrity.
+ *
+ * This function removes single (') and double (") quotes from the
+ * input string, ensuring that nested or paired quotes are handled
+ * appropriately. Quotes are removed only if they are properly paired.
+ * Unbalanced quotes result in a NULL return.
+ *
+ * *s1: The input string to trim.
+ * squote: Indicates if a single-quote context is active (initially 0).
+ * dquote: Indicates if a double-quote context is active (initially 0).
+ *
+ * Return: 	A newly allocated string with quotes removed,
+ * 			or NULL on failure or unbalanced quotes.
+ * 
+ * The caller is responsible for freeing the returned string.
+ */
 char	*ft_strtrim_quotes(char const *s1, int squote, int dquote)
 {
 	int		count;
@@ -44,7 +76,7 @@ char	*ft_strtrim_quotes(char const *s1, int squote, int dquote)
 
 	i[1] = -1;
 	i[0] = 0;
-	count = count_quotes(s1);
+	count = ft_count_quotes(s1);
 	if (!s1 || count == -1)
 		return (NULL);
 	trimmed = malloc(sizeof(char) * (ft_strlen(s1) - count + 1));
@@ -61,4 +93,80 @@ char	*ft_strtrim_quotes(char const *s1, int squote, int dquote)
 	}
 	trimmed[++i[1]] = '\0';
 	return (trimmed);
+}
+
+/**
+ * get_quote_context - 	Determines the quote context at a given index
+ * 						in a string.
+ *
+ * This function evaluates the state of quoting (single or double)
+ * at the specified index of the string. It considers nested and paired
+ * quotes to determine whether the current context is within quotes or not.
+ *
+ * *s: The input string to evaluate.
+ * index: The index within the string to check for quote context.
+ *
+ * Return: The current quote context:
+ *         - 0 if no quote is active.
+ *         - '\'' if in a single-quote context.
+ *         - '\"' if in a double-quote context.
+ */
+char	ft_get_quote_context(const char *s, int index)
+{
+	char		quote;
+	const char	*aux;
+	int			i;
+
+	quote = 0;
+	aux = s;
+	i = 0;
+	while (i < index)
+	{
+		if (aux[i] == '\'' || aux[i] == '\"')
+		{
+			if (quote == 0)
+				quote = aux[i];
+			else if (quote == aux[i])
+				quote = 0;
+		}
+		i++;
+	}
+	return (quote);
+}
+
+/**
+ * final_trim - Removes outermost matching quotes from each string in an array.
+ *
+ * This function iterates through an array of strings and removes the outermost
+ * quotes (single or double) from each string if they are properly paired.
+ * The trimmed strings are updated in place, and the original memory is freed.
+ *
+ * **array: The array of strings to trim.
+ *
+ * Return: The modified array with quotes removed, or NULL if **array is NULL.
+ */
+char	**ft_final_trim(char **array)
+{
+	int		i;
+	char	*trimmed;
+	int		len;
+
+	if (!array)
+		return (NULL);
+	i = 0;
+	while (array[i])
+	{
+		len = ft_strlen(array[i]);
+		if ((len > 1) && array[i][0] == array[i][len - 1])
+		{
+			if (array[i][0] == '\'' || array[i][0] == '\"')
+			{
+				trimmed = ft_substr(array[i], 1, (len - 2));
+				free(array[i]);
+				array[i] = trimmed;
+			}
+		}
+		i++;
+	}
+	return (array);
 }
