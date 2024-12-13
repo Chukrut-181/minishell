@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:40:11 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/12 11:36:14 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 09:59:20 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_mini
 
 t_mini	*ft_process_input(char *line, char **envp);
 char	**ft_split_prompt(char const *s, char c);
-char	*ft_expand_path(char *word, int index);
+char	*ft_expand_path(char *word);
 char	*ft_expand_variable(char *word, int index);
 char	*ft_strtrim_quotes(const char *s1, int squote, int dquote);
 int		ft_count_quotes(char const *s1);
