@@ -6,11 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/28 10:30:15 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:48:58 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_parser.h"
+#include "../include/minishell.h"
 
 /**
  * free_array - Frees a dynamically allocated array of strings.

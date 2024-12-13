@@ -6,11 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/11 14:15:02 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:49:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_parser.h"
+#include "../include/minishell.h"
 
 /**
  * count_quotes - 	Counts the number of quotes in a string and verifies
