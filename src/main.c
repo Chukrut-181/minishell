@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:29:39 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 12:40:45 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int main(int argc, char **argv, char **env)
 	    }
 	    if (ft_strlen(line) > 0)
 	    {
+			mini = ft_process_input(name, env);
 	        add_history(line);
 	        process_command(mini, line);
 	    }
