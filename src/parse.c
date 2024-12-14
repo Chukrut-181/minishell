@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 12:34:55 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/14 08:14:39 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_mini	*ft_process_input(char *line, char **envp)
  *
  * Return: Always returns 0 on success. Returns 1 if input processing fails.
  */
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
@@ -113,7 +113,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	return (0);
-}
+} */
 
 /*
 
