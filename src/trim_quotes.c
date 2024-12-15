@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:51:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:49:31 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:02:25 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ int	ft_count_quotes(char const *s1)
 	bool	dquote;
 	bool	squote;
 
+	if (!s1)
+		return (0);
 	i = 0;
 	count = 0;
 	dquote = 0;
 	squote = 0;
-	while (s1 && s1[i])
+	while (s1[i] != '\0')
 	{
 		squote = (squote + (!dquote && s1[i] == '\'')) % 2;
 		dquote = (dquote + (!squote && s1[i] == '\"')) % 2;

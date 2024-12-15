@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 13:09:48 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/15 15:09:18 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char *get_name(char **env)
 
 	(void)argv;
 	(void)argc;
-	mini = ft_calloc(1, sizeof(t_mini));
+	//mini = ft_calloc(1, sizeof(t_mini));
 	while (1)
 	{
 	    name = get_name(env);
@@ -74,13 +74,14 @@ char *get_name(char **env)
 	    }
 	    if (ft_strlen(line) > 0)
 	    {
-			mini = ft_process_input(name, env);
+			mini = ft_process_input(line, env);
 	        add_history(line);
 	        process_command(mini, line);
+			free(line);
 	    }
-	    free(line);
+		//free(line);
 	}
-	if (mini->full_path)
+/* 	if (mini->full_path)
 		free(mini->full_path);
 	if (mini->env_copy)
 	{
@@ -88,7 +89,7 @@ char *get_name(char **env)
 			free(mini->env_copy[i]);
 		free(mini->env_copy);
 	}
-	free(mini);
+	free(mini); */
 	rl_clear_history();
 	return (0);
 } */

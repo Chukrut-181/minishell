@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 13:20:28 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/15 15:09:26 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_mini	*ft_process_input(char *line, char **envp)
 		printf("Error splitting input line\n");
 		return (NULL);
 	}
-	free (line);
+	//free (line);
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
@@ -73,7 +73,7 @@ t_mini	*ft_process_input(char *line, char **envp)
  *
  * Return: Always returns 0 on success. Returns 1 if input processing fails.
  */
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
@@ -115,7 +115,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	return (0);
-}
+} */
 
 /*
 
