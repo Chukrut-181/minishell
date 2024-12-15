@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:38:46 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 13:11:50 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	execute_external_command(t_mini *mini)
 {
 	pid_t	pid;
 	int		status;
-	char	*cmd_path;
+//	char	*cmd_path;
 
 	pid = fork();
 	if (pid == -1)
@@ -49,8 +49,8 @@ void	execute_external_command(t_mini *mini)
 	else if (pid == 0)
 	{
 		handle_redirections(mini);
-		cmd_path = get_path(mini);
-		if (execve(cmd_path, mini->full_cmd, mini->envp) == -1)
+		//cmd_path = get_path(mini);
+		if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);

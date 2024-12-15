@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 12:34:55 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:20:28 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ t_mini	*ft_process_input(char *line, char **envp)
 	array = ft_expand(array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
-	int i = 0;
+	/* int i = 0;
 	printf("\n");
 	while (array && array[i])
 	{
 		printf("%s\n", array[i]);
 		i++;
-	}
+	} */
 	mini = ft_create_structure(array, envp);
 	ft_free_array(array);
 
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	int res;
 	char	*test_line;
 	t_mini	*result;
 	t_mini	*aux;
@@ -91,6 +92,9 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		}
 		int	i = 1;
+		res = management_builtins(result);
+		if (res == 1)
+			execute_external_command(result);
 		while (result)
 		{
 			printf("\n***COMMAND Nº %i***\n", i);
@@ -104,8 +108,6 @@ int	main(int argc, char **argv, char **envp)
 			}
 			printf("full_path: %s\n", result->full_path);
 			printf("is_builtin: %i\n", result->is_builtin);
-			printf("Sample Env 13: %s\n", result->envp[13]);
-			printf("Sample Env 28: %s\n", result->envp[28]);
 			aux = result;
 			result = result->next;
 			free(aux);
