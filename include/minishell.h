@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 12:44:23 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/16 10:54:51 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 #include "../lib/libft/libft.h"
 #include <stdbool.h>
 
-# define HOME "/home/eandres"
 # define MAX_PATH 1024
 
-# define RED			"\033[0;31m"
+# define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
 # define GREENB		"\033[32;1m"
 # define YELLOW		"\033[0;33m"
@@ -71,8 +70,9 @@ int		count_val(const char *val);
 
 //execute command
 char	*get_path(t_mini *mini);
-int		process_command(t_mini *mini, char *line);
+void		process_command(t_mini *mini);
 void	execute_external_command(t_mini *mini);
+void	handle_redirections(t_mini *mini);
 
 //other
 void	free_args(char **args);

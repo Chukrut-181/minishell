@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/15 15:09:18 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/16 09:52:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char *get_name(char **env)
 	    }
 		//free(line);
 	}
-/* 	if (mini->full_path)
+ 	if (mini->full_path)
 		free(mini->full_path);
 	if (mini->env_copy)
 	{
@@ -89,7 +89,69 @@ char *get_name(char **env)
 			free(mini->env_copy[i]);
 		free(mini->env_copy);
 	}
-	free(mini); */
+	free(mini);
 	rl_clear_history();
 	return (0);
 } */
+
+void	print(char **str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		printf("%s\n", str[i]);
+		i++;
+	}
+}
+
+int main(int argc, char **argv, char **env)
+{
+	char		*line;
+	char		*name;
+	t_mini		*mini;
+
+	(void)argv;
+	(void)argc;
+	//mini = ft_calloc(1, sizeof(t_mini));
+	while (1)
+	{
+	    name = get_name(env);
+	    if (!name)
+	    {
+	        perror("Error: No se pudo obtener el nombre del prompt\n");
+	        break;
+	    }
+	    line = readline(name);
+	    free(name);
+	    if (!line)
+	    {
+	        printf("Error al leer la línea.\n");
+	        break;
+	    }
+	    if (ft_strlen(line) > 0)
+	    {
+			mini = ft_process_input(line, env);
+			print(mini->full_cmd);
+			if (mini->full_path)
+				printf("%s\n", mini->full_path);
+			printf("%s\n", mini->envp[0]);
+			printf("%d\n", mini->is_builtin);
+	        add_history(line);
+	        process_command(mini);
+			free(line);
+	    }
+		//free(line);
+	}
+ 	if (mini->full_path)
+		free(mini->full_path);
+	if (mini->env_copy)
+	{
+		for (int i = 0; mini->env_copy[i]; i++)
+			free(mini->env_copy[i]);
+		free(mini->env_copy);
+	}
+	free(mini);
+	rl_clear_history();
+	return (0);
+}
