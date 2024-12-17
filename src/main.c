@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/17 10:28:18 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:03:36 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,26 +145,25 @@ int main(int argc, char **argv, char **env)
 	    if (ft_strlen(line) > 0)
 	    {
 			mini = ft_process_input(line, env);
-			print(mini->full_cmd);
-			if (mini->full_path)
-				printf("%s\n", mini->full_path);
-			printf("%s\n", mini->envp[0]);
-			printf("%d\n", mini->is_builtin);
+			//print(mini->full_cmd);
+			//if (mini->full_path)
+			//	printf("%s\n", mini->full_path);
+			//printf("%d\n", mini->is_builtin);
 	        add_history(line);
 	        process_command(mini);
 			free(line);
 	    }
 		//free(line);
 	}
- 	if (mini->full_path)
-		free(mini->full_path);
-	if (mini->env_copy)
-	{
-		for (int i = 0; mini->env_copy[i]; i++)
-			free(mini->env_copy[i]);
-		free(mini->env_copy);
-	}
-	free(mini);
+//	if (mini->full_path)
+//		free(mini->full_path);
+//	if (mini->env_copy)
+//	{
+//		for (int i = 0; mini->env_copy[i]; i++)
+//			free(mini->env_copy[i]);
+//		free(mini->env_copy);
+//	}
+//	free(mini);
 	rl_clear_history();
 	return (0);
 }

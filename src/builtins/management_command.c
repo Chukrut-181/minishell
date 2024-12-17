@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/16 10:59:03 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/17 13:53:06 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	handle_redirections(t_mini *mini)
 {
+	printf("%d\n", mini->infile);
 	if (mini->infile != STDIN_FILENO)
 	{
 		if (dup2(mini->infile, STDIN_FILENO) == -1)
@@ -62,15 +63,11 @@ void	execute_external_command(t_mini *mini)
 	}
 }
 
-//	checkear estas 2 funciones porque creo que no es necesaria ya que esto la haces en el parseo
-//  esto lo cree yo para hacer pruebas y que funcionase todo.
-//  IMPORTANTE: revisar.
-
 void	process_command(t_mini *mini)
 {
 	int		result;
 
-	handle_redirections(mini);
+	//handle_redirections(mini);
 	result = management_builtins(mini);
 	if (result == 1)
 		execute_external_command(mini);

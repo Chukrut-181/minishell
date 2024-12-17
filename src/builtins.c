@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/16 10:57:12 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/17 17:11:50 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	management_builtins(t_mini *mini)
 {
+	handle_redirections(mini);
 	if (!mini->full_cmd || !mini->full_cmd[0])
 		return (1);
 	if (ft_strcmp(mini->full_cmd[0], "cd") == 0)
