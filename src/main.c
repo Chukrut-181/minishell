@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/16 09:52:05 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/17 10:11:09 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void free_args(char **args)
+void	free_args(char **args)
 {
 	for (int i = 0; args[i]; i++)
 		free(args[i]);
@@ -114,8 +114,24 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)argc;
 	//mini = ft_calloc(1, sizeof(t_mini));
+
+	
 	while (1)
 	{
+ 		/*
+    	 * Set a custom handler for SIGINT (Ctrl-C).
+     	* When Ctrl-C is pressed, the handle_sigint function is called to
+     	* print a new line and redisplay the prompt, preventing the shell 
+     	* from terminating.
+     	*/
+
+		/*
+     	* Ignore the SIGQUIT signal (Ctrl-\).
+     	* This prevents the shell from being terminated or producing a core dump
+     	* when Ctrl-\ is pressed, ensuring no disruptive behavior occurs.
+     	*/
+		signal(SIGINT, ft_handle_sigint);
+    	signal(SIGQUIT, SIG_IGN);
 	    name = get_name(env);
 	    if (!name)
 	    {
