@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:49:06 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:51:01 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_mini	*ft_initialize_mini_node(char **envp)
 	new_node->infile = STDIN_FILENO;
 	new_node->outfile = STDOUT_FILENO;
 	new_node->next = NULL;
+	new_node->command = NULL;
 	return (new_node);
 }
 

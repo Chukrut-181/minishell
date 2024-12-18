@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/17 09:47:43 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:14:04 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@
 
 typedef struct s_mini
 {
-	char			*command;
+	char			**command;
 	char			**full_cmd;
 	char			*full_path;
 	char			**envp;
 	char			**env_copy; 
 	int				is_builtin;
+	int				num;
 	int				infile;
 	int				outfile;
 	pid_t			pid;
@@ -70,9 +71,9 @@ int		count_val(const char *val);
 
 //execute command
 char	*get_path(t_mini *mini);
-void		process_command(t_mini *mini);
-void	execute_external_command(t_mini *mini);
+void		process_command2(t_mini *mini);
 void	handle_redirections(t_mini *mini);
+void	execute_one_command(t_mini *mini);
 
 //other
 void	free_args(char **args);

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 12:41:44 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/18 11:34:18 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	management_cd(t_mini *mini)
 {
-
 	if (mini->full_cmd[1] == NULL)
 	{
 		if (chdir(mini->full_cmd[1]) != 0)

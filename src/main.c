@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/17 14:03:36 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/18 14:13:54 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int main(int argc, char **argv, char **env)
 	*/
 	signal(SIGINT, ft_handle_sigint);
     signal(SIGQUIT, SIG_IGN);
+	// pruebas para testear eleder
 	while (1)
 	{
 	    name = get_name(env);
@@ -150,7 +151,7 @@ int main(int argc, char **argv, char **env)
 			//	printf("%s\n", mini->full_path);
 			//printf("%d\n", mini->is_builtin);
 	        add_history(line);
-	        process_command(mini);
+	        process_command2(mini);
 			free(line);
 	    }
 		//free(line);
