@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 13:20:53 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 12:57:25 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	ft_get_full_envp(t_mini *node, char **envp)
 		i++;
 	}
 	node->envp[i] = NULL;
-	node->env_copy = node->envp;
+	node->env_copy = envp;
 }

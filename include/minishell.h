@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 10:50:15 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:33:00 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
 void	ft_free_array(char **array);
+t_mini	*ft_free_mini(t_mini *freethis);
 
 //signal
 void ft_handle_sigint(int signal);
