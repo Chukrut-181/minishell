@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 10:49:36 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:52:43 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,4 @@ char *get_name(char **env)
 	free(mini);
 	rl_clear_history();
 	return (0);
-}
+} */
