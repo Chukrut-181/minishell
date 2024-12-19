@@ -6,11 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/12 15:00:10 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:48:37 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_parser.h"
+#include "../include/minishell.h"
 
 void	ft_check_if_builtin(t_mini *node)
 {

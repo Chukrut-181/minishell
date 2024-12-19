@@ -6,40 +6,71 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 17:23:59 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:40:54 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	is_valid(char *str)
+static	int	find_and_remove_var(char **env, const char *var_name)
 {
-	int len;
+	int	j;
+	int	len;
 
-	if (str == NULL || *str == '\0')
-        return (-1);
-    len = ft_strlen(str);
-	if (str[len - 1] == '=')
-		return (0);
-	return (-1);
+	j = -1;
+	len = count_val(var_name);
+	while (env[++j])
+	{
+		if (ft_strncmp(var_name, env[j], len) == 0 && env[j][len] == '=')
+		{
+			free(env[j]);
+			while (env[j])
+			{
+				env[j] = env[j + 1];
+				j++;
+			}
+			return (1);
+		}
+	}
+	return (0);
 }
 
-static int count_val(const char *val)
+int	count_val(const char *val)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (val[i] && val[i] != '=')
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-char **create_env_copy(char **env)
+int	is_valid(char *str)
 {
-	int i = 0;
-	int len = 0;
-	char **env_copy;
+	int	i;
 
+	i = 0;
+	if (str == NULL || *str == '\0')
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (-1);
+}
+
+char	**create_env_copy(char **env)
+{
+	int		i;
+	int		len;
+	char	**env_copy;
+
+	i = 0;
+	len = 0;
 	while (env[len])
 		len++;
 	env_copy = malloc(sizeof(char *) * (len + 1));
@@ -61,36 +92,17 @@ char **create_env_copy(char **env)
 	return (env_copy);
 }
 
-void management_unset(t_mini *mini)
+void	management_unset(t_mini *mini)
 {
-	int i, j, k;
-	int len;
+	int	i;
 
 	i = 1;
-	j = 0;
-	if (!mini->env_copy || is_valid(mini->full_cmd[1]))
-	{
-		fprintf(stderr, "unset: invalid arguments\n");
-		return;
-	}
+	if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))
+		perror("uset: invalid arguments\n");
 	while (mini->full_cmd[i])
 	{
-		len = count_val(mini->full_cmd[i]);
-		while (mini->env_copy[j])
-		{
-			if (ft_strncmp(mini->full_cmd[i], mini->env_copy[j], len) == 0 && mini->env_copy[j][len] == '=')
-			{
-				free(mini->env_copy[j]);
-				k = j;
-				while (mini->env_copy[k])
-				{
-					mini->env_copy[k] = mini->env_copy[k + 1];
-					k++;
-				}
-				break;
-			}
-			j++;
-		}
+		if (!find_and_remove_var(mini->env_copy, mini->full_cmd[i]))
+			perror("uset: valiable not found\n");
 		i++;
 	}
 }

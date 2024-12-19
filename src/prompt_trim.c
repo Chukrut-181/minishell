@@ -6,11 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:14:17 by igchurru          #+#    #+#             */
-/*   Updated: 2024/11/28 10:39:12 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:49:26 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_parser.h"
+#include "../include/minishell.h"
 
 /**
  * handle_quotes - Skips characters enclosed within quotes in a string.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 12:23:17 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 10:49:36 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void free_args(char **args)
+void	free_args(char **args)
 {
 	for (int i = 0; args[i]; i++)
 		free(args[i]);
@@ -33,15 +33,15 @@ char *get_name(char **env)
 	{
 		if (ft_strncmp("USER=", env[i], 5) == 0)
 		{
-			user = ft_strjoin(GREEN, env[i] + 5);
+			user = ft_strjoin(PURPLEB, env[i] + 5);
 			break;
 		}
 		i++;
 	}
 	if (!user)
-		user = ft_strjoin(GREEN, "unknown");
+		user = ft_strjoin(PURPLEB, "unknown");
 	//pwd = ft_strjoin(pwd, BLUE" $ "X);
-	char *prompt = ft_strjoin(user, YELLOW"@minishell $ "X);
+	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	//char *result = ft_strjoin(prompt, pwd);
 	free(user);
 	//free(pwd);
@@ -56,7 +56,7 @@ char *get_name(char **env)
 
 	(void)argv;
 	(void)argc;
-	mini = ft_calloc(1, sizeof(t_mini));
+	//mini = ft_calloc(1, sizeof(t_mini));
 	while (1)
 	{
 	    name = get_name(env);
@@ -74,12 +74,14 @@ char *get_name(char **env)
 	    }
 	    if (ft_strlen(line) > 0)
 	    {
+			mini = ft_process_input(line, env);
 	        add_history(line);
 	        process_command(mini, line);
+			free(line);
 	    }
-	    free(line);
+		//free(line);
 	}
-	if (mini->full_path)
+ 	if (mini->full_path)
 		free(mini->full_path);
 	if (mini->env_copy)
 	{
@@ -90,4 +92,4 @@ char *get_name(char **env)
 	free(mini);
 	rl_clear_history();
 	return (0);
-} */
+}

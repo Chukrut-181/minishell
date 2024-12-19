@@ -6,16 +6,16 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/18 17:24:29 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:31:48 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char *create_env_var(const char *name, const char *value)
+static	char	*create_env_var(const char *name, const char *value)
 {
-	char *temp;
-	char *result;
+	char	*temp;
+	char	*result;
 
 	temp = ft_strjoin(name, "=");
 	if (!temp)
@@ -25,7 +25,7 @@ static char *create_env_var(const char *name, const char *value)
 	return (result);
 }
 
-static int find_env_var(char **env_copy, const char *name)
+static	int	find_env_var(char **env_copy, const char *name)
 {
 	int	i;
 	int	len;
@@ -41,10 +41,10 @@ static int find_env_var(char **env_copy, const char *name)
 	return (-1);
 }
 
-static int add_new_env_var(t_mini *mini, const char *new_var)
+static	int	add_new_env_var(t_mini *mini, const char *new_var)
 {
-	int i;
-	char **new_env_copy;
+	int		i;
+	char	**new_env_copy;
 
 	i = 0;
 	while (mini->env_copy[i])
@@ -70,10 +70,10 @@ static int add_new_env_var(t_mini *mini, const char *new_var)
 	return (0);
 }
 
-int set_env_var(t_mini *mini, const char *name, const char *value)
+int	set_env_var(t_mini *mini, const char *name, const char *value)
 {
-	int index;
-	char *new_var;
+	int		index;
+	char	*new_var;
 
 	if (!name || !mini->env_copy)
 		return (-1);
@@ -97,12 +97,12 @@ int set_env_var(t_mini *mini, const char *name, const char *value)
 	return (0);
 }
 
-int management_export(t_mini *mini)
+int	management_export(t_mini *mini)
 {
 	char	*value;
 
-	if (is_valid(mini->full_cmd[1]) || !mini->env_copy)
-		return (-1);
+	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->env_copy)
+		return (perror("not found"), -1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{

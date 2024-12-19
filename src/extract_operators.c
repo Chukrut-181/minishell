@@ -6,11 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 10:27:16 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:48:54 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_parser.h"
+#include "../include/minishell.h"
 
 /**
  * ft_concatenate_array - 	Merges a temporary array into an existing array at
