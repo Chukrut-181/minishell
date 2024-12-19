@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/18 14:14:48 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/18 17:17:48 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,33 +85,18 @@ static void	execute_one_command2(t_mini *mini)
 	}
 }
 
-/* void	execute_multiples_command(t_mini *mini)
+void	execute_multiples_command(t_mini *mini)
 {
 	int		last_fd;
 
 	last_fd = STDIN_FILENO;
 	while (mini->num--)
 	{
-		
+		//crear pipes siempre que exista un comando mas adelante;
+		//despues ejecutar lo que diga el comando gestionando redirecciones
+		//despues cerrar el pipe que se ha creado.
 	}
-} */
-
-/* void	process_command(t_mini *mini)
-{
-	pid_t pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork error");
-		return ;
-	}
-	if (pid == 0)
-	{
-		handle_redirections(mini);
-		handle_command(mini);
-	}
-} */
+}
 
 void	process_command2(t_mini *mini)
 {
@@ -120,6 +105,8 @@ void	process_command2(t_mini *mini)
 		management_builtins(mini);
 		return ;
 	}
-	else
+	else if (mini->command == NULL)
 		execute_one_command2(mini);
+	else 
+		execute_multiples_command(mini);
 }

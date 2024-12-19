@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/18 14:14:04 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 10:07:51 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 typedef struct s_mini
 {
-	char			**command;
+	char			*command;
 	char			**full_cmd;
 	char			*full_path;
 	char			**envp;
