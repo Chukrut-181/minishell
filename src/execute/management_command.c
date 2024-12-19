@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/18 17:17:48 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 11:00:20 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,6 @@ static void	handle_redirections2(t_mini *mini)
 		close(mini->outfile);
 	}
 }
-
-/* static void	handle_command(t_mini *mini)
-{
-	int sig;
-
-	if (mini->is_builtin == 1)
-	{
-		sig = management_builtins(mini);
-		exit(sig);
-	}
-	else
-	{
-		execute_external_command(mini);
-		exit(1);
-	}
-} */
 
 static void	execute_external_command33(t_mini *mini)
 {
@@ -87,11 +71,12 @@ static void	execute_one_command2(t_mini *mini)
 
 void	execute_multiples_command(t_mini *mini)
 {
-	int		last_fd;
+//	int		last_fd;
 
-	last_fd = STDIN_FILENO;
-	while (mini->num--)
+//	last_fd = STDIN_FILENO;
+	while (mini->next != NULL)
 	{
+		
 		//crear pipes siempre que exista un comando mas adelante;
 		//despues ejecutar lo que diga el comando gestionando redirecciones
 		//despues cerrar el pipe que se ha creado.
@@ -100,12 +85,12 @@ void	execute_multiples_command(t_mini *mini)
 
 void	process_command2(t_mini *mini)
 {
-	if (mini->command == NULL && mini->is_builtin == 1)
+	if (mini->next == NULL && mini->is_builtin == 1)
 	{
 		management_builtins(mini);
 		return ;
 	}
-	else if (mini->command == NULL)
+	else if (mini->next == NULL)
 		execute_one_command2(mini);
 	else 
 		execute_multiples_command(mini);
