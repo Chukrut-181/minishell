@@ -6,13 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 11:00:20 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 13:46:55 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	handle_redirections2(t_mini *mini)
+void	handle_redirections(t_mini *mini)
 {
 	if (mini->infile != STDIN_FILENO)
 	{
@@ -34,7 +34,7 @@ static void	handle_redirections2(t_mini *mini)
 	}
 }
 
-static void	execute_external_command33(t_mini *mini)
+void	execute_external_command(t_mini *mini)
 {
 	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 	{
@@ -56,8 +56,8 @@ static void	execute_one_command2(t_mini *mini)
 	}
 	else if (pid == 0)
 	{
-		handle_redirections2(mini);
-		execute_external_command33(mini);
+		handle_redirections(mini);
+		execute_external_command(mini);
 	}
 	else
 	{
@@ -71,15 +71,21 @@ static void	execute_one_command2(t_mini *mini)
 
 void	execute_multiples_command(t_mini *mini)
 {
-//	int		last_fd;
+	int		last_fd;
+	int		pipefd[2];
 
-//	last_fd = STDIN_FILENO;
+	last_fd = STDIN_FILENO;
 	while (mini->next != NULL)
 	{
-		
-		//crear pipes siempre que exista un comando mas adelante;
+		//crear pipes siempre que exista un comando mas adelante
+		if (create_pipes(pipefd, mini) == -1)
+			return ;
 		//despues ejecutar lo que diga el comando gestionando redirecciones
+		handle_multiples_command(pipefd[2], last_fd, mini);
 		//despues cerrar el pipe que se ha creado.
+		close_pipe(pipefd[2]);
+		mini->next = mini->next->next;
+		last_fd = pipefd[0];
 	}
 }
 

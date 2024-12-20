@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 10:07:51 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/19 13:44:44 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,13 @@ int		count_val(const char *val);
 
 //execute command
 char	*get_path(t_mini *mini);
-void		process_command2(t_mini *mini);
+void	process_command2(t_mini *mini);
 void	handle_redirections(t_mini *mini);
 void	execute_one_command(t_mini *mini);
+void	pipe_outfile(int pipefd[2]);
+void	pipe_infile(int pipefd[2], int last_fd);
+int		create_pipes(int pipefd[2], t_mini *mini);
+void	execute_external_command(t_mini *mini);
 
 //other
 void	free_args(char **args);
