@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 13:44:44 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/20 10:58:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -106,6 +107,7 @@ int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
 void	ft_free_array(char **array);
+t_mini	*ft_free_mini(t_mini *freethis);
 
 //signal
 void ft_handle_sigint(int signal);
