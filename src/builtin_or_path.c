@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/20 11:57:57 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:03:30 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	ft_check_if_builtin(t_mini *node)
 /*
  * ft_get_path - Searches for a command in the directories specified in the
  * PATH environment variable.
- * This function attempts to find the full path of a command by checking
- * each directory listed in the PATH environment variable. If the command is 
- * found and is executable, the full path is assigned to the node's 
+ * 
+ * This function attempts to find the full path of a command.If the command is
+ * found and it is executable, the full path is assigned to the node's
  * `full_path` member.
  * 
- * **node: A pointer to the t_mini structure, which represents a command. 
+ * **node: A pointer to the t_mini structure, which represents a command.
  *         and the `full_path` field which will be populated with the
  * 		   full path to the executable if found.
  *
  * Function flow:
  * 1. It first checks if the command is a built-in (node->is_builtin == 1).
  *    If it is, the function returns immediately as built-in commands do
- *    	not require path searching.
+ *    not require path searching.
  * 2. If the command is not a built-in, it retrieves the PATH environment
  *    variable and splits it into individual directories.
  * 3. It then iterates through each directory in the PATH variable and attempts
@@ -64,19 +64,15 @@ void	ft_check_if_builtin(t_mini *node)
  * 4. For each directory, it checks if the resulting path is executable
  *    using `access(valid_path, X_OK)`. If an executable file is found, the
  *    `full_path` field of the node is set to the full path of the executable.
- * 5. If no valid path is found after checking all directories, the `full_path` remains unchanged.
- * 6. Memory for the temporary strings (`temp_path` and `valid_path`) and the split `paths` array is properly
- *    freed at the end of the function to avoid memory leaks.
- *
- * Notes:
- * - If the `PATH` environment variable is not set, `ft_split` will return NULL, which should be handled
- *   elsewhere in the program to avoid segmentation faults.
- * - If the `full_cmd` in the node contains a relative or absolute path, this function will not be used, as
- *   it's assumed that the user has already provided the full path.
+ * 5. If no valid path is found after checking all directories,
+ *    the `full_path` remains unchanged (NULL).
+ * 6. Memory for the temporary strings (`temp_path` and `valid_path`)
+ *    and the split `paths` array is properly freed at the end of the function
+ *    to avoid memory leaks.
  *
  * Possible improvements:
- * - Additional error handling could be added for cases where `getenv("PATH")` returns NULL or if any
- *   system calls (like `access`) fail unexpectedly.
+ * - Additional error handling could be added for cases where `getenv("PATH")`
+ *   returns NULL or if any system calls (like `access`) fail unexpectedly.
  */
 void	ft_get_path(t_mini *node)
 {
