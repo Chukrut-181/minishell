@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/19 12:46:24 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:41:22 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
-t_mini	*ft_free_mini(t_mini *freethis)
+void	ft_free_mini(t_mini *freethis)
 {
 	t_mini	*aux;
 
@@ -55,11 +55,9 @@ t_mini	*ft_free_mini(t_mini *freethis)
 			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
-/* 		if (freethis->env_copy)
-			ft_free_array(freethis->env_copy); */
 		aux = freethis;
 		freethis = freethis->next;
 		free(aux);
 	}
-	return (NULL);
+	//free(freethis);
 }

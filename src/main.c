@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 12:32:26 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:34:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ int main(int argc, char **argv, char **env)
 			free(line);
 	    }
 		if (mini)
-			mini = ft_free_mini(mini);
+			ft_free_mini(mini);
+		mini = NULL;
 	}
 	rl_clear_history();
 	return (0);
 }
+
+/* 		valgrind --leak-check=full --suppressions=readline.supp./minishell		*/

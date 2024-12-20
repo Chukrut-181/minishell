@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 12:33:00 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/20 07:55:32 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		count_val(const char *val);
 
 //execute command
 char	*get_path(t_mini *mini);
-void		process_command2(t_mini *mini);
+void	process_command2(t_mini *mini);
 void	handle_redirections(t_mini *mini);
 void	execute_one_command(t_mini *mini);
 
@@ -103,7 +103,7 @@ int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
 void	ft_free_array(char **array);
-t_mini	*ft_free_mini(t_mini *freethis);
+void	ft_free_mini(t_mini *freethis);
 
 //signal
 void ft_handle_sigint(int signal);

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:37 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:20:12 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,26 @@ void	ft_check_if_builtin(t_mini *node)
 void	ft_get_path(t_mini *node)
 {
 	char	**paths;
+	char	*temp_path;
 	char	*valid_path;
 	int		i;
 
 	if (node->is_builtin == 1)
-	{
-		node->full_path = NULL;
 		return ;
-	}
 	paths = ft_split(getenv("PATH"), ':');
 	i = 0;
-	valid_path = NULL;
 	while (paths[i])
 	{
-		valid_path = ft_strjoin(paths[i], "/");
-		valid_path = ft_strjoin(valid_path, node->full_cmd[0]);
+		temp_path = ft_strjoin(paths[i], "/");
+		valid_path = ft_strjoin(temp_path, node->full_cmd[0]);
+		free(temp_path);
 		if (access(valid_path, X_OK) == 0)
 		{
-			node->full_path = ft_strdup(valid_path);
+			node->full_path = valid_path;
+			ft_free_array(paths);
 			return ;
 		}
 		i++;
 	}
+	ft_free_array(paths);
 }
