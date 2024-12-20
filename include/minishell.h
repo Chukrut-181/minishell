@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/20 10:58:05 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/20 15:56:10 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 # define BOLD		"\033[0;1m"
 # define X			"\033[0;0m"
 
+typedef struct s_prompt
+{
+	t_list *cmds;
+}			t_prompt;
+
 typedef struct s_mini
 {
 	char			*command;
@@ -65,23 +70,23 @@ void	management_exit(t_mini *mini);
 //builtins utils
 void	update_pwd(t_mini *mini);
 char	**create_env_copy(char **env);
-char	*my_getenvp(const char *name, char **env_copy);
 int		set_env_var(t_mini *mini, const char *name, const char *value);
 int		is_valid(char *str);
 int		count_val(const char *val);
 
 //execute command
-char	*get_path(t_mini *mini);
 void	process_command2(t_mini *mini);
-void	handle_redirections(t_mini *mini);
+void	handle_redirection1(t_mini *mini);
 void	execute_one_command(t_mini *mini);
-void	pipe_outfile(int pipefd[2]);
-void	pipe_infile(int pipefd[2], int last_fd);
-int		create_pipes(int pipefd[2], t_mini *mini);
+int		create_pipes(int pipefd[2]);
 void	execute_external_command(t_mini *mini);
+void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini);
+void	close_pipe(int pipefd[2], int last_fd);
+void	pipe_output(int pipefd[2], t_mini *mini);
+void	pipe_input(int last_fd);
+void	handle_redirection2(t_mini *mini);
 
 //other
-void	free_args(char **args);
 
 //parse and command list creation
 t_mini	*ft_process_input(char *line, char **envp);

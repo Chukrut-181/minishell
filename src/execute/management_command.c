@@ -6,13 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 13:46:55 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/20 15:44:15 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	handle_redirections(t_mini *mini)
+void	handle_redirection1(t_mini *mini)
 {
 	if (mini->infile != STDIN_FILENO)
 	{
@@ -23,6 +23,10 @@ void	handle_redirections(t_mini *mini)
 		}
 		close(mini->infile);
 	}
+}
+
+void	handle_redirection2(t_mini *mini)
+{
 	if (mini->outfile != STDOUT_FILENO)
 	{
 		if (dup2(mini->outfile, STDOUT_FILENO) == -1)
@@ -43,7 +47,7 @@ void	execute_external_command(t_mini *mini)
 	}
 }
 
-static void	execute_one_command2(t_mini *mini)
+void	execute_one_command(t_mini *mini)
 {
 	pid_t pid;
 	int status;
@@ -56,7 +60,8 @@ static void	execute_one_command2(t_mini *mini)
 	}
 	else if (pid == 0)
 	{
-		handle_redirections(mini);
+		handle_redirection1(mini);
+		handle_redirection2(mini);
 		execute_external_command(mini);
 	}
 	else
@@ -73,20 +78,28 @@ void	execute_multiples_command(t_mini *mini)
 {
 	int		last_fd;
 	int		pipefd[2];
+	int		status;
+	int 	i = 0;
 
 	last_fd = STDIN_FILENO;
-	while (mini->next != NULL)
+	while (mini->full_cmd[i])
 	{
+		write(1, "estoy2\n", 7);
 		//crear pipes siempre que exista un comando mas adelante
-		if (create_pipes(pipefd, mini) == -1)
-			return ;
+		if (mini->next)
+		{
+			if (create_pipes(pipefd) == -1)
+				return ;
+		}
 		//despues ejecutar lo que diga el comando gestionando redirecciones
-		handle_multiples_command(pipefd[2], last_fd, mini);
+		handle_multiples_command(pipefd, last_fd, mini);
 		//despues cerrar el pipe que se ha creado.
-		close_pipe(pipefd[2]);
+		close_pipe(pipefd, last_fd);
 		mini->next = mini->next->next;
 		last_fd = pipefd[0];
 	}
+	while(wait(&status) > 0)
+		mini->num = WEXITSTATUS(status);
 }
 
 void	process_command2(t_mini *mini)
@@ -97,7 +110,10 @@ void	process_command2(t_mini *mini)
 		return ;
 	}
 	else if (mini->next == NULL)
-		execute_one_command2(mini);
-	else 
+		execute_one_command(mini);
+	else
+	{
+		write(1, "estoy1\n", 7);
 		execute_multiples_command(mini);
+	}
 }
