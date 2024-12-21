@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/20 15:21:57 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/21 12:59:55 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	create_pipes(int pipefd[2])
 	return (0);
 }
 
-void	pipe_output(int pipefd[2], t_mini *mini)
+void	pipe_output(int pipefd[2], t_prompt *cmd)
 {
-	if (mini->next != NULL)
+	if (cmd->next != NULL)
 	{
 		if (dup2(pipefd[1], STDOUT_FILENO) == -1)
 		{
@@ -70,7 +70,7 @@ void	close_pipe(int pipefd[2], int last_fd)
 	close(pipefd[1]);
 }
 
-void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini)
+void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd)
 {
 	pid_t pid;
 
@@ -84,8 +84,8 @@ void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini)
 	{
 		write(1, "estoy4\n", 7);
 		pipe_input(last_fd);
-		if (mini->next)
-			pipe_output(pipefd, mini);
+		if (cmd->next)
+			pipe_output(pipefd, cmd);
 		handle_redirection1(mini);
 		handle_redirection2(mini);
 		execute_command(mini);

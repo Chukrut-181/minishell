@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/20 15:56:10 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/21 12:59:43 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 
 typedef struct s_prompt
 {
-	t_list *cmds;
+	t_list 			*cmds;
+	struct s_prompt *next;
 }			t_prompt;
 
 typedef struct s_mini
@@ -80,13 +81,15 @@ void	handle_redirection1(t_mini *mini);
 void	execute_one_command(t_mini *mini);
 int		create_pipes(int pipefd[2]);
 void	execute_external_command(t_mini *mini);
-void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini);
+void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd);
 void	close_pipe(int pipefd[2], int last_fd);
-void	pipe_output(int pipefd[2], t_mini *mini);
+void	pipe_output(int pipefd[2], t_prompt *cmd);
 void	pipe_input(int last_fd);
 void	handle_redirection2(t_mini *mini);
 
 //other
+void parse_command(t_prompt *prompt, const char *command);
+t_prompt *create_prompt(void);
 
 //parse and command list creation
 t_mini	*ft_process_input(char *line, char **envp);

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/20 15:44:15 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/21 15:17:20 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,37 @@ void	execute_one_command(t_mini *mini)
 	}
 }
 
-void	execute_multiples_command(t_mini *mini)
+void execute_multiples_command(t_mini *mini)
 {
-	int		last_fd;
-	int		pipefd[2];
-	int		status;
-	int 	i = 0;
+    int     last_fd;
+    int     pipefd[2];
+    int     status;
+    t_mini  *current;
+    t_prompt *cmd;
 
-	last_fd = STDIN_FILENO;
-	while (mini->full_cmd[i])
-	{
-		write(1, "estoy2\n", 7);
-		//crear pipes siempre que exista un comando mas adelante
-		if (mini->next)
-		{
-			if (create_pipes(pipefd) == -1)
-				return ;
-		}
-		//despues ejecutar lo que diga el comando gestionando redirecciones
-		handle_multiples_command(pipefd, last_fd, mini);
-		//despues cerrar el pipe que se ha creado.
-		close_pipe(pipefd, last_fd);
-		mini->next = mini->next->next;
-		last_fd = pipefd[0];
-	}
-	while(wait(&status) > 0)
-		mini->num = WEXITSTATUS(status);
+    cmd = create_prompt();
+    parse_command(cmd, mini->command);
+    last_fd = STDIN_FILENO;
+    current = mini;
+    // Execute each command in the pipeline
+    while (cmd && current)
+    {
+        // Create pipe for all but the last command
+        if (cmd->next)
+        {
+            if (create_pipes(pipefd) == -1)
+                return;
+        }
+        handle_multiples_command(pipefd, last_fd, current, cmd);
+        // Close used pipe ends and update for next iteration
+        close_pipe(pipefd, last_fd);
+        if (cmd->next)
+            last_fd = pipefd[0];
+        cmd = cmd->next;
+        current = current->next;
+    }
+    while (waitpid(-1, &status, 0) > 0)
+        continue;
 }
 
 void	process_command2(t_mini *mini)
