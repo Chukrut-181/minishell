@@ -12,15 +12,15 @@
 
 #include "../../include/minishell.h"
 
-/* int	create_pipes(int pipefd[2])
+int create_pipes(int pipefd[2])
 {
-	if (pipe(pipefd) == -1)
-	{
-		perror("Error creando el pipe");
-		return (-1);
-	}
-	return (0);
-} */
+    if (pipe(pipefd) == -1)
+    {
+        perror("pipe");
+        return (-1);
+    }
+    return (0);
+}
 
 void	pipe_output(int pipefd[2], t_prompt *cmd)
 {
@@ -31,7 +31,6 @@ void	pipe_output(int pipefd[2], t_prompt *cmd)
 			perror("error en dup2");
 			return ;
 		}
-		write(1, "estoy6\n", 7);
 		close(pipefd[1]);
 	}
 }
@@ -63,12 +62,13 @@ void	execute_command(t_mini *mini)
 	}
 }
 
-/* void	close_pipe(int pipefd[2], int last_fd)
+void close_pipe(int pipefd[2], int last_fd)
 {
-	if (last_fd != STDIN_FILENO)
-		close(pipefd[0]);
-	close(pipefd[1]);
-} */
+    if (last_fd != STDIN_FILENO)
+        close(last_fd);
+    if (pipefd[1] != STDOUT_FILENO)
+        close(pipefd[1]);
+}
 
 /* void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd)
 {
@@ -91,4 +91,4 @@ void	execute_command(t_mini *mini)
 		execute_command(mini);
 	}
 }
- */
+*/

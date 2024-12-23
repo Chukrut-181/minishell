@@ -98,24 +98,6 @@ void handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *
     mini->pid = pid;
 }
 
-void close_pipe(int pipefd[2], int last_fd)
-{
-    if (last_fd != STDIN_FILENO)
-        close(last_fd);
-    if (pipefd[1] != STDOUT_FILENO)
-        close(pipefd[1]);
-}
-
-int create_pipes(int pipefd[2])
-{
-    if (pipe(pipefd) == -1)
-    {
-        perror("pipe");
-        return (-1);
-    }
-    return (0);
-}
-
 t_prompt *create_prompt(void)
 {
     t_prompt *new;

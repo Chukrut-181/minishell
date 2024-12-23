@@ -123,9 +123,14 @@ void execute_multiples_command(t_mini *mini)
         if (current->next)
         {
             if (create_pipes(pipefd) == -1)
-                return;
+                return ;
         }
-        handle_multiples_command(pipefd, last_fd, current, current->next ? current->next : NULL);
+        //handle_multiples_command(pipefd, last_fd, current, current->next ? current->next : NULL);
+		if (current->next != NULL)
+   			handle_multiples_command(pipefd, last_fd, current, current->next);
+		else
+    		handle_multiples_command(pipefd, last_fd, current, NULL);
+
         // Close used pipe ends and update for next iteration
         close_pipe(pipefd, last_fd);
         if (current->next)
@@ -147,7 +152,6 @@ void	process_command2(t_mini *mini)
 		execute_one_command(mini);
 	else
 	{
-		write(1, "estoy1\n", 7);
 		execute_multiples_command(mini);
 	}
 }
