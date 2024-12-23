@@ -43,10 +43,12 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
-t_mini	*ft_free_mini(t_mini *freethis)
+t_mini	*ft_free_mini(t_mini *freethis, const char *str)
 {
 	t_mini	*aux;
 
+	if (str)
+		fprintf(stderr, "Error: %s\n", str);
 	while (freethis)
 	{
 		if (freethis->full_cmd)

@@ -22,30 +22,36 @@ int create_pipes(int pipefd[2])
     return (0);
 }
 
-void	pipe_output(int pipefd[2], t_prompt *cmd)
+void	pipe_output(int pipefd[2])
 {
-	if (cmd->next != NULL)
-	{
-		if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-		{
-			perror("error en dup2");
-			return ;
-		}
-		close(pipefd[1]);
-	}
+	close(pipefd[0]);  // Close read end
+    if (dup2(pipefd[1], STDOUT_FILENO) == -1)
+    {
+        perror("dup2");
+        exit(EXIT_FAILURE);
+    }
+    close(pipefd[1]);
 }
 
 void	pipe_input(int last_fd)
 {
-	if (last_fd != STDIN_FILENO)
-	{
-		if (dup2(last_fd, STDIN_FILENO) == -1)
-		{
-			perror("error en dup2");
-			return ;
-		}
-		close(last_fd);
-	}
+    if (last_fd != STDIN_FILENO)
+    {
+        if (dup2(last_fd, STDIN_FILENO) == -1)
+        {
+            perror("dup2");
+            exit(EXIT_FAILURE);
+        }
+        close(last_fd);
+    }
+}
+
+void close_pipe(int pipefd[2], int last_fd)
+{
+    if (last_fd != STDIN_FILENO)
+        close(last_fd);
+    if (pipefd[1] != STDOUT_FILENO)
+        close(pipefd[1]);
 }
 
 void	execute_command(t_mini *mini)
@@ -61,34 +67,3 @@ void	execute_command(t_mini *mini)
 		exit(0);
 	}
 }
-
-void close_pipe(int pipefd[2], int last_fd)
-{
-    if (last_fd != STDIN_FILENO)
-        close(last_fd);
-    if (pipefd[1] != STDOUT_FILENO)
-        close(pipefd[1]);
-}
-
-/* void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd)
-{
-	pid_t pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("error en fork");
-		return ;
-	}
-	else if (pid == 0)
-	{
-		write(1, "estoy4\n", 7);
-		pipe_input(last_fd);
-		if (cmd->next)
-			pipe_output(pipefd, cmd);
-		handle_redirection1(mini);
-		handle_redirection2(mini);
-		execute_command(mini);
-	}
-}
-*/

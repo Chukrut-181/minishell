@@ -37,12 +37,6 @@
 # define BOLD		"\033[0;1m"
 # define X			"\033[0;0m"
 
-typedef struct s_prompt
-{
-	t_list 			*cmds;
-	struct s_prompt *next;
-}			t_prompt;
-
 typedef struct s_mini
 {
 	char			*command;
@@ -83,13 +77,11 @@ int		create_pipes(int pipefd[2]);
 void	execute_external_command(t_mini *mini);
 void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd);
 void	close_pipe(int pipefd[2], int last_fd);
-void	pipe_output(int pipefd[2], t_prompt *cmd);
+void	pipe_output(int pipefd[2]);
 void	pipe_input(int last_fd);
 void	handle_redirection2(t_mini *mini);
 
 //other
-void parse_command(t_prompt *prompt, const char *command);
-t_prompt *create_prompt(void);
 
 //parse and command list creation
 t_mini	*ft_process_input(char *line, char **envp);
@@ -115,7 +107,7 @@ int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
 void	ft_free_array(char **array);
-t_mini	*ft_free_mini(t_mini *freethis);
+t_mini	*ft_free_mini(t_mini *freethis, const char *str);
 
 //signal
 void ft_handle_sigint(int signal);
