@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	create_pipes(int pipefd[2])
+/* int	create_pipes(int pipefd[2])
 {
 	if (pipe(pipefd) == -1)
 	{
@@ -20,7 +20,7 @@ int	create_pipes(int pipefd[2])
 		return (-1);
 	}
 	return (0);
-}
+} */
 
 void	pipe_output(int pipefd[2], t_prompt *cmd)
 {
@@ -63,14 +63,14 @@ void	execute_command(t_mini *mini)
 	}
 }
 
-void	close_pipe(int pipefd[2], int last_fd)
+/* void	close_pipe(int pipefd[2], int last_fd)
 {
 	if (last_fd != STDIN_FILENO)
 		close(pipefd[0]);
 	close(pipefd[1]);
-}
+} */
 
-void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd)
+/* void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd)
 {
 	pid_t pid;
 
@@ -91,3 +91,4 @@ void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt
 		execute_command(mini);
 	}
 }
+ */

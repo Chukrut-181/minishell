@@ -74,7 +74,7 @@ void	execute_one_command(t_mini *mini)
 	}
 }
 
-void execute_multiples_command(t_mini *mini)
+/* void execute_multiples_command(t_mini *mini)
 {
     int     last_fd;
     int     pipefd[2];
@@ -101,6 +101,35 @@ void execute_multiples_command(t_mini *mini)
         if (cmd->next)
             last_fd = pipefd[0];
         cmd = cmd->next;
+        current = current->next;
+    }
+    while (waitpid(-1, &status, 0) > 0)
+        continue;
+} */
+
+void execute_multiples_command(t_mini *mini)
+{
+    int     last_fd;
+    int     pipefd[2];
+    int     status;
+    t_mini  *current;
+
+    last_fd = STDIN_FILENO;
+    current = mini;
+    // Execute each command in the pipeline
+    while (current)
+    {
+        // Create pipe for all but the last command
+        if (current->next)
+        {
+            if (create_pipes(pipefd) == -1)
+                return;
+        }
+        handle_multiples_command(pipefd, last_fd, current, current->next ? current->next : NULL);
+        // Close used pipe ends and update for next iteration
+        close_pipe(pipefd, last_fd);
+        if (current->next)
+            last_fd = pipefd[0];
         current = current->next;
     }
     while (waitpid(-1, &status, 0) > 0)

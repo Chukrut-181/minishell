@@ -81,7 +81,7 @@ void	handle_redirection1(t_mini *mini);
 void	execute_one_command(t_mini *mini);
 int		create_pipes(int pipefd[2]);
 void	execute_external_command(t_mini *mini);
-void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_prompt *cmd);
+void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd);
 void	close_pipe(int pipefd[2], int last_fd);
 void	pipe_output(int pipefd[2], t_prompt *cmd);
 void	pipe_input(int last_fd);
