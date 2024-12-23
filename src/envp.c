@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/20 09:52:45 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/23 07:46:35 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_get_full_envp(t_mini *node, char **envp)
 	env_count = 0;
 	while (envp[env_count])
 		env_count++;
-
 	node->envp = malloc(sizeof(char *) * (env_count + 1));
 	if (!node->envp)
 	{
