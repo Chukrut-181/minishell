@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/19 11:00:20 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/23 08:23:45 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	execute_external_command33(t_mini *mini)
 
 static void	execute_one_command2(t_mini *mini)
 {
-	pid_t pid;
-	int status;
-	
+	pid_t	pid;
+	int		status;
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -92,6 +92,6 @@ void	process_command2(t_mini *mini)
 	}
 	else if (mini->next == NULL)
 		execute_one_command2(mini);
-	else 
+	else
 		execute_multiples_command(mini);
 }
