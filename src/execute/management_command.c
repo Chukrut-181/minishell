@@ -6,13 +6,13 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/23 08:23:45 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/24 07:52:24 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	handle_redirections2(t_mini *mini)
+void	handle_redirection1(t_mini *mini)
 {
 	if (mini->infile != STDIN_FILENO)
 	{
@@ -23,6 +23,10 @@ static void	handle_redirections2(t_mini *mini)
 		}
 		close(mini->infile);
 	}
+}
+
+void	handle_redirection2(t_mini *mini)
+{
 	if (mini->outfile != STDOUT_FILENO)
 	{
 		if (dup2(mini->outfile, STDOUT_FILENO) == -1)
@@ -34,7 +38,7 @@ static void	handle_redirections2(t_mini *mini)
 	}
 }
 
-static void	execute_external_command33(t_mini *mini)
+void	execute_external_command(t_mini *mini)
 {
 	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 	{
@@ -43,7 +47,7 @@ static void	execute_external_command33(t_mini *mini)
 	}
 }
 
-static void	execute_one_command2(t_mini *mini)
+void	execute_one_command(t_mini *mini)
 {
 	pid_t	pid;
 	int		status;
@@ -56,8 +60,9 @@ static void	execute_one_command2(t_mini *mini)
 	}
 	else if (pid == 0)
 	{
-		handle_redirections2(mini);
-		execute_external_command33(mini);
+		handle_redirection1(mini);
+		handle_redirection2(mini);
+		execute_external_command(mini);
 	}
 	else
 	{
@@ -67,31 +72,4 @@ static void	execute_one_command2(t_mini *mini)
 			close(mini->outfile);
 		waitpid(pid, &status, 0);
 	}
-}
-
-void	execute_multiples_command(t_mini *mini)
-{
-//	int		last_fd;
-
-//	last_fd = STDIN_FILENO;
-	while (mini->next != NULL)
-	{
-		
-		//crear pipes siempre que exista un comando mas adelante;
-		//despues ejecutar lo que diga el comando gestionando redirecciones
-		//despues cerrar el pipe que se ha creado.
-	}
-}
-
-void	process_command2(t_mini *mini)
-{
-	if (mini->next == NULL && mini->is_builtin == 1)
-	{
-		management_builtins(mini);
-		return ;
-	}
-	else if (mini->next == NULL)
-		execute_one_command2(mini);
-	else
-		execute_multiples_command(mini);
 }
