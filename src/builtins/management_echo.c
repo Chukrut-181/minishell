@@ -27,6 +27,8 @@ void	management_echo(t_mini *mini)
 	while (mini->full_cmd[i])
 	{
 		write(1, mini->full_cmd[i], ft_strlen(mini->full_cmd[i]));
+		if (mini->full_cmd[i + 1] != NULL)
+			write(1, " ", 1);
 		i++;
 	}
 	if (parameter == 1)

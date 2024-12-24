@@ -107,7 +107,7 @@ int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
 void	ft_free_array(char **array);
-t_mini	*ft_free_mini(t_mini *freethis, const char *str);
+t_mini	*ft_free_mini(t_mini *freethis);
 
 //signal
 void ft_handle_sigint(int signal);
