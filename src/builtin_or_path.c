@@ -30,12 +30,24 @@ void	ft_check_if_builtin(t_mini *node)
 		node->is_builtin = 1;
 }
 
+//he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+
+static void check_this(t_mini *node)
+{
+	if (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.')
+    {
+        node->full_path = ft_strdup(node->full_cmd[0]);
+        return ;
+    }
+}
+
 void	ft_get_path(t_mini *node)
 {
 	char	**paths;
 	char	*valid_path;
 	int		i;
 
+	check_this(node);
 	if (node->is_builtin == 1)
 	{
 		node->full_path = NULL;

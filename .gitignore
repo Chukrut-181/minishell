@@ -7,3 +7,5 @@ test.c
 readline.supp
 infile_test.txt
 .n
+*.a
+out
