@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/19 12:46:24 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/27 11:21:34 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_free_array(char **array)
 {
 	int	i;
 
-	if (!array)
+	if (!array || !*array)
 		return ;
 	i = 0;
 	while (array[i])
@@ -43,7 +43,24 @@ void	ft_free_array(char **array)
 	array = NULL;
 }
 
-t_mini	*ft_free_mini(t_mini *freethis)
+/*
+ * ft_free_mini - Frees the memory allocated for a linked list of t_mini nodes
+ *
+ * This function iterates through a linked list of t_mini nodes, deallocates
+ * the memory for each node's member variables, and frees the node itself.
+ * It also calls the ft_free_array function to free any dynamically allocated
+ * arrays (such as `full_cmd` and `envp`) associated with each node.
+ *
+ * **freethis: A pointer to the first node in the linked list to be freed.
+ *             Each node in the list is of type t_mini. The linked list must
+ *             be traversed until all nodes are freed.
+ *
+ * Notes:
+ * - If the `freethis` pointer is NULL, the function does nothing.
+ * - This function ensures that all dynamically allocated memory associated
+ *   with the list is freed, preventing memory leaks.
+ */
+void	ft_free_mini(t_mini *freethis, const char *str)
 {
 	t_mini	*aux;
 
@@ -55,11 +72,8 @@ t_mini	*ft_free_mini(t_mini *freethis)
 			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
-/* 		if (freethis->env_copy)
-			ft_free_array(freethis->env_copy); */
 		aux = freethis;
 		freethis = freethis->next;
 		free(aux);
 	}
-	return (NULL);
 }

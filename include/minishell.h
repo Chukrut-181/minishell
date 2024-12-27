@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/21 12:59:43 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/24 07:50:41 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index);
 char	**ft_final_trim(char **array);
 t_mini	*ft_initialize_mini_node(char **envp);
 void	ft_get_full_envp(t_mini *node, char **envp);
+void	ft_get_single_envp(t_mini *node, int i, char **envp);
 void	ft_check_redirections(t_mini *node, char **array);
 t_mini	*ft_create_structure(char **array, char **envp);
 void	ft_get_full_command(t_mini *node, char **array);

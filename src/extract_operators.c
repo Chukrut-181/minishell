@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:54 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/23 08:20:23 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index)
 int	ft_arraylen(char **array)
 {
 	int	i;
-	
+
 	if (!array || !array[0])
 		return (0);
 	i = 0;
@@ -113,7 +113,8 @@ char	**ft_extract_operators(char **array, const char *operators)
 			array = ft_concatenate_array(array, temp_array, i);
 			ft_free_array(temp_array);
 		}
-		else if (len > 1 && ft_strchr(operators, array[i][len - 1]) && array[i][len - 2])
+		else if (len > 1 && ft_strchr(operators, array[i][len - 1])
+			&& array[i][len - 2])
 		{
 			temp_array = ft_create_temp_array(array, i, (len - 1));
 			array = ft_concatenate_array(array, temp_array, i);

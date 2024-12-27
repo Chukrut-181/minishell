@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/20 15:29:38 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/24 07:51:52 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 {
 	int	i;
 
-	i = 0;
 	if (str)
 	{
+		i = 0;
 		while (str[i])
 		{
 			free(str[i]);
@@ -28,6 +28,10 @@
 	}
 } */
 
+/*
+Redirijo la gestión de todos los frees de salida al ejecutar exit 
+a ft_free_mini. Evitamos redundancias: doublke free, invalid pointer, etc.
+*/
 void	management_exit(t_mini *mini)
 {
 	(void)mini;
