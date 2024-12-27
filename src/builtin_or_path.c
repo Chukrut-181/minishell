@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/27 11:23:07 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/27 11:26:30 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void	ft_check_if_builtin(t_mini *node)
 		node->is_builtin = 1;
 	else if (!ft_strcmp(node->full_cmd[0], "exit"))
 		node->is_builtin = 1;
+}
+
+//he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+
+static void check_this(t_mini *node)
+{
+	if (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.')
+    {
+        node->full_path = ft_strdup(node->full_cmd[0]);
+        return ;
+    }
 }
 
 /*
