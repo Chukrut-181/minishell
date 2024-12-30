@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 10:38:02 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:58:22 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = readline(name);
 		free(name);
-		if (!line || line[0] == ' ' || line[0] == '\0')
+		if (!line)
+			break ;
+		if (line[0] == ' ' || line[0] == '\0')
 		{
 			free(line);
 			continue ;
