@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/27 11:21:34 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 09:50:13 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_free_array(char **array)
  * - This function ensures that all dynamically allocated memory associated
  *   with the list is freed, preventing memory leaks.
  */
-void	ft_free_mini(t_mini *freethis, const char *str)
+void	ft_free_mini(t_mini *freethis)
 {
 	t_mini	*aux;
 

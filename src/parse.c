@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/23 08:24:16 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:34:34 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_mini	*ft_process_input(char *line, char **envp)
 		return (NULL);
 	}
 	array = ft_split_prompt(line, ' ');
-	if (!array)
+	if (!array || array == NULL)
 	{
 		printf("Error splitting input line\n");
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/23 08:06:29 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:38:02 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,20 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = readline(name);
 		free(name);
-		if (!line)
+		if (!line || line[0] == ' ' || line[0] == '\0')
 		{
-			printf("Error al leer la línea.\n");
-			break ;
+			free(line);
+			continue ;
 		}
 		if (ft_strlen(line) > 0)
 		{
 			mini = ft_process_input(line, env);
 			add_history(line);
+			if (!mini)
+			{
+				free(line);
+				continue ;
+			}
 			process_command2(mini);
 			free(line);
 		}
