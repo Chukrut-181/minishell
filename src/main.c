@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 10:32:51 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/30 10:40:56 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = readline(name);
 		free(name);
-		if (!line || line[0] == 32)
+		if (!line || line[0] == ' ' || line[0] == '\0')
 		{
-			printf("Error al leer la línea.\n");
-			break ;
+			free(line);
+			continue ;
 		}
 		if (ft_strlen(line) > 0)
 		{
@@ -86,7 +86,8 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			if (!mini)
 			{
-				continue;
+				free(line);
+				continue ;
 			}
 			process_command2(mini);
 			free(line);
