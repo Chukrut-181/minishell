@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/23 08:06:29 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:32:51 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = readline(name);
 		free(name);
-		if (!line)
+		if (!line || line[0] == 32)
 		{
 			printf("Error al leer la línea.\n");
 			break ;
@@ -84,6 +84,10 @@ int	main(int argc, char **argv, char **env)
 		{
 			mini = ft_process_input(line, env);
 			add_history(line);
+			if (!mini)
+			{
+				continue;
+			}
 			process_command2(mini);
 			free(line);
 		}
