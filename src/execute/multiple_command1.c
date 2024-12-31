@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multiple_command.c                                 :+:      :+:    :+:   */
+/*   multiple_command1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/21 12:59:55 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/30 14:07:56 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,20 @@ void execute_multiples_command(t_mini *mini)
         continue ;
 }
 
-void	process_command2(t_mini *mini)
+void process_command2(t_mini *mini)
 {
-	if (mini->next == NULL && mini->is_builtin == 1)
-	{
-		management_builtins(mini);
-		return ;
-	}
-	else if (mini->next == NULL)
-		execute_one_command(mini);
-	else
-	{
-		execute_multiples_command(mini);
-	}
+    if (mini->is_builtin)
+    {
+        mini->status = management_builtins(mini);
+        // Actualiza el código de salida de la shell si es necesario
+        // Por ejemplo: shell.last_exit_status = status;
+    }
+    else if (mini->next == NULL)
+    {
+        execute_one_command(mini);
+    }
+    else
+    {
+        execute_multiples_command(mini);
+    }
 }

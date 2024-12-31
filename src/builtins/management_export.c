@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:31:48 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/31 13:43:03 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	new_env_copy = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!new_env_copy)
 		return (-1);
-	i = 0;
 	while (mini->env_copy[i])
 	{
 		new_env_copy[i] = mini->env_copy[i];
@@ -65,7 +64,6 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 		return (-1);
 	}
 	new_env_copy[i + 1] = NULL;
-	free(mini->env_copy);
 	mini->env_copy = new_env_copy;
 	return (0);
 }
@@ -83,7 +81,6 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		return (-1);
 	if (index >= 0)
 	{
-		free(mini->env_copy[index]);
 		mini->env_copy[index] = new_var;
 	}
 	else

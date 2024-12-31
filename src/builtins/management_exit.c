@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/24 07:51:52 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/31 10:21:28 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@
 Redirijo la gestión de todos los frees de salida al ejecutar exit 
 a ft_free_mini. Evitamos redundancias: doublke free, invalid pointer, etc.
 */
-void	management_exit(t_mini *mini)
+
+int management_exit(t_mini *mini)
 {
-	(void)mini;
+  	(void)mini;
 //	if (mini)
 //	{
 //		bucle_free(mini->full_cmd);

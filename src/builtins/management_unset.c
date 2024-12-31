@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/13 11:40:54 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/30 16:34:45 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static	int	find_and_remove_var(char **env, const char *var_name)
 	{
 		if (ft_strncmp(var_name, env[j], len) == 0 && env[j][len] == '=')
 		{
-			free(env[j]);
 			while (env[j])
 			{
 				env[j] = env[j + 1];
@@ -92,7 +91,7 @@ char	**create_env_copy(char **env)
 	return (env_copy);
 }
 
-void	management_unset(t_mini *mini)
+int	management_unset(t_mini *mini)
 {
 	int	i;
 
@@ -105,4 +104,5 @@ void	management_unset(t_mini *mini)
 			perror("uset: valiable not found\n");
 		i++;
 	}
+    return (mini->status);
 }

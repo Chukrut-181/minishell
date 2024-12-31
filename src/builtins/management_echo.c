@@ -6,13 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:41:37 by eandres           #+#    #+#             */
-/*   Updated: 2024/11/27 16:16:20 by eandres          ###   ########.fr       */
+/*   Updated: 2024/12/30 14:27:00 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	management_echo(t_mini *mini)
+int	management_echo(t_mini *mini)
 {
 	char	parameter;
 	int		i;
@@ -33,4 +33,6 @@ void	management_echo(t_mini *mini)
 	}
 	if (parameter == 1)
 		write(1, "\n", 1);
+	mini->status = 0;
+	return (mini->status);
 }
