@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 14:54:01 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/02 08:20:21 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int management_builtins(t_mini *mini)
         mini->status = management_export(mini);
     else if (ft_strcmp(mini->full_cmd[0], "exit") == 0)
         mini->status = management_exit(mini);
-    return mini->status;
+    return (mini->status);
 }
