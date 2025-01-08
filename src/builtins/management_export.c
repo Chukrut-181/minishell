@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/02 08:18:16 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:29:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	char	**new_env_copy;
 
 	i = 0;
-	while (mini->env_copy[i])
+	while (mini->envp[i])
 		i++;
 	new_env_copy = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!new_env_copy)
 		return (-1);
 	i = 0;
-	while (mini->env_copy[i])
+	while (mini->envp[i])
 	{
-		new_env_copy[i] = mini->env_copy[i];
+		new_env_copy[i] = mini->envp[i];
 		i++;
 	}
 	new_env_copy[i] = ft_strdup(new_var);
@@ -65,7 +65,8 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 		return (-1);
 	}
 	new_env_copy[i + 1] = NULL;
-	mini->env_copy = new_env_copy;
+	mini->envp = new_env_copy;
+	free(new_env_copy);
 	return (0);
 }
 
@@ -74,15 +75,15 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 	int		index;
 	char	*new_var;
 
-	if (!name || !mini->env_copy)
+	if (!name || !mini->envp)
 		return (-1);
-	index = find_env_var(mini->env_copy, name);
+	index = find_env_var(mini->envp, name);
 	new_var = create_env_var(name, value);
 	if (!new_var)
 		return (-1);
 	if (index >= 0)
 	{
-		mini->env_copy[index] = new_var;
+		mini->envp[index] = new_var;
 	}
 	else
 	{
@@ -99,7 +100,7 @@ int	management_export(t_mini *mini)
 {
 	char	*value;
 
-	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->env_copy)
+	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->envp)
 		return (perror("not found"), -1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
