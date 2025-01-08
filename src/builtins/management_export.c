@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/08 18:43:50 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/08 19:04:33 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	}
 	new_env_copy[i + 1] = NULL;
 	mini->env_copy = new_env_copy;
+	int j = 0;
+	while (mini->env_copy[j])
+		j++;
+	printf("%s\n", mini->env_copy[j - 1]);
 	free(new_env_copy);
 	return (0);
 }

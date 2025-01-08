@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/20 13:01:01 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:14:04 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,27 +240,27 @@ t_mini	*ft_initialize_mini_node(char **envp)
  * - Redirections (e.g., `<`, `>`, `>>`) are handled per node during processing.
  * - The function assumes `array` is properly formatted and null-terminated.
  */
-t_mini	*ft_create_structure(char **array, char **envp)
+t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
 {
 	t_mini	*head;
-	t_mini	*node;
+	//t_mini	*node;
 	t_mini	*next_node;
 	int		index;
 
-	node = ft_initialize_mini_node(envp);
-	head = node;
+	//node = ft_initialize_mini_node(envp);
+	head = mini;
 	index = 0;
 	while (1)
 	{
-		ft_check_redirections(node, &array[index]);
-		ft_get_full_command(node, &array[index]);
-		ft_check_if_builtin(node);
-		ft_get_path(node);
+		ft_check_redirections(mini, &array[index]);
+		ft_get_full_command(mini, &array[index]);
+		ft_check_if_builtin(mini);
+		ft_get_path(mini);
 		if (!ft_locate_pipe(&array[index], &index))
 			break ;
 		next_node = ft_initialize_mini_node(envp);
-		node->next = next_node;
-		node = next_node;
+		mini->next = next_node;
+		mini = next_node;
 	}
 	return (head);
 }
