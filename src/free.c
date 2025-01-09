@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/09 11:35:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:07:53 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	ft_free_mini(t_mini *freethis)
 			ft_free_array(freethis->full_cmd);
 		if (freethis->full_path)
 			free(freethis->full_path);
-		//if (freethis->envp)
-		//	ft_free_array(freethis->envp);
+		if (freethis->envp)
+			ft_free_array(freethis->envp);
 		aux = freethis;
 		freethis = freethis->next;
 		free(aux);

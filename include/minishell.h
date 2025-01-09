@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/09 11:27:36 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:27:53 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	close_pipe(int pipefd[2], int last_fd);
 void	pipe_output(int pipefd[2]);
 void	pipe_input(int last_fd);
 void	handle_redirection2(t_mini *mini);
-
+void	reset_mini_state(t_mini *mini);
 //other
 
 //parse and command list creation
