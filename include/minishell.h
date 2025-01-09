@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 18:00:16 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/09 11:27:36 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	handle_redirection2(t_mini *mini);
 //other
 
 //parse and command list creation
-t_mini	*ft_process_input(char *line, char **envp);
+t_mini	*ft_process_input(t_mini *mini, char *line, char **envp);
 char	**ft_split_prompt(char const *s, char c);
 char	*ft_expand_path(char *word);
 char	*ft_expand_variable(t_mini *mini, char *word, int index);
@@ -103,7 +103,7 @@ t_mini	*ft_initialize_mini_node(char **envp);
 void	ft_get_full_envp(t_mini *node, char **envp);
 void	ft_get_single_envp(t_mini *node, int i, char **envp);
 void	ft_check_redirections(t_mini *node, char **array);
-t_mini	*ft_create_structure(char **array, char **envp);
+t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp);
 void	ft_get_full_command(t_mini *node, char **array);
 int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
