@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 10:51:16 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:09:56 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_name(char **env)
 	}
 	if (!user)
 		user = ft_strjoin(PURPLEB, "unknown");
-	char	*prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
+	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	free(user);
 	return (prompt);
 }
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **env)
 	mini = ft_initialize_mini_node(env);
 	while (1)
 	{
-		name = get_name(env);
+		name = get_name(mini->env_copy);
 		if (!name)
 		{
 			perror("Error: No se pudo obtener el nombre del prompt\n");
