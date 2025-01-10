@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 10:24:12 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:14:40 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,12 @@ void	ft_check_redirections(t_mini *node, char **array)
 			i++;
 	}
 	len = ft_arraylen(array);
-	if (array && len - 2 >= 0 && *array[len - 2] == '>')
+	if (array && len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
+	{
+		node->outfile = open(array[len - 1],
+				O_CREAT | O_APPEND | O_WRONLY, 0644);
+	}
+	else if (array && len - 2 >= 0 && *array[len - 2] == '>')
 	{
 		node->outfile = open(array[len - 1],
 				O_CREAT | O_TRUNC | O_WRONLY, 0644);
