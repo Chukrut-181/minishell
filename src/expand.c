@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:49 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:22:50 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,24 @@ char	*ft_expand_path(char *word)
 	return (expanded);
 }
 
+static char *get_env_value(t_mini *mini, const char *name)
+{
+    int i;
+    int len;
+
+    len = ft_strlen(name);
+	i = 0;
+    while (mini->env_copy[i])
+    {
+        if (ft_strncmp(mini->env_copy[i], name, len) == 0 && mini->env_copy[i][len] == '=')
+        {
+            return (mini->env_copy[i] + len + 1);
+        }
+		i++;
+    }
+    return (NULL);
+}
+
 /**
  * expand_variable - Expands an environment variable within a string.
  *
@@ -60,7 +78,7 @@ char	*ft_expand_path(char *word)
  * 
  * The caller is responsible for freeing the returned string.
  */
-char	*ft_expand_variable(char *word, int index)
+char	*ft_expand_variable(t_mini *mini, char *word, int index)
 {
 	char	*var_name;
 	int		name_len;
@@ -69,7 +87,7 @@ char	*ft_expand_variable(char *word, int index)
 
 	name_len = ft_get_var_name_len(&word[index + 1]);
 	var_name = ft_substr(&word[index + 1], 0, name_len);
-	var_value = getenv(var_name);
+	var_value = get_env_value(mini, var_name);
 	if (!var_value)
 		var_value = "";
 	free(var_name);
@@ -77,7 +95,7 @@ char	*ft_expand_variable(char *word, int index)
 	if (!expanded)
 		return (NULL);
 	ft_strlcpy(expanded, var_value, (ft_strlen(var_value) + 1));
-	if (word[index + name_len + 1 != '\0'])
+	if (word[index + name_len + 1] != '\0')
 	{
 		var_value = &word[index + name_len + 1];
 		expanded = ft_strjoin(expanded, var_value);
@@ -123,7 +141,7 @@ int	ft_get_var_name_len(const char *var_name)
  * Return: 	The array with expanded strings. If a string is replaced,
  * 			its original memory is freed. Returns NULL if `temp` is NULL.
  */
-char	**ft_expand(char **temp)
+char	**ft_expand(t_mini *mini, char **temp)
 {
 	int		i;
 	int		j;
@@ -141,7 +159,7 @@ char	**ft_expand(char **temp)
 				&& ft_get_quote_context(temp[i], j) != '\'')
 			{
 				prefix = ft_substr(temp[i], 0, j);
-				temp[i] = ft_strjoin(prefix, ft_expand_variable(temp[i], j));
+				temp[i] = ft_strjoin(prefix, ft_expand_variable(mini, temp[i], j));
 				free(prefix);
 			}
 			j++;

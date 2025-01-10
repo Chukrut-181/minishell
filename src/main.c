@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 10:58:22 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 09:51:45 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	signal(SIGINT, ft_handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
+	mini = ft_initialize_mini_node(env);
 	while (1)
 	{
 		name = get_name(env);
@@ -84,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (ft_strlen(line) > 0)
 		{
-			mini = ft_process_input(line, env);
+			mini = ft_process_input(mini, line, env);
 			add_history(line);
 			if (!mini)
 			{
@@ -94,9 +95,9 @@ int	main(int argc, char **argv, char **env)
 			process_command2(mini);
 			free(line);
 		}
-		if (mini)
-			ft_free_mini(mini);
-		mini = NULL;
+		//if (mini)
+			//ft_free_mini(mini);
+		//mini = NULL;
 	}
 	rl_clear_history();
 	return (0);
