@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_command1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/09 14:28:56 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/10 10:50:14 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void reset_mini_state(t_mini *mini)
     // Reinicia los campos relevantes de mini
     mini->is_builtin = 0;
     mini->status = 0;
+	mini->next = NULL;
     // Reinicia file descriptors si es necesario
     if (mini->infile != STDIN_FILENO)
     {

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 09:51:45 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 10:51:16 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int	main(int argc, char **argv, char **env)
 			process_command2(mini);
 			free(line);
 		}
-		//if (mini)
-			//ft_free_mini(mini);
-		//mini = NULL;
+		ft_clean_and_reset(mini);
 	}
 	rl_clear_history();
 	return (0);
