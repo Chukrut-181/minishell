@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_command1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 10:50:14 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 17:47:47 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

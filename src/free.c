@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 10:49:20 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:09:15 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	ft_free_array(char **array)
 	while (array[i])
 	{
 		free(array[i]);
-		array[i] = NULL;
+		//array[i] = NULL;
 		i++;
 	}
 	free(array);
-	array = NULL;
+	//array = NULL;
 }
 
 /*
@@ -60,7 +60,7 @@ void	ft_free_array(char **array)
  * - This function ensures that all dynamically allocated memory associated
  *   with the list is freed, preventing memory leaks.
  */
-void	ft_free_mini(t_mini *freethis)
+/* void	ft_free_mini(t_mini *freethis)
 {
 	t_mini	*aux;
 
@@ -76,6 +76,24 @@ void	ft_free_mini(t_mini *freethis)
 		freethis = freethis->next;
 		free(aux);
 	}
+} */
+
+void ft_free_mini(t_mini *freethis)
+{
+    t_mini *aux;
+
+    while (freethis)
+    {
+        if (freethis->full_cmd)
+            ft_free_array(freethis->full_cmd);
+        if (freethis->full_path)
+            free(freethis->full_path);
+		if (freethis->envp)
+			ft_free_array(freethis->envp);
+        aux = freethis;
+        freethis = freethis->next;
+        free(aux);
+    }
 }
 
 void	ft_clean_and_reset(t_mini *mini)

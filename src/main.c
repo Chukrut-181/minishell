@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 11:09:56 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/10 17:43:48 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_clean_and_reset(mini);
 	}
+	ft_free_mini(mini);
 	rl_clear_history();
 	return (0);
 }

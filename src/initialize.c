@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 11:14:40 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:12:20 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void	ft_get_full_command(t_mini *node, char **array)
 		i++;
 	}
 	node->full_cmd = malloc(sizeof(char *) * (i + 1));
+	if (!node->full_cmd)
+	{
+		perror("malloc failded for full_cmd");
+		return ;
+	}
 	j = 0;
 	while (j < i)
 	{
@@ -110,7 +115,7 @@ void	ft_get_full_command(t_mini *node, char **array)
 
 /*
  * ft_check_redirections - Checks and handles input/output redirections
- 	 in a command array.
+ 	in a command array.
  *
  * This function processes the provided command array to identify input (`<`)
  * and output (`>`) redirections. It opens the appropriate files and updates
