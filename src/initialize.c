@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 18:12:20 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/11 10:30:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,6 @@ void	ft_get_full_command(t_mini *node, char **array)
 		i++;
 	}
 	node->full_cmd = malloc(sizeof(char *) * (i + 1));
-	if (!node->full_cmd)
-	{
-		perror("malloc failded for full_cmd");
-		return ;
-	}
 	j = 0;
 	while (j < i)
 	{
