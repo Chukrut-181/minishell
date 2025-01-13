@@ -6,14 +6,12 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:20 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/13 16:05:17 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:34:37 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* If here_doc was found, this function will create a .tmp file to store the
-input from the terminal until the limiter is found. */
 void	ft_create_tmp(t_mini *node)
 {
 	char	*line;
@@ -39,9 +37,6 @@ void	ft_create_tmp(t_mini *node)
 	close(pipefd[1]);
 }
 
-/* getline will read from the terminal one char at a time and create a string
-to be returned to the create_tmp function. Pay extra attention to aux: it is only
-used to avoid memory leaks. */
 char	*get_one_line(int fd)
 {
 	char	c;

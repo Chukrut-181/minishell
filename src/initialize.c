@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/13 16:10:21 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:48:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,16 +151,14 @@ void	ft_check_redirections(t_mini *node, char **array)
 	i = 0;
 	if (!array || !array[i])
 		return ;
- 	
- 	if (array && array[i] && *array[i] == '<' && array[i + 1] && *array[i + 1] == '<' && array[i + 2])
+	if (*array[i] == '<' && array[i + 1] && *array[i + 1] == '<'
+		&& array[i + 2])
 	{
 		node->limit = ft_strdup(array[i + 2]);
 		ft_create_tmp(node);
 	}
 	else if (array && array[i] && *array[i] == '<')
 		node->infile = open(array[i + 1], O_RDONLY);
-/* 	if (array && array[i] && *array[i] == '<')
-		node->infile = open(array[i + 1], O_RDONLY); */
 	while (array[i])
 	{
 		if (*array[i] == '|')
@@ -169,7 +167,7 @@ void	ft_check_redirections(t_mini *node, char **array)
 			i++;
 	}
 	len = ft_arraylen(array);
-	if (array && len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
+	if (len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
 	{
 		node->outfile = open(array[len - 1],
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
@@ -259,11 +257,9 @@ t_mini	*ft_initialize_mini_node(char **envp)
 t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
 {
 	t_mini	*head;
-	//t_mini	*node;
 	t_mini	*next_node;
 	int		index;
 
-	//node = ft_initialize_mini_node(envp);
 	head = mini;
 	index = 0;
 	while (1)
