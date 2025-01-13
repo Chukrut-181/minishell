@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:20 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 13:48:29 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:05:17 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void	ft_create_tmp(t_mini *node)
 {
 	char	*line;
 	char	*limiter;
+	int		pipefd[2];
 
 	limiter = ft_strjoin(node->limit, "\n");
-	node->infile = open(".temp", O_CREAT | O_TRUNC | O_RDWR, 0777);
+	if (pipe(pipefd) < 0)
+		printf("Error creating here_doc\n");
+	node->infile = pipefd[0];
 	while (true)
 	{
 		line = get_one_line(0);
@@ -29,11 +32,11 @@ void	ft_create_tmp(t_mini *node)
 			free(limiter);
 			break ;
 		}
-		ft_putstr_fd(line, node->infile);
+		ft_putstr_fd(line, pipefd[1]);
 		free(line);
 	}
 	free(line);
-	//close(node->infile);
+	close(pipefd[1]);
 }
 
 /* getline will read from the terminal one char at a time and create a string
