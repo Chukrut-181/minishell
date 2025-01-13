@@ -6,20 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 17:43:48 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:10:13 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-
-/* void	free_args(char **args)
-{
-	for (int i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-} */
 
 char	*get_name(char **env)
 {
@@ -44,17 +35,6 @@ char	*get_name(char **env)
 	return (prompt);
 }
 
-void	print(char **str)
-{
-	int	i = 0;
-
-	while (str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
@@ -63,8 +43,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	signal(SIGINT, ft_handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	setup_signals();
 	mini = ft_initialize_mini_node(env);
 	while (1)
 	{

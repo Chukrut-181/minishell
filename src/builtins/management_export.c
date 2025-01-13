@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/02 08:18:16 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:27:22 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static	int	find_env_var(char **env_copy, const char *name)
 	return (-1);
 }
 
-static	int	add_new_env_var(t_mini *mini, const char *new_var)
+static int add_new_env_var(t_mini *mini, const char *new_var)
 {
-	int		i;
-	char	**new_env_copy;
+	int     i;
+	char    **new_env_copy;
 
 	i = 0;
 	while (mini->env_copy[i])
@@ -55,13 +55,18 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	i = 0;
 	while (mini->env_copy[i])
 	{
-		new_env_copy[i] = mini->env_copy[i];
+		new_env_copy[i] = ft_strdup(mini->env_copy[i]);
+		if (!new_env_copy[i])
+		{
+			ft_free_array(new_env_copy);
+			return (-1);
+		}
 		i++;
 	}
 	new_env_copy[i] = ft_strdup(new_var);
 	if (!new_env_copy[i])
 	{
-		free(new_env_copy);
+		ft_free_array(new_env_copy);
 		return (-1);
 	}
 	new_env_copy[i + 1] = NULL;
@@ -92,6 +97,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 			return (-1);
 		}
 	}
+	free(new_var);
 	return (0);
 }
 

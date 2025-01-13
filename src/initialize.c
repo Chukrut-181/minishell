@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/11 10:30:05 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:41:47 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,12 +202,14 @@ t_mini	*ft_initialize_mini_node(char **envp)
 	new_node = malloc(sizeof(t_mini));
 	if (!new_node)
 		return (NULL);
-	ft_bzero(new_node, sizeof(t_mini));
+	ft_memset(new_node, 0, sizeof(t_mini));
 	ft_get_full_envp(new_node, envp);
 	new_node->infile = STDIN_FILENO;
 	new_node->outfile = STDOUT_FILENO;
 	new_node->next = NULL;
 	new_node->command = NULL;
+	new_node->full_cmd = NULL;
+	new_node->full_path = NULL;
 	return (new_node);
 }
 
@@ -245,14 +247,12 @@ t_mini	*ft_initialize_mini_node(char **envp)
  * - Redirections (e.g., `<`, `>`, `>>`) are handled per node during processing.
  * - The function assumes `array` is properly formatted and null-terminated.
  */
-t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
+t_mini *ft_create_structure(t_mini *mini, char **array, char **envp)
 {
-	t_mini	*head;
-	//t_mini	*node;
-	t_mini	*next_node;
-	int		index;
+	t_mini *head;
+	t_mini *next_node;
+	int     index;
 
-	//node = ft_initialize_mini_node(envp);
 	head = mini;
 	index = 0;
 	while (1)
@@ -262,7 +262,7 @@ t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
 		ft_check_if_builtin(mini);
 		ft_get_path(mini);
 		if (!ft_locate_pipe(&array[index], &index))
-			break ;
+			break;
 		next_node = ft_initialize_mini_node(envp);
 		mini->next = next_node;
 		mini = next_node;

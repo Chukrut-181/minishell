@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 18:09:15 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:47:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,19 @@
  * - If the array is NULL, the function does nothing.
  * - Ensures that all pointers are set to NULL after deallocation.
  */
-void	ft_free_array(char **array)
+void ft_free_array(char **array)
 {
-	int	i;
+	int i;
 
-	if (!array || !*array)
-		return ;
+	if (!array)
+		return;
 	i = 0;
 	while (array[i])
 	{
 		free(array[i]);
-		//array[i] = NULL;
 		i++;
 	}
-	free(array);
-	//array = NULL;
+	//free(array);
 }
 
 /*
@@ -60,9 +58,9 @@ void	ft_free_array(char **array)
  * - This function ensures that all dynamically allocated memory associated
  *   with the list is freed, preventing memory leaks.
  */
-/* void	ft_free_mini(t_mini *freethis)
+void ft_free_mini(t_mini *freethis)
 {
-	t_mini	*aux;
+	t_mini *aux;
 
 	while (freethis)
 	{
@@ -72,28 +70,14 @@ void	ft_free_array(char **array)
 			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
+		if (freethis->env_copy)
+			//ft_free_array(freethis->env_copy);
+		if (freethis->command)
+			free(freethis->command);
 		aux = freethis;
 		freethis = freethis->next;
 		free(aux);
 	}
-} */
-
-void ft_free_mini(t_mini *freethis)
-{
-    t_mini *aux;
-
-    while (freethis)
-    {
-        if (freethis->full_cmd)
-            ft_free_array(freethis->full_cmd);
-        if (freethis->full_path)
-            free(freethis->full_path);
-		if (freethis->envp)
-			ft_free_array(freethis->envp);
-        aux = freethis;
-        freethis = freethis->next;
-        free(aux);
-    }
 }
 
 void	ft_clean_and_reset(t_mini *mini)

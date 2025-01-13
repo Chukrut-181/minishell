@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:44:38 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/30 11:19:50 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:12:29 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+int g_exit_status = 0;
 
 /*
  * ft_handle_sigint - Signal handler for SIGINT (Ctrl-C).
@@ -30,11 +31,28 @@
  */
 void	ft_handle_sigint(int signal)
 {
-	if (signal == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	(void)signal;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void update_exit_status(int status)
+{
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_exit_status = 128 + WTERMSIG(status);
+}
+
+int get_exit_status(void)
+{
+	return (g_exit_status);
+}
+
+void setup_signals(void)
+{
+    signal(SIGINT, ft_handle_sigint);
+    signal(SIGQUIT, SIG_IGN);
 }
