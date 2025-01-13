@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/30 10:41:00 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 13:05:34 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,22 @@ void	ft_free_mini(t_mini *freethis)
 		freethis = freethis->next;
 		free(aux);
 	}
+}
+
+void	ft_clean_and_reset(t_mini *mini)
+{
+	t_mini	*aux;
+
+	if (mini->limit)
+	{
+		free(mini->limit);
+		mini->limit = NULL;
+		unlink(".temp");
+	}
+	if (mini->next != NULL)
+	{
+		aux = mini->next;
+		ft_free_mini(aux);
+	}
+	reset_mini_state(mini);
 }

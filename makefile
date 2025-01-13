@@ -3,7 +3,7 @@ NAME = minishell
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g
 RM = rm -rf
 
 # Directories

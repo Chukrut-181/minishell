@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_command1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 14:07:56 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/10 10:50:14 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,31 @@ void execute_multiples_command(t_mini *mini)
         continue ;
 }
 
+void reset_mini_state(t_mini *mini)
+{
+    // Reinicia los campos relevantes de mini
+    mini->is_builtin = 0;
+    mini->status = 0;
+	mini->next = NULL;
+    // Reinicia file descriptors si es necesario
+    if (mini->infile != STDIN_FILENO)
+    {
+        close(mini->infile);
+        mini->infile = STDIN_FILENO;
+    }
+    if (mini->outfile != STDOUT_FILENO)
+    {
+        close(mini->outfile);
+        mini->outfile = STDOUT_FILENO;
+    }
+    // Limpia full_path si es necesario
+    if (mini->full_path)
+    {
+        free(mini->full_path);
+        mini->full_path = NULL;
+    }
+}
+
 void process_command2(t_mini *mini)
 {
     if (mini->is_builtin)
@@ -86,4 +111,5 @@ void process_command2(t_mini *mini)
     {
         execute_multiples_command(mini);
     }
+    reset_mini_state(mini);
 }

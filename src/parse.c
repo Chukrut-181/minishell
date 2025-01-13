@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/08 19:16:59 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:11:24 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@
  *
  * Return: A null-terminated array of processed strings. NULL on error.
  */
-t_mini	*ft_process_input(char *line, char **envp)
+t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 {
 	char	**array;
-	t_mini	*mini = NULL;
 
 	if (!line)
 		return (NULL);
@@ -46,7 +45,6 @@ t_mini	*ft_process_input(char *line, char **envp)
 		printf("Error splitting input line\n");
 		return (NULL);
 	}
-	mini = ft_initialize_mini_node(envp);
 	array = ft_expand(mini, array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);

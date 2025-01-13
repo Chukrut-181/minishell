@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/08 19:14:19 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:10:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_mini
 	int				outfile;
 	int				status;
 	pid_t			pid;
+	char			*limit;
 	struct s_mini	*next;
 }					t_mini;
 
@@ -81,11 +82,11 @@ void	close_pipe(int pipefd[2], int last_fd);
 void	pipe_output(int pipefd[2]);
 void	pipe_input(int last_fd);
 void	handle_redirection2(t_mini *mini);
-
+void	reset_mini_state(t_mini *mini);
 //other
 
 //parse and command list creation
-t_mini	*ft_process_input(char *line, char **envp);
+t_mini	*ft_process_input(t_mini *mini, char *line, char **envp);
 char	**ft_split_prompt(char const *s, char c);
 char	*ft_expand_path(char *word);
 char	*ft_expand_variable(t_mini *mini, char *word, int index);
@@ -108,8 +109,15 @@ void	ft_get_full_command(t_mini *node, char **array);
 int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
+
+//heredoc
+void	ft_create_tmp(t_mini *node);
+char	*get_one_line(int fd);
+
+//free
 void	ft_free_array(char **array);
 void	ft_free_mini(t_mini *freethis);
+void	ft_clean_and_reset(t_mini *mini);
 
 //signal
 void ft_handle_sigint(int signal);
