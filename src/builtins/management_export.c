@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/13 17:27:22 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/14 16:59:23 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		return (-1);
 	if (index >= 0)
 	{
-		mini->env_copy[index] = new_var;
+		mini->env_copy[index] = ft_strdup(new_var);
 	}
 	else
 	{
