@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:41:37 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 14:27:00 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/15 13:49:52 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	management_echo(t_mini *mini)
 
 	i = 1;
 	parameter = 1;
+	if (!mini->full_cmd[i])
+		return (mini->status = 0);
 	if (mini->full_cmd[i] && ft_strncmp(mini->full_cmd[i], "-n", 2) == 0)
 	{
 		parameter = 0;
