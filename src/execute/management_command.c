@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/24 07:52:24 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:40:47 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	execute_one_command(t_mini *mini)
 		if (mini->outfile != STDOUT_FILENO)
 			close(mini->outfile);
 		waitpid(pid, &status, 0);
+		update_exit_status(status);
 	}
 }

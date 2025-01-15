@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/10 13:23:30 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:53:19 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,24 @@ void	ft_get_path(t_mini *node)
 	check_this(node);
 	if (node->is_builtin == 1)
 		return ;
-	paths = ft_split(getenv("PATH"), ':');
+	//paths = ft_split(getenv("PATH"), ':');
+	paths = NULL;
 	i = 0;
+	while (node->env_copy[i])
+	{
+		if (ft_strncmp("PATH=", node->env_copy[i], 5) == 0)
+		{
+			paths = ft_split(&(node->env_copy[i][5]), ':');
+			break ;
+		} 
+		else
+			i++;
+	}
+	i = 0;
+	if (!paths)
+	{
+		return ;
+	}
 	while (paths[i])
 	{
 		temp_path = ft_strjoin(paths[i], "/");
