@@ -6,20 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 17:43:48 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:09:53 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-
-/* void	free_args(char **args)
-{
-	for (int i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-} */
 
 char	*get_name(char **env)
 {
@@ -42,17 +35,6 @@ char	*get_name(char **env)
 	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	free(user);
 	return (prompt);
-}
-
-void	print(char **str)
-{
-	int	i = 0;
-
-	while (str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -101,5 +83,3 @@ int	main(int argc, char **argv, char **env)
 	rl_clear_history();
 	return (0);
 }
-
-/* 		valgrind --leak-check=full --suppressions=readline.supp ./minishell		*/

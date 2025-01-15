@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/02 08:18:16 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:12:41 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		return (-1);
 	if (index >= 0)
 	{
-		mini->env_copy[index] = new_var;
+		mini->env_copy[index] = ft_strdup(new_var);
 	}
 	else
 	{
@@ -92,6 +92,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 			return (-1);
 		}
 	}
+	free(new_var);
 	return (0);
 }
 

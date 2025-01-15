@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/10 17:47:47 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/15 12:13:09 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ void execute_multiples_command(t_mini *mini)
 
 void reset_mini_state(t_mini *mini)
 {
-    // Reinicia los campos relevantes de mini
     mini->is_builtin = 0;
     mini->status = 0;
 	mini->next = NULL;
-    // Reinicia file descriptors si es necesario
     if (mini->infile != STDIN_FILENO)
     {
         close(mini->infile);
@@ -87,11 +85,15 @@ void reset_mini_state(t_mini *mini)
         close(mini->outfile);
         mini->outfile = STDOUT_FILENO;
     }
-    // Limpia full_path si es necesario
     if (mini->full_path)
     {
         free(mini->full_path);
         mini->full_path = NULL;
+    }
+    if (mini->full_cmd)
+    {
+        ft_free_array(mini->full_cmd);
+        mini->full_cmd = NULL;
     }
 }
 
