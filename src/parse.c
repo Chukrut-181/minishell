@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/16 10:39:35 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:52:27 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 	if (!array || array == NULL)
 	{
 		printf("Error splitting input line\n");
+		ft_free_mini(mini);
 		return (NULL);
 	}
 	array = ft_expand(mini, array);
