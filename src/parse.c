@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/09 12:07:52 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/16 10:39:35 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 	if (ft_count_quotes(line) == -1)
 	{
 		printf("Warning: Unclosed quotes\n");
+		ft_free_mini(mini);
 		return (NULL);
 	}
 	array = ft_split_prompt(line, ' ');

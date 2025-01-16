@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/15 14:09:08 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/16 10:40:31 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int argc, char **argv, char **env)
 			if (!mini)
 			{
 				free(line);
+				mini = ft_initialize_mini_node(env);
 				continue ;
 			}
 			process_command2(mini);
