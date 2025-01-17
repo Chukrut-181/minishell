@@ -6,20 +6,11 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/13 16:10:59 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:57 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-
-/* void	free_args(char **args)
-{
-	for (int i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-} */
 
 char	*get_name(char **env)
 {
@@ -39,20 +30,9 @@ char	*get_name(char **env)
 	}
 	if (!user)
 		user = ft_strjoin(PURPLEB, "unknown");
-	char	*prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
+	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	free(user);
 	return (prompt);
-}
-
-void	print(char **str)
-{
-	int	i = 0;
-
-	while (str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -63,12 +43,11 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	signal(SIGINT, ft_handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	setup_signals();
 	mini = ft_initialize_mini_node(env);
 	while (1)
 	{
-		name = get_name(env);
+		name = get_name(mini->env_copy);
 		if (!name)
 		{
 			perror("Error: No se pudo obtener el nombre del prompt\n");
@@ -90,6 +69,7 @@ int	main(int argc, char **argv, char **env)
 			if (!mini)
 			{
 				free(line);
+				mini = ft_initialize_mini_node(env);
 				continue ;
 			}
 			process_command2(mini);
@@ -97,6 +77,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_clean_and_reset(mini);
 	}
+	ft_free_mini(mini);
 	rl_clear_history();
 	return (0);
 }

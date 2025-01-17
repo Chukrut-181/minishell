@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/13 16:45:03 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:16 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,14 @@ char	*ft_expand_path(char *word)
 
 static char	*get_env_value(t_mini *mini, const char *name)
 {
-	int	i;
-	int	len;
+	int i;
+	int len;
 
 	len = ft_strlen(name);
 	i = 0;
 	while (mini->env_copy[i])
 	{
-		if (ft_strncmp(mini->env_copy[i], name, len) == 0
-			&& mini->env_copy[i][len] == '=')
+		if (ft_strncmp(mini->env_copy[i], name, len) == 0 && mini->env_copy[i][len] == '=')
 		{
 			return (mini->env_copy[i] + len + 1);
 		}
@@ -85,7 +84,9 @@ char	*ft_expand_variable(t_mini *mini, char *word, int index)
 	int		name_len;
 	char	*var_value;
 	char	*expanded;
-
+	
+	if (ft_strncmp("$?", word, 2) == 0)
+		return (ft_itoa(mini->status));
 	name_len = ft_get_var_name_len(&word[index + 1]);
 	var_name = ft_substr(&word[index + 1], 0, name_len);
 	var_value = get_env_value(mini, var_name);

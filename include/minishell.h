@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/13 16:10:31 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:38:30 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 #include <signal.h>
 #include "../lib/libft/libft.h"
 #include <stdbool.h>
+#include <sys/wait.h>
 
 # define MAX_PATH 1024
+extern int g_exit_status;
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
@@ -83,7 +85,6 @@ void	pipe_output(int pipefd[2]);
 void	pipe_input(int last_fd);
 void	handle_redirection2(t_mini *mini);
 void	reset_mini_state(t_mini *mini);
-//other
 
 //parse and command list creation
 t_mini	*ft_process_input(t_mini *mini, char *line, char **envp);
@@ -121,5 +122,11 @@ void	ft_clean_and_reset(t_mini *mini);
 
 //signal
 void ft_handle_sigint(int signal);
+void update_exit_status(int status);
+int get_exit_status(void);
+
+
+//other
+void setup_signals(void);
 
 #endif
