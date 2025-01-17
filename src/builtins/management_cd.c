@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:43:05 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:22:34 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,14 @@ int	management_cd(t_mini *mini)
 	target_dir = get_target_dir(mini);
 	if (!target_dir)
 	{
-		perror("hola");
-		mini->status = 1;
-		return (mini->status);
+		perror("erro in cd command");
+		return (1);
 	}
 	if (chdir(target_dir) == -1)
 	{
-		perror("hola");
-		mini->status = 1;
-		return (mini->status);
+		perror("error in cd command");
+		return (1);
 	}
 	update_pwd_variables(oldpwd, mini);
-	mini->status = 0;
-	return (mini->status);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 12:08:59 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:39:06 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,88 +35,27 @@
  * 6. Stores a pointer to the original `envp` in the
  *    `env_copy` field of `node`.
  */
-/* void	ft_get_full_envp(t_mini *node, char **envp)
-{
-	int	i;
-	int	env_count;
-
-	env_count = 0;
-	while (envp[env_count])
-		env_count++;
-	node->envp = malloc(sizeof(char *) * (env_count + 1));
-	if (!node->envp)
-	{
-		perror("malloc failed for env_vars\n");
-		return ;
-	}
-	i = 0;
-	while (i < env_count)
-	{
-		ft_get_single_envp(node, i, envp);
-		i++;
-	}
-	node->envp[env_count] = NULL;
-	node->env_copy = envp;
-} */
-
 void ft_get_full_envp(t_mini *mini, char **envp)
 {
-    int count = 0;
+    int count;
 	int i;
-    
+
+    count = 0;
+	i = 0;
     while (envp[count] != NULL)
         count++;
     mini->env_copy = malloc((count + 1) * sizeof(char *));
     if (mini->env_copy == NULL)
-	{
-        perror("Error al asignar memoria para mini->env_copy");
-        exit(1);
-    }
-	i = 0;
+        return ;
     while (i < count)
 	{
         mini->env_copy[i] = ft_strdup(envp[i]);
         if (mini->env_copy[i] == NULL) 
 		{
-            perror("Error al copiar una variable de entorno");
-            exit(1);
+            error(mini, 1, "error in env");
+            return ;
         }
 		i++;
     }
     mini->env_copy[count] = NULL;
 }
-
-/*
- * ft_get_single_envp - Duplicates a single env var string.
- * @node: Pointer to the `t_mini` structure where the string will be stored.
- * @i: Index of the environment variable to duplicate.
- * @envp: Double-pointer to the original environment variables.
- * 
- * Description:
- * This function duplicates the `i`th string in the `envp` array and stores
- * it in the `node->envp` array. It first calculates the length of the string,
- * then allocates memory for it (including space for the null terminator).
- * After verifying the allocation, it copies the content of the string
- * using `ft_strlcpy`.
- * 
- * Steps:
- * 1. Calculates the length of the `i`th env var string using `ft_strlen`.
- * 2. Allocates memory for the string (length + 1 for null terminator).
- * 3. If allocation fails, logs an error using `perror` and frees
- *    the already allocated array.
- * 4. Copies the string content from `envp[i]` to the newly allocated memory.
- */
-/* void	ft_get_single_envp(t_mini *node, int i, char **envp)
-{
-	int	len;
-
-	len = ft_strlen(envp[i]);
-	node->envp[i] = malloc(sizeof(char) * (len + 1));
-	if (!node->envp[i])
-	{
-		perror("malloc failed for env_vars[i]\n");
-		ft_free_array(node->envp);
-		return ;
-	}
-	ft_strlcpy(node->envp[i], envp[i], len + 1);
-} */

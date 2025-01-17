@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:09:43 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 13:10:22 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:24:05 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	management_pwd(t_mini *mini)
 	}
 	else
 	{
-		perror("getcwd() error");
+		perror("error whith pwd");
 		mini->status = 1;
 	}
 	return (mini->status);

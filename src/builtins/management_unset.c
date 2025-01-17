@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 16:34:45 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:30:18 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,21 @@ int	management_unset(t_mini *mini)
 
 	i = 1;
 	if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))
-		perror("uset: invalid arguments\n");
+	{
+		mini->status = 1;
+		perror("unset: invalid parameter name\n");
+		return (mini->status);
+	}
 	while (mini->full_cmd[i])
 	{
 		if (!find_and_remove_var(mini->env_copy, mini->full_cmd[i]))
-			perror("uset: valiable not found\n");
+		{
+			mini->status = 1;
+			perror("unset: valiable not found\n");
+			return (mini->status);
+		}
 		i++;
 	}
+	mini->status = 0;
     return (mini->status);
 }

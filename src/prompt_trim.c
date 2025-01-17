@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_trim.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:14:17 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/30 10:35:13 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:18:00 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ char	**ft_split_prompt(char const *s, char c)
 	{
 		ft_get_next_word(&next_word, &next_word_len, c);
 		array[i] = (char *)malloc(sizeof(char) * (next_word_len + 1));
+		if (!array[i])
+			return (NULL);
 		ft_strlcpy(array[i], next_word, next_word_len + 1);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 12:52:30 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:17:19 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int create_pipes(int pipefd[2])
     if (pipe(pipefd) == -1)
     {
         perror("pipe");
-        return (-1);
+        return (EXIT_FAILURE);
     }
     return (0);
 }
 
 void	pipe_output(int pipefd[2])
 {
-	close(pipefd[0]);  // Close read end
+	close(pipefd[0]);
     if (dup2(pipefd[1], STDOUT_FILENO) == -1)
     {
         perror("dup2");

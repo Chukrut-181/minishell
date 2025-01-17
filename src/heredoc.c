@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:20 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/13 16:34:37 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:18:52 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ char	*get_one_line(int fd)
 	char	*aux;
 
 	str = malloc(1 * sizeof(char));
+	if (!str)
+		return (NULL);
 	str[0] = 0;
 	while (read(fd, &c, 1) > 0)
 	{
 		aux = str;
 		temp = malloc(2 * sizeof(char));
+		if (!temp)
+			return (NULL);
 		temp[0] = c;
 		temp[1] = 0;
 		str = ft_strjoin(aux, temp);

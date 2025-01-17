@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:57:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:29:43 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 #include <sys/wait.h>
 
 # define MAX_PATH 1024
-extern int g_exit_status;
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
@@ -103,7 +102,6 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index);
 char	**ft_final_trim(char **array);
 t_mini	*ft_initialize_mini_node(char **envp);
 void	ft_get_full_envp(t_mini *node, char **envp);
-void	ft_get_single_envp(t_mini *node, int i, char **envp);
 void	ft_check_redirections(t_mini *node, char **array);
 t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp);
 void	ft_get_full_command(t_mini *node, char **array);
@@ -128,5 +126,6 @@ int get_exit_status(void);
 
 //other
 void setup_signals(void);
+void	error(t_mini *mini, int sig, char *str);
 
 #endif

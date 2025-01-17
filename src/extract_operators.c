@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_operators.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:58:58 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/23 08:20:23 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:19:37 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,7 @@ char	**ft_create_temp_array(char **array, int i, int j)
 
 	temp_array = malloc(sizeof(char *) * 3);
 	if (!temp_array)
-	{
 		return (NULL);
-	}
 	temp_array[0] = ft_substr(&array[i][0], 0, j);
 	temp_array[1] = ft_strdup(&array[i][j]);
 	temp_array[2] = NULL;

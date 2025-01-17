@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 12:09:57 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:15:57 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,8 @@ static	int	find_env_var(char **env_copy, const char *name)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (1);
 }
-
-/* static void ft_free_env(char **var, size_t size)
-{
-	size_t i;
-
-	if (!var)
-		return ;
-	i = 0;
-	while (i < size)
-	{
-		if (var[i])
-			free(var[i]);
-		var[i] = NULL;
-		i++;
-	}
-	free(var);
-	var = NULL;
-	return ;
-} */
 
 static	int	add_new_env_var(t_mini *mini, const char *new_var)
 {
@@ -70,7 +51,7 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 		i++;
 	new_env_copy = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!new_env_copy)
-		return (-1);
+		return (1);
 	i = 0;
 	while (mini->env_copy[i])
 	{
@@ -81,7 +62,7 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	if (!new_env_copy[i])
 	{
 		free(new_env_copy);
-		return (-1);
+		return (1);
 	}
 	new_env_copy[i + 1] = NULL;
 	ft_free_array(mini->env_copy);
@@ -96,11 +77,11 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 	char	*new_var;
 
 	if (!name || !mini->env_copy)
-		return (-1);
+		return (1);
 	index = find_env_var(mini->env_copy, name);
 	new_var = create_env_var(name, value);
 	if (!new_var)
-		return (-1);
+		return (1);
 	if (index >= 0)
 	{
 		free(mini->env_copy[index]);
@@ -112,7 +93,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		if (add_new_env_var(mini, new_var) < 0)
 		{
 			free(new_var);
-			return (-1);
+			return (1);
 		}
 	}
 	free(new_var);
@@ -124,7 +105,7 @@ int	management_export(t_mini *mini)
 	char	*value;
 
 	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->env_copy)
-		return (perror("not found"), -1);
+		return (ft_putstr_fd("no valid option\n", 2), 1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{

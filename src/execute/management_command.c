@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:44:29 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:11:18 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_redirection1(t_mini *mini)
 	{
 		if (dup2(mini->infile, STDIN_FILENO) == -1)
 		{
-			perror("dup2");
+			error(mini, 1, "error in dup2");
 			exit(EXIT_FAILURE);
 		}
 		close(mini->infile);
@@ -31,7 +31,7 @@ void	handle_redirection2(t_mini *mini)
 	{
 		if (dup2(mini->outfile, STDOUT_FILENO) == -1)
 		{
-			perror("dup2");
+			error(mini, 1, "error in dup2");
 			exit(EXIT_FAILURE);
 		}
 		close(mini->outfile);
@@ -42,7 +42,7 @@ void	execute_external_command(t_mini *mini)
 {
 	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 	{
-		perror("execve");
+		error(mini, 3, "non executable");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -55,7 +55,7 @@ void	execute_one_command(t_mini *mini)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("erro: fork");
+		error(mini, 1, "error: fork");
 		return ;
 	}
 	else if (pid == 0)

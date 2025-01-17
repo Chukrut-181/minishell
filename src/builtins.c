@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:39:05 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:15:54 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	management_builtins(t_mini *mini)
 		mini->status = management_export(mini);
 	else if (ft_strcmp(mini->full_cmd[0], "exit") == 0)
 		mini->status = management_exit(mini);
-	g_exit_status = mini->status;
 	return (mini->status);
 }
