@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/23 08:43:37 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:02:37 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
  * 6. Stores a pointer to the original `envp` in the
  *    `env_copy` field of `node`.
  */
-void	ft_get_full_envp(t_mini *node, char **envp)
+/* void	ft_get_full_envp(t_mini *node, char **envp)
 {
 	int	i;
 	int	env_count;
@@ -57,6 +57,36 @@ void	ft_get_full_envp(t_mini *node, char **envp)
 	}
 	node->envp[env_count] = NULL;
 	node->env_copy = envp;
+} */
+
+void ft_get_full_envp(t_mini *mini, char **envp)
+{
+    int count = 0;
+    
+    // Contamos cuántas variables de entorno hay
+    while (envp[count] != NULL) {
+        count++;
+    }
+    // Asignamos memoria para el arreglo de punteros
+    mini->env_copy = malloc((count + 1) * sizeof(char *));  // +1 para el NULL al final
+    if (mini->env_copy == NULL) {
+        perror("Error al asignar memoria para mini->env_copy");
+        exit(1);
+    }
+
+    // Copiamos cada variable de entorno
+    for (int i = 0; i < count; i++)
+	{
+        mini->env_copy[i] = ft_strdup(envp[i]);  // Copia cada cadena
+        if (mini->env_copy[i] == NULL) 
+		{
+            perror("Error al copiar una variable de entorno");
+            exit(1);
+        }
+    }
+
+    // Aseguramos que el arreglo termina con un puntero NULL
+    mini->env_copy[count] = NULL;
 }
 
 /*
@@ -79,7 +109,7 @@ void	ft_get_full_envp(t_mini *node, char **envp)
  *    the already allocated array.
  * 4. Copies the string content from `envp[i]` to the newly allocated memory.
  */
-void	ft_get_single_envp(t_mini *node, int i, char **envp)
+/* void	ft_get_single_envp(t_mini *node, int i, char **envp)
 {
 	int	len;
 
@@ -92,4 +122,4 @@ void	ft_get_single_envp(t_mini *node, int i, char **envp)
 		return ;
 	}
 	ft_strlcpy(node->envp[i], envp[i], len + 1);
-}
+} */
