@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/15 12:53:19 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:08:47 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	ft_check_if_builtin(t_mini *node)
 }
 
 //he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+//(igchurru) modifico para evitar segfault cuando node->full_cmd[0] == NULL.
 
 static void check_this(t_mini *node)
 {
-	if (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.')
+	if (node->full_cmd[0] && (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.'))
     {
         node->full_path = ft_strdup(node->full_cmd[0]);
         return ;
@@ -92,10 +93,9 @@ void	ft_get_path(t_mini *node)
 	char	*valid_path;
 	int		i;
 
-	check_this(node);
 	if (node->is_builtin == 1)
 		return ;
-	//paths = ft_split(getenv("PATH"), ':');
+	check_this(node);
 	paths = NULL;
 	i = 0;
 	while (node->env_copy[i])
