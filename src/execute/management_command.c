@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 10:54:00 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:44:29 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	execute_one_command(t_mini *mini)
 		if (mini->outfile != STDOUT_FILENO)
 			close(mini->outfile);
 		waitpid(pid, &status, 0);
+		update_exit_status(status);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/13 16:41:11 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:38:44 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ void	ft_check_if_builtin(t_mini *node)
 		node->is_builtin = 1;
 }
 
-//he creado esta funcion para gestionar la posibilidad
-//de que sea una ruta completa
+//he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+//(igchurru) modifico para evitar segfault cuando node->full_cmd[0] == NULL.
 
 static void	check_this(t_mini *node)
 {
-	if (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.')
-	{
-		node->full_path = ft_strdup(node->full_cmd[0]);
-		return ;
-	}
+	if (node->full_cmd[0] && (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.'))
+    {
+        node->full_path = ft_strdup(node->full_cmd[0]);
+        return ;
+    }
 }
 
 /*
@@ -93,11 +93,26 @@ void	ft_get_path(t_mini *node)
 	char	*valid_path;
 	int		i;
 
-	check_this(node);
 	if (node->is_builtin == 1)
 		return ;
-	paths = ft_split(getenv("PATH"), ':');
+	check_this(node);
+	paths = NULL;
 	i = 0;
+	while (node->env_copy[i])
+	{
+		if (ft_strncmp("PATH=", node->env_copy[i], 5) == 0)
+		{
+			paths = ft_split(&(node->env_copy[i][5]), ':');
+			break ;
+		} 
+		else
+			i++;
+	}
+	i = 0;
+	if (!paths)
+	{
+		return ;
+	}
 	while (paths[i])
 	{
 		temp_path = ft_strjoin(paths[i++], "/");

@@ -6,13 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:41:46 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:43:01 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
 char	*get_name(char **env)
 {
@@ -45,8 +43,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	signal(SIGINT, ft_handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	setup_signals();
 	mini = ft_initialize_mini_node(env);
 	while (1)
 	{
@@ -72,6 +69,7 @@ int	main(int argc, char **argv, char **env)
 			if (!mini)
 			{
 				free(line);
+				mini = ft_initialize_mini_node(env);
 				continue ;
 			}
 			process_command2(mini);
