@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 11:46:41 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 12:04:44 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,22 @@ void ft_free_array(char **array)
  */
 void ft_free_mini(t_mini *freethis)
 {
-	t_mini *aux;
+    t_mini *aux;
 
-	while (freethis)
-	{
-		if (freethis->full_cmd)
-			ft_free_array(freethis->full_cmd);
-		if (freethis->full_path)
-			free(freethis->full_path);
+    while (freethis)
+    {
+        if (freethis->full_cmd)
+            ft_free_array(freethis->full_cmd);
+        if (freethis->full_path)
+            free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
-		if (freethis->command)
-			free(freethis->command);
-		aux = freethis;
-		freethis = freethis->next;
-		free(aux);
-	}
+		if (freethis->env_copy)
+			ft_free_array(freethis->env_copy);
+        aux = freethis;
+        freethis = freethis->next;
+        free(aux);
+    }
 }
 
 void	ft_clean_and_reset(t_mini *mini)

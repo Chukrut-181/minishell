@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 11:02:37 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 12:08:59 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,27 @@
 void ft_get_full_envp(t_mini *mini, char **envp)
 {
     int count = 0;
+	int i;
     
-    // Contamos cuántas variables de entorno hay
-    while (envp[count] != NULL) {
+    while (envp[count] != NULL)
         count++;
-    }
-    // Asignamos memoria para el arreglo de punteros
-    mini->env_copy = malloc((count + 1) * sizeof(char *));  // +1 para el NULL al final
-    if (mini->env_copy == NULL) {
+    mini->env_copy = malloc((count + 1) * sizeof(char *));
+    if (mini->env_copy == NULL)
+	{
         perror("Error al asignar memoria para mini->env_copy");
         exit(1);
     }
-
-    // Copiamos cada variable de entorno
-    for (int i = 0; i < count; i++)
+	i = 0;
+    while (i < count)
 	{
-        mini->env_copy[i] = ft_strdup(envp[i]);  // Copia cada cadena
+        mini->env_copy[i] = ft_strdup(envp[i]);
         if (mini->env_copy[i] == NULL) 
 		{
             perror("Error al copiar una variable de entorno");
             exit(1);
         }
+		i++;
     }
-
-    // Aseguramos que el arreglo termina con un puntero NULL
     mini->env_copy[count] = NULL;
 }
 
