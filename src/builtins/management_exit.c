@@ -6,27 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:43:13 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:49:46 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/* static	void	bucle_free(char **str)
-{
-	int	i;
-
-	if (str)
-	{
-		i = 0;
-		while (str[i])
-		{
-			free(str[i]);
-			i++;
-		}
-		free(str);
-	}
-} */
 
 /*
 Redirijo la gestión de todos los frees de salida al ejecutar exit 

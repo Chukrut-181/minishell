@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:44:24 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:53:22 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static	int	find_env_var(char **env_copy, const char *name)
 	return (-1);
 }
 
-static void ft_free_env(char **var, size_t size)
+static void ft_free_env(char **var, int size)
 {
-	size_t i;
+	int i;
 
 	if (!var)
 		return ;
@@ -75,11 +75,6 @@ static int add_new_env_var(t_mini *mini, const char *new_var)
 	while (mini->env_copy[i])
 	{
 		new_env_copy[i] = ft_strdup(mini->env_copy[i]);
-		if (!new_env_copy[i])
-		{
-			ft_free_array(new_env_copy);
-			return (-1);
-		}
 		i++;
 	}
 	new_env_copy[i] = ft_strdup(new_var);
@@ -108,6 +103,8 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		return (-1);
 	if (index >= 0)
 	{
+		free(mini->env_copy[index]);
+		mini->env_copy[index] = NULL;
 		mini->env_copy[index] = ft_strdup(new_var);
 	}
 	else
