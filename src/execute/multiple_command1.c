@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/15 13:11:38 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:41:31 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ void reset_mini_state(t_mini *mini)
         ft_free_array(mini->full_cmd);
         mini->full_cmd = NULL;
     }
+	if (mini->limit)
+	{
+		free(mini->limit);
+		mini->limit = NULL;
+	}
 }
 
 void process_command2(t_mini *mini)

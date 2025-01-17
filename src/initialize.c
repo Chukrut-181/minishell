@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 11:39:58 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:41:42 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ void	ft_get_full_command(t_mini *node, char **array)
 	int	k;
 
 	k = 0;
-	if (array && array[k] && *array[k] == '<')
+	if (node->limit != NULL)
+		k += 3;
+	else if (array && array[k] && *array[k] == '<')
 		k += 2;
 	i = 0;
 	while (array && array[k] && (*array[k] != '|' && *array[k] != '>'))
@@ -154,7 +156,13 @@ void	ft_check_redirections(t_mini *node, char **array)
 	i = 0;
 	if (!array || !array[i])
 		return ;
-	if (array && array[i] && *array[i] == '<')
+	if (*array[i] == '<' && array[i + 1] && *array[i + 1] == '<'
+		&& array[i + 2])
+	{
+		node->limit = ft_strdup(array[i + 2]);
+		ft_create_tmp(node);
+	}
+	else if (array && array[i] && *array[i] == '<')
 		node->infile = open(array[i + 1], O_RDONLY);
 	while (array[i])
 	{
@@ -164,7 +172,7 @@ void	ft_check_redirections(t_mini *node, char **array)
 			i++;
 	}
 	len = ft_arraylen(array);
-	if (array && len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
+	if (len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
 	{
 		node->outfile = open(array[len - 1],
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
@@ -213,6 +221,7 @@ t_mini	*ft_initialize_mini_node(char **envp)
 	new_node->outfile = STDOUT_FILENO;
 	new_node->next = NULL;
 	new_node->command = NULL;
+	new_node->limit = NULL;
 	return (new_node);
 }
 
@@ -253,11 +262,9 @@ t_mini	*ft_initialize_mini_node(char **envp)
 t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
 {
 	t_mini	*head;
-	//t_mini	*node;
 	t_mini	*next_node;
 	int		index;
 
-	//node = ft_initialize_mini_node(envp);
 	head = mini;
 	index = 0;
 	while (1)

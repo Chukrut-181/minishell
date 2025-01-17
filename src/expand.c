@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/09 14:22:50 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:45:03 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,23 @@ char	*ft_expand_path(char *word)
 	return (expanded);
 }
 
-static char *get_env_value(t_mini *mini, const char *name)
+static char	*get_env_value(t_mini *mini, const char *name)
 {
-    int i;
-    int len;
+	int	i;
+	int	len;
 
-    len = ft_strlen(name);
+	len = ft_strlen(name);
 	i = 0;
-    while (mini->env_copy[i])
-    {
-        if (ft_strncmp(mini->env_copy[i], name, len) == 0 && mini->env_copy[i][len] == '=')
-        {
-            return (mini->env_copy[i] + len + 1);
-        }
+	while (mini->env_copy[i])
+	{
+		if (ft_strncmp(mini->env_copy[i], name, len) == 0
+			&& mini->env_copy[i][len] == '=')
+		{
+			return (mini->env_copy[i] + len + 1);
+		}
 		i++;
-    }
-    return (NULL);
+	}
+	return (NULL);
 }
 
 /**
@@ -159,7 +160,8 @@ char	**ft_expand(t_mini *mini, char **temp)
 				&& ft_get_quote_context(temp[i], j) != '\'')
 			{
 				prefix = ft_substr(temp[i], 0, j);
-				temp[i] = ft_strjoin(prefix, ft_expand_variable(mini, temp[i], j));
+				temp[i] = ft_strjoin(prefix,
+						ft_expand_variable(mini, temp[i], j));
 				free(prefix);
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 11:02:14 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:41:39 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void	ft_free_array(char **array)
 			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
+		if (freethis->limit)
+		{
+			free(freethis->limit);
+			freethis->limit = NULL;
+		}
 		aux = freethis;
 		freethis = freethis->next;
 		free(aux);
@@ -102,6 +107,11 @@ void	ft_clean_and_reset(t_mini *mini)
 {
 	t_mini	*aux;
 
+	if (mini->limit)
+	{
+		free(mini->limit);
+		mini->limit = NULL;
+	}
 	if (mini->next != NULL)
 	{
 		aux = mini->next;

@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/27 11:26:30 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:41:11 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ void	ft_check_if_builtin(t_mini *node)
 		node->is_builtin = 1;
 }
 
-//he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+//he creado esta funcion para gestionar la posibilidad
+//de que sea una ruta completa
 
-static void check_this(t_mini *node)
+static void	check_this(t_mini *node)
 {
 	if (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.')
-    {
-        node->full_path = ft_strdup(node->full_cmd[0]);
-        return ;
-    }
+	{
+		node->full_path = ft_strdup(node->full_cmd[0]);
+		return ;
+	}
 }
 
 /*
@@ -99,7 +100,7 @@ void	ft_get_path(t_mini *node)
 	i = 0;
 	while (paths[i])
 	{
-		temp_path = ft_strjoin(paths[i], "/");
+		temp_path = ft_strjoin(paths[i++], "/");
 		valid_path = ft_strjoin(temp_path, node->full_cmd[0]);
 		free(temp_path);
 		if (access(valid_path, X_OK) == 0)
@@ -110,7 +111,6 @@ void	ft_get_path(t_mini *node)
 			return ;
 		}
 		free(valid_path);
-		i++;
 	}
 	ft_free_array(paths);
 }

@@ -6,7 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/01/17 11:39:49 by eandres          ###   ########.fr       */
+=======
+/*   Updated: 2025/01/13 16:10:31 by igchurru         ###   ########.fr       */
+>>>>>>> 097382ed3db62ae029074402937f1449cd327898
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +54,7 @@ typedef struct s_mini
 	int				outfile;
 	int				status;
 	pid_t			pid;
+	char			*limit;
 	struct s_mini	*next;
 }					t_mini;
 
@@ -108,6 +113,10 @@ void	ft_get_full_command(t_mini *node, char **array);
 int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
+
+//heredoc
+void	ft_create_tmp(t_mini *node);
+char	*get_one_line(int fd);
 
 //free
 void	ft_free_array(char **array);
