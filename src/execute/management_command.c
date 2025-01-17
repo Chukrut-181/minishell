@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 16:11:18 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:51:27 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	execute_external_command(t_mini *mini)
 {
 	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 	{
-		error(mini, 3, "non executable");
+		error(mini, 127, "non executable");
 		exit(EXIT_FAILURE);
 	}
 }

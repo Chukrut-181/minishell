@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:45:21 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:44:10 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void execute_multiples_command(t_mini *mini)
 void reset_mini_state(t_mini *mini)
 {
 	mini->is_builtin = 0;
-//    mini->status = 0;
 	mini->next = NULL;
 	if (mini->infile != STDIN_FILENO)
 	{
