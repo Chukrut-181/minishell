@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 14:49:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:55:13 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ static char	*get_target_dir(t_mini *mini)
 {
 	if (mini->full_cmd[1])
 		return (mini->full_cmd[1]);
-	return (get_env_value(mini->envp, "HOME"));
+	return (get_env_value(mini->env_copy, "HOME"));
 }
 
 static void	update_pwd_variables(char *oldpwd, t_mini *mini)
 {
 	char	cwd[MAX_PATH];
 
-	update_env_variable(mini->envp, "OLDPWD", oldpwd);
+	update_env_variable(mini->env_copy, "OLDPWD", oldpwd);
 	if (getcwd(cwd, sizeof(cwd)))
-		update_env_variable(mini->envp, "PWD", cwd);
+		update_env_variable(mini->env_copy, "PWD", cwd);
 }
 
 int	management_cd(t_mini *mini)

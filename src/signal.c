@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:44:38 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/23 08:20:47 by igchurru         ###   ########.fr       */
+/*   Updated: 2024/12/30 11:19:50 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_handle_sigint(int signal)
 	if (signal == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

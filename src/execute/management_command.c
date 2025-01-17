@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_command.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/24 07:52:24 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:54:00 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

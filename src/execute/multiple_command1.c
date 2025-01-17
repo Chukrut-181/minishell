@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2024/12/30 14:07:56 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/15 13:11:38 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,33 @@ void execute_multiples_command(t_mini *mini)
         continue ;
 }
 
+void reset_mini_state(t_mini *mini)
+{
+    mini->is_builtin = 0;
+    mini->status = 0;
+	mini->next = NULL;
+    if (mini->infile != STDIN_FILENO)
+    {
+        close(mini->infile);
+        mini->infile = STDIN_FILENO;
+    }
+    if (mini->outfile != STDOUT_FILENO)
+    {
+        close(mini->outfile);
+        mini->outfile = STDOUT_FILENO;
+    }
+    if (mini->full_path)
+    {
+        free(mini->full_path);
+        mini->full_path = NULL;
+    }
+    if (mini->full_cmd)
+    {
+        ft_free_array(mini->full_cmd);
+        mini->full_cmd = NULL;
+    }
+}
+
 void process_command2(t_mini *mini)
 {
     if (mini->is_builtin)
@@ -86,4 +113,5 @@ void process_command2(t_mini *mini)
     {
         execute_multiples_command(mini);
     }
+    reset_mini_state(mini);
 }

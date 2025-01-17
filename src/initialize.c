@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/08 19:14:04 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:58 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void	ft_get_full_command(t_mini *node, char **array)
 		i++;
 	}
 	node->full_cmd = malloc(sizeof(char *) * (i + 1));
+	if (!node->full_cmd)
+	{
+		perror("malloc failded for full_cmd");
+		return ;
+	}
 	j = 0;
 	while (j < i)
 	{
@@ -110,7 +115,7 @@ void	ft_get_full_command(t_mini *node, char **array)
 
 /*
  * ft_check_redirections - Checks and handles input/output redirections
- 	 in a command array.
+ 	in a command array.
  *
  * This function processes the provided command array to identify input (`<`)
  * and output (`>`) redirections. It opens the appropriate files and updates
@@ -159,7 +164,12 @@ void	ft_check_redirections(t_mini *node, char **array)
 			i++;
 	}
 	len = ft_arraylen(array);
-	if (array && len - 2 >= 0 && *array[len - 2] == '>')
+	if (array && len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
+	{
+		node->outfile = open(array[len - 1],
+				O_CREAT | O_APPEND | O_WRONLY, 0644);
+	}
+	else if (array && len - 2 >= 0 && *array[len - 2] == '>')
 	{
 		node->outfile = open(array[len - 1],
 				O_CREAT | O_TRUNC | O_WRONLY, 0644);

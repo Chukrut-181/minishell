@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/30 10:41:00 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:02:14 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_free_array(char **array)
  * - This function ensures that all dynamically allocated memory associated
  *   with the list is freed, preventing memory leaks.
  */
-void	ft_free_mini(t_mini *freethis)
+/* void	ft_free_mini(t_mini *freethis)
 {
 	t_mini	*aux;
 
@@ -76,4 +76,36 @@ void	ft_free_mini(t_mini *freethis)
 		freethis = freethis->next;
 		free(aux);
 	}
+} */
+
+void ft_free_mini(t_mini *freethis)
+{
+    t_mini *aux;
+
+    while (freethis)
+    {
+        if (freethis->full_cmd)
+            ft_free_array(freethis->full_cmd);
+        if (freethis->full_path)
+            free(freethis->full_path);
+		if (freethis->envp)
+			ft_free_array(freethis->envp);
+		if (freethis->env_copy)
+			ft_free_array(freethis->env_copy);
+        aux = freethis;
+        freethis = freethis->next;
+        free(aux);
+    }
+}
+
+void	ft_clean_and_reset(t_mini *mini)
+{
+	t_mini	*aux;
+
+	if (mini->next != NULL)
+	{
+		aux = mini->next;
+		ft_free_mini(aux);
+	}
+	reset_mini_state(mini);
 }

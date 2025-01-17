@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/08 19:04:33 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:24 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ static	int	find_env_var(char **env_copy, const char *name)
 	return (-1);
 }
 
+static void ft_free_env(char **var, size_t size)
+{
+	size_t i;
+
+	if (!var)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		if (var[i])
+			free(var[i]);
+		var[i] = NULL;
+		i++;
+	}
+	free(var);
+	var = NULL;
+	return ;
+}
+
 static	int	add_new_env_var(t_mini *mini, const char *new_var)
 {
 	int		i;
@@ -55,7 +74,7 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	i = 0;
 	while (mini->env_copy[i])
 	{
-		new_env_copy[i] = mini->env_copy[i];
+		new_env_copy[i] = ft_strdup(mini->env_copy[i]);
 		i++;
 	}
 	new_env_copy[i] = ft_strdup(new_var);
@@ -65,6 +84,8 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 		return (-1);
 	}
 	new_env_copy[i + 1] = NULL;
+	ft_free_env(mini->env_copy, i);
+	mini->env_copy = NULL;
 	mini->env_copy = new_env_copy;
 	int j = 0;
 	while (mini->env_copy[j])
@@ -87,7 +108,9 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 		return (-1);
 	if (index >= 0)
 	{
-		mini->env_copy[index] = new_var;
+		free(mini->env_copy[index]);
+		mini->env_copy[index] = NULL;
+		mini->env_copy[index] = ft_strdup(new_var);
 	}
 	else
 	{
@@ -97,6 +120,7 @@ int	set_env_var(t_mini *mini, const char *name, const char *value)
 			return (-1);
 		}
 	}
+	free(new_var);
 	return (0);
 }
 

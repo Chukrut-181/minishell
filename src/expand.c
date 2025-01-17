@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2024/12/31 10:13:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:22:50 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*ft_expand_variable(t_mini *mini, char *word, int index)
 	if (!expanded)
 		return (NULL);
 	ft_strlcpy(expanded, var_value, (ft_strlen(var_value) + 1));
-	if (word[index + name_len + 1 != '\0'])
+	if (word[index + name_len + 1] != '\0')
 	{
 		var_value = &word[index + name_len + 1];
 		expanded = ft_strjoin(expanded, var_value);

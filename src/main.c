@@ -6,20 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/08 19:07:12 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:40:08 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-
-/* void	free_args(char **args)
-{
-	for (int i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-} */
 
 char	*get_name(char **env)
 {
@@ -39,20 +32,9 @@ char	*get_name(char **env)
 	}
 	if (!user)
 		user = ft_strjoin(PURPLEB, "unknown");
-	char	*prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
+	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	free(user);
 	return (prompt);
-}
-
-void	print(char **str)
-{
-	int	i = 0;
-
-	while (str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -65,9 +47,10 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	signal(SIGINT, ft_handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
+	mini = ft_initialize_mini_node(env);
 	while (1)
 	{
-		name = get_name(env);
+		name = get_name(mini->env_copy);
 		if (!name)
 		{
 			perror("Error: No se pudo obtener el nombre del prompt\n");
@@ -75,14 +58,16 @@ int	main(int argc, char **argv, char **env)
 		}
 		line = readline(name);
 		free(name);
-		if (!line || line[0] == ' ' || line[0] == '\0')
+		if (!line)
+			break ;
+		if (line[0] == ' ' || line[0] == '\0')
 		{
 			free(line);
 			continue ;
 		}
 		if (ft_strlen(line) > 0)
 		{
-			mini = ft_process_input(line, env);
+			mini = ft_process_input(mini, line, env);
 			add_history(line);
 			if (!mini)
 			{
@@ -92,12 +77,9 @@ int	main(int argc, char **argv, char **env)
 			process_command2(mini);
 			free(line);
 		}
-		if (mini)
-			//ft_free_mini(mini);
-		mini = NULL;
+		ft_clean_and_reset(mini);
 	}
+	ft_free_mini(mini);
 	rl_clear_history();
 	return (0);
 }
-
-/* 		valgrind --leak-check=full --suppressions=readline.supp ./minishell		*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/08 12:33:20 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:40 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,7 @@ a ft_free_mini. Evitamos redundancias: doublke free, invalid pointer, etc.
 
 int management_exit(t_mini *mini)
 {
-  	ft_free_mini(mini);
-//	if (mini)
-//	{
-//		bucle_free(mini->full_cmd);
-//		if (mini->full_path)
-//			free(mini->full_path);
-//		bucle_free(mini->env_copy);
-//		free(mini);
-//	}
+	ft_free_mini(mini);
 	rl_clear_history();
 	exit(0);
 }
