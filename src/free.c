@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/15 12:53:36 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:36:37 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void ft_free_mini(t_mini *freethis)
 			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
-		if (freethis->env_copy)
-			//ft_free_array(freethis->env_copy);
 		if (freethis->command)
 			free(freethis->command);
 		aux = freethis;
@@ -88,7 +86,6 @@ void	ft_clean_and_reset(t_mini *mini)
 	{
 		free(mini->limit);
 		mini->limit = NULL;
-		unlink(".temp");
 	}
 	if (mini->next != NULL)
 	{
