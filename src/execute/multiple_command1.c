@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:49:59 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:48:11 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	reset_mini_state(t_mini *mini)
 void	process_command2(t_mini *mini)
 {
 	if (mini->is_builtin)
-		mini->status = management_builtins(mini);
+		g_exit_status = management_builtins(mini);
 	else if (mini->next == NULL)
 		execute_one_command(mini);
 	else

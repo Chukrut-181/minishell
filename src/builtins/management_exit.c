@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:56:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:50 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:48:11 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	management_exit(t_mini *mini)
 {
 	int	status;
 
-	status = mini->status;
+	status = g_exit_status;
 	ft_free_mini(mini);
 	rl_clear_history();
 	exit(status);

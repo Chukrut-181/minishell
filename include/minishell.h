@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:58:52 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:02:02 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 
 # define MAX_PATH 1024
+extern int g_exit_status;
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
@@ -49,7 +50,6 @@ typedef struct s_mini
 	int				num;
 	int				infile;
 	int				outfile;
-	int				status;
 	pid_t			pid;
 	char			*limit;
 	struct s_mini	*next;

@@ -6,13 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:44:38 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/19 17:46:27 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:02:29 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	g_exit_status = 0;
 
 /*
  * ft_handle_sigint - Signal handler for SIGINT (Ctrl-C).

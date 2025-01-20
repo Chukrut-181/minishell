@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:57:34 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/19 17:18:50 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:45:48 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_expand_variable(t_mini *mini, char *word, int index)
 	char	*expanded;
 
 	if (ft_strncmp("$?", word, 2) == 0)
-		return (ft_itoa(mini->status));
+		return (ft_itoa(g_exit_status));
 	name_len = ft_get_var_name_len(&word[index + 1]);
 	var_name = ft_substr(&word[index + 1], 0, name_len);
 	var_value = get_env_value(mini, var_name);

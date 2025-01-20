@@ -6,11 +6,12 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:44:30 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:02:34 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+int	g_exit_status = 0;
 
 char	*get_name(char **env)
 {

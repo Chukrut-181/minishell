@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 15:25:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:43:21 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 		return (NULL);
 	if (ft_count_quotes(line) == -1)
 	{
-		error(mini, 1, "Warning: Unclosed quotes\n");
+		error(mini, 1, "Warning: Unclosed quotes");
 		return (NULL);
 	}
 	array = ft_split_prompt(line, ' ');
 	if (!array || array == NULL)
 	{
-		error(mini, 1, "Error splitting input line\n");
+		error(mini, 1, "Error splitting input line");
 		return (NULL);
 	}
 	array = ft_expand(mini, array);
