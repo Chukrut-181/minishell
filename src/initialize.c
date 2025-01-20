@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/19 17:38:16 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:32:50 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,6 @@ t_mini	*ft_initialize_mini_node(char **envp)
 	new_node->command = NULL;
 	new_node->full_cmd = NULL;
 	new_node->full_path = NULL;
-	new_node->status = 0;
 	return (new_node);
 }
 
