@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_or_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/19 18:03:39 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 11:51:20 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_get_path(t_mini *node)
 	paths = NULL;
 	paths = ft_get_path_util(node, paths);
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		temp_path = ft_strjoin(paths[i++], "/");
 		valid_path = ft_strjoin(temp_path, node->full_cmd[0]);
