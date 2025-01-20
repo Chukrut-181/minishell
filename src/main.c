@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 14:02:34 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 15:58:33 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 		name = get_name(mini->env_copy);
 		if (!name)
 		{
-			perror("Error: No se pudo obtener el nombre del prompt\n");
+			error(mini, 1, "Error: No se pudo obtener el nombre del prompt");
 			break ;
 		}
 		line = readline(name);
