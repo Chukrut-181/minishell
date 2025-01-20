@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:09 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:32:35 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,20 @@ int	management_unset(t_mini *mini)
 	i = 1;
 	if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))
 	{
-		mini->status = 1;
+		g_exit_status = 1;
 		ft_putstr_fd("unset: invalid parameter name\n", 2);
-		return (mini->status);
+		return (g_exit_status);
 	}
 	while (mini->full_cmd[i])
 	{
 		if (!find_and_remove_var(mini->env_copy, mini->full_cmd[i]))
 		{
-			mini->status = 1;
+			g_exit_status = 1;
 			ft_putstr_fd("unset: valiable not found\n", 2);
-			return (mini->status);
+			return (g_exit_status);
 		}
 		i++;
 	}
-	mini->status = 0;
-	return (mini->status);
+	g_exit_status = 0;
+	return (g_exit_status);
 }

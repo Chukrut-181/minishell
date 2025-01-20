@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:41:37 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 14:17:15 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:32:35 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	management_echo(t_mini *mini)
 	i = 1;
 	parameter = 1;
 	if (!mini->full_cmd[i])
-		return (mini->status = 0);
+		return (g_exit_status = 0);
 	if (mini->full_cmd[i] && ft_strncmp(mini->full_cmd[i], "-n", 2) == 0)
 	{
 		parameter = 0;
@@ -35,6 +35,6 @@ int	management_echo(t_mini *mini)
 	}
 	if (parameter == 1)
 		write(1, "\n", 1);
-	mini->status = 0;
-	return (mini->status);
+	g_exit_status = 0;
+	return (g_exit_status);
 }
