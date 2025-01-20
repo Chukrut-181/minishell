@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:39:10 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 16:11:55 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:38:16 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,10 @@ void	ft_get_full_command(t_mini *node, char **array)
 	node->full_cmd = malloc(sizeof(char *) * (i + 1));
 	if (!node->full_cmd)
 		return ;
-	j = 0;
-	while (j < i)
+	j = -1;
+	while (++j < i)
 	{
 		node->full_cmd[j] = ft_strdup(array[k - i]);
-		j++;
 		k++;
 	}
 	node->full_cmd[j] = NULL;
@@ -148,7 +147,6 @@ void	ft_get_full_command(t_mini *node, char **array)
 void	ft_check_redirections(t_mini *node, char **array)
 {
 	int	i;
-	int	len;
 
 	i = 0;
 	if (!array || !array[i])
@@ -168,17 +166,7 @@ void	ft_check_redirections(t_mini *node, char **array)
 		else
 			i++;
 	}
-	len = ft_arraylen(array);
-	if (len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
-	{
-		node->outfile = open(array[len - 1],
-				O_CREAT | O_APPEND | O_WRONLY, 0644);
-	}
-	else if (array && len - 2 >= 0 && *array[len - 2] == '>')
-	{
-		node->outfile = open(array[len - 1],
-				O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	}
+	ft_check_redirections_util(node, array);
 }
 
 /*
@@ -258,11 +246,11 @@ t_mini	*ft_initialize_mini_node(char **envp)
  * - Redirections (e.g., `<`, `>`, `>>`) are handled per node during processing.
  * - The function assumes `array` is properly formatted and null-terminated.
  */
-t_mini *ft_create_structure(t_mini *mini, char **array, char **envp)
+t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp)
 {
-	t_mini *head;
-	t_mini *next_node;
-	int     index;
+	t_mini	*head;
+	t_mini	*next_node;
+	int		index;
 
 	head = mini;
 	index = 0;
@@ -273,7 +261,7 @@ t_mini *ft_create_structure(t_mini *mini, char **array, char **envp)
 		ft_check_if_builtin(mini);
 		ft_get_path(mini);
 		if (!ft_locate_pipe(&array[index], &index))
-			break;
+			break ;
 		next_node = ft_initialize_mini_node(envp);
 		mini->next = next_node;
 		mini = next_node;

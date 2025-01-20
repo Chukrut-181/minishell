@@ -6,11 +6,11 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:07:30 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 16:41:52 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:17:55 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "../include/minishell.h"
 
 void	error(t_mini *mini, int sig, char *str)
 {

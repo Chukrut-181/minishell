@@ -6,23 +6,23 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 15:29:43 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:58:52 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <limits.h>
-#include <signal.h>
-#include "../lib/libft/libft.h"
-#include <stdbool.h>
-#include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <limits.h>
+# include <signal.h>
+# include "../lib/libft/libft.h"
+# include <stdbool.h>
+# include <sys/wait.h>
 
 # define MAX_PATH 1024
 
@@ -78,7 +78,7 @@ void	handle_redirection1(t_mini *mini);
 void	execute_one_command(t_mini *mini);
 int		create_pipes(int pipefd[2]);
 void	execute_external_command(t_mini *mini);
-void	handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd);
+void	h_m_c(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd);
 void	close_pipe(int pipefd[2], int last_fd);
 void	pipe_output(int pipefd[2]);
 void	pipe_input(int last_fd);
@@ -108,6 +108,7 @@ void	ft_get_full_command(t_mini *node, char **array);
 int		ft_locate_pipe(char **array, int *index);
 void	ft_check_if_builtin(t_mini *node);
 void	ft_get_path(t_mini *node);
+void	ft_check_redirections_util(t_mini *node, char **array);
 
 //heredoc
 void	ft_create_tmp(t_mini *node);
@@ -119,13 +120,12 @@ void	ft_free_mini(t_mini *freethis);
 void	ft_clean_and_reset(t_mini *mini);
 
 //signal
-void ft_handle_sigint(int signal);
-void update_exit_status(int status);
-int get_exit_status(void);
-
+void	ft_handle_sigint(int signal);
+void	update_exit_status(int status);
+int		get_exit_status(void);
 
 //other
-void setup_signals(void);
+void	setup_signals(void);
 void	error(t_mini *mini, int sig, char *str);
 
 #endif

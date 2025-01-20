@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:08:48 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 12:04:44 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:02:04 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
  * - If the array is NULL, the function does nothing.
  * - Ensures that all pointers are set to NULL after deallocation.
  */
-void ft_free_array(char **array)
+void	ft_free_array(char **array)
 {
-	int i;
+	int	i;
 
 	if (!array)
-		return;
+		return ;
 	i = 0;
 	while (array[i])
 	{
@@ -60,24 +60,24 @@ void ft_free_array(char **array)
  * - This function ensures that all dynamically allocated memory associated
  *   with the list is freed, preventing memory leaks.
  */
-void ft_free_mini(t_mini *freethis)
+void	ft_free_mini(t_mini *freethis)
 {
-    t_mini *aux;
+	t_mini	*aux;
 
-    while (freethis)
-    {
-        if (freethis->full_cmd)
-            ft_free_array(freethis->full_cmd);
-        if (freethis->full_path)
-            free(freethis->full_path);
+	while (freethis)
+	{
+		if (freethis->full_cmd)
+			ft_free_array(freethis->full_cmd);
+		if (freethis->full_path)
+			free(freethis->full_path);
 		if (freethis->envp)
 			ft_free_array(freethis->envp);
 		if (freethis->env_copy)
 			ft_free_array(freethis->env_copy);
-        aux = freethis;
-        freethis = freethis->next;
-        free(aux);
-    }
+		aux = freethis;
+		freethis = freethis->next;
+		free(aux);
+	}
 }
 
 void	ft_clean_and_reset(t_mini *mini)

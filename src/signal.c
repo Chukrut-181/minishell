@@ -6,12 +6,13 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:44:38 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 12:49:11 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:46:27 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-int g_exit_status = 0;
+
+int	g_exit_status = 0;
 
 /*
  * ft_handle_sigint - Signal handler for SIGINT (Ctrl-C).
@@ -38,7 +39,7 @@ void	ft_handle_sigint(int signal)
 	rl_redisplay();
 }
 
-void update_exit_status(int status)
+void	update_exit_status(int status)
 {
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
@@ -46,13 +47,13 @@ void update_exit_status(int status)
 		g_exit_status = 128 + WTERMSIG(status);
 }
 
-int get_exit_status(void)
+int	get_exit_status(void)
 {
 	return (g_exit_status);
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
-    signal(SIGINT, ft_handle_sigint);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

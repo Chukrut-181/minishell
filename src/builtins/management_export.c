@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 16:15:57 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:57:11 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,9 @@ static	int	add_new_env_var(t_mini *mini, const char *new_var)
 	new_env_copy = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!new_env_copy)
 		return (1);
-	i = 0;
-	while (mini->env_copy[i])
-	{
+	i = -1;
+	while (mini->env_copy[++i])
 		new_env_copy[i] = ft_strdup(mini->env_copy[i]);
-		i++;
-	}
 	new_env_copy[i] = ft_strdup(new_var);
 	if (!new_env_copy[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 11:43:01 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:44:30 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 char	*get_name(char **env)
 {
-	char	*user = NULL;
-	int		i = 0;
+	char	*user;
+	char	*prompt;
+	int		i;
 
+	i = 0;
+	user = NULL;
 	if (!env)
 		return (ft_strdup("minishell $ "));
 	while (env[i])
@@ -30,9 +33,32 @@ char	*get_name(char **env)
 	}
 	if (!user)
 		user = ft_strjoin(PURPLEB, "unknown");
-	char *prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
+	prompt = ft_strjoin(user, BLUEB"@minishell $ "X);
 	free(user);
 	return (prompt);
+}
+
+static	void	util_main(t_mini *mini, char *line, char **env)
+{
+	if (line[0] == ' ' || line[0] == '\0')
+	{
+		free(line);
+		return ;
+	}
+	if (ft_strlen(line) > 0)
+	{
+		mini = ft_process_input(mini, line, env);
+		add_history(line);
+		if (!mini)
+		{
+			free(line);
+			mini = ft_initialize_mini_node(env);
+			return ;
+		}
+		process_command2(mini);
+		free(line);
+	}
+	ft_clean_and_reset(mini);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -57,25 +83,7 @@ int	main(int argc, char **argv, char **env)
 		free(name);
 		if (!line)
 			break ;
-		if (line[0] == ' ' || line[0] == '\0')
-		{
-			free(line);
-			continue ;
-		}
-		if (ft_strlen(line) > 0)
-		{
-			mini = ft_process_input(mini, line, env);
-			add_history(line);
-			if (!mini)
-			{
-				free(line);
-				mini = ft_initialize_mini_node(env);
-				continue ;
-			}
-			process_command2(mini);
-			free(line);
-		}
-		ft_clean_and_reset(mini);
+		util_main(mini, line, env);
 	}
 	ft_free_mini(mini);
 	rl_clear_history();

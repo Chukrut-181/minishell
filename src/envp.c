@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 15:39:06 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:17:33 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,27 @@
  * 6. Stores a pointer to the original `envp` in the
  *    `env_copy` field of `node`.
  */
-void ft_get_full_envp(t_mini *mini, char **envp)
+void	ft_get_full_envp(t_mini *mini, char **envp)
 {
-    int count;
-	int i;
+	int	count;
+	int	i;
 
-    count = 0;
+	count = 0;
 	i = 0;
-    while (envp[count] != NULL)
-        count++;
-    mini->env_copy = malloc((count + 1) * sizeof(char *));
-    if (mini->env_copy == NULL)
-        return ;
-    while (i < count)
+	while (envp[count] != NULL)
+		count++;
+	mini->env_copy = malloc((count + 1) * sizeof(char *));
+	if (mini->env_copy == NULL)
+		return ;
+	while (i < count)
 	{
-        mini->env_copy[i] = ft_strdup(envp[i]);
-        if (mini->env_copy[i] == NULL) 
+		mini->env_copy[i] = ft_strdup(envp[i]);
+		if (mini->env_copy[i] == NULL)
 		{
-            error(mini, 1, "error in env");
-            return ;
-        }
+			error(mini, 1, "error in env");
+			return ;
+		}
 		i++;
-    }
-    mini->env_copy[count] = NULL;
+	}
+	mini->env_copy[count] = NULL;
 }

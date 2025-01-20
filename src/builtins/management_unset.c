@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 16:59:51 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:53:09 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,5 @@ int	management_unset(t_mini *mini)
 		i++;
 	}
 	mini->status = 0;
-    return (mini->status);
+	return (mini->status);
 }

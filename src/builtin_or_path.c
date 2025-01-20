@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_or_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:19:15 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 11:38:44 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:03:39 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,39 @@ void	ft_check_if_builtin(t_mini *node)
 		node->is_builtin = 1;
 }
 
-//he creado esta funcion para gestionar la posibilidad de que sea una ruta completa
+//he creado esta funcion para gestionar la, 
+//posibilidad de que sea una ruta completa
 //(igchurru) modifico para evitar segfault cuando node->full_cmd[0] == NULL.
 
 static void	check_this(t_mini *node)
 {
-	if (node->full_cmd[0] && (node->full_cmd[0][0] == '/' || node->full_cmd[0][0] == '.'))
-    {
-        node->full_path = ft_strdup(node->full_cmd[0]);
-        return ;
-    }
+	if (node->full_cmd[0] && (node->full_cmd[0][0] == '/'
+		|| node->full_cmd[0][0] == '.'))
+	{
+		node->full_path = ft_strdup(node->full_cmd[0]);
+		return ;
+	}
+}
+
+static	char	**ft_get_path_util(t_mini *node, char **paths)
+{
+	int	i;
+
+	check_this(node);
+	i = 0;
+	while (node->env_copy[i])
+	{
+		if (ft_strncmp("PATH=", node->env_copy[i], 5) == 0)
+		{
+			paths = ft_split(&(node->env_copy[i][5]), ':');
+			break ;
+		}
+		else
+			i++;
+	}
+	if (!paths)
+		return (NULL);
+	return (paths);
 }
 
 /*
@@ -95,24 +118,9 @@ void	ft_get_path(t_mini *node)
 
 	if (node->is_builtin == 1)
 		return ;
-	check_this(node);
 	paths = NULL;
+	paths = ft_get_path_util(node, paths);
 	i = 0;
-	while (node->env_copy[i])
-	{
-		if (ft_strncmp("PATH=", node->env_copy[i], 5) == 0)
-		{
-			paths = ft_split(&(node->env_copy[i][5]), ':');
-			break ;
-		} 
-		else
-			i++;
-	}
-	i = 0;
-	if (!paths)
-	{
-		return ;
-	}
 	while (paths[i])
 	{
 		temp_path = ft_strjoin(paths[i++], "/");
@@ -128,4 +136,21 @@ void	ft_get_path(t_mini *node)
 		free(valid_path);
 	}
 	ft_free_array(paths);
+}
+
+void	ft_check_redirections_util(t_mini *node, char **array)
+{
+	int	len;
+
+	len = ft_arraylen(array);
+	if (len - 3 >= 0 && *array[len - 3] == '>' && *array[len - 2] == '>')
+	{
+		node->outfile = open(array[len - 1],
+				O_CREAT | O_APPEND | O_WRONLY, 0644);
+	}
+	else if (array && len - 2 >= 0 && *array[len - 2] == '>')
+	{
+		node->outfile = open(array[len - 1],
+				O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	}
 }

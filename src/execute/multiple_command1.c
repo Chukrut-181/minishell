@@ -6,15 +6,15 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 16:44:10 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:49:59 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd)
+void	h_m_c(int pipefd[2], int last_fd, t_mini *mini, t_mini *next_cmd)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
@@ -24,12 +24,9 @@ void handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *
 	}
 	if (pid == 0)
 	{
-		// Handle input from previous command if exists
 		pipe_input(last_fd);
-		// Handle output to next command if exists
 		if (next_cmd)
 			pipe_output(pipefd);
-		// Handle any redirections specific to this command
 		handle_redirection1(mini);
 		handle_redirection2(mini);
 		if (mini->is_builtin)
@@ -41,26 +38,24 @@ void handle_multiples_command(int pipefd[2], int last_fd, t_mini *mini, t_mini *
 	mini->pid = pid;
 }
 
-void execute_multiples_command(t_mini *mini)
+void	execute_multiples_command(t_mini *mini)
 {
-	int     last_fd;
-	int     pipefd[2];
-	int     status;
-	t_mini  *current;
+	int		last_fd;
+	int		pipefd[2];
+	int		status;
+	t_mini	*current;
 
 	last_fd = STDIN_FILENO;
 	current = mini;
 	while (current)
 	{
-		// Create pipe for all but the last command
 		if (current->next)
 		{
 			waitpid(mini->pid, &status, 0);
 			if (create_pipes(pipefd) == -1)
 				return ;
 		}
-   		handle_multiples_command(pipefd, last_fd, current, current->next);
-		// Close used pipe ends and update for next iteration
+		h_m_c(pipefd, last_fd, current, current->next);
 		close_pipe(pipefd, last_fd);
 		if (current->next)
 			last_fd = pipefd[0];
@@ -70,7 +65,7 @@ void execute_multiples_command(t_mini *mini)
 		update_exit_status(status);
 }
 
-void reset_mini_state(t_mini *mini)
+void	reset_mini_state(t_mini *mini)
 {
 	mini->is_builtin = 0;
 	mini->next = NULL;
@@ -96,21 +91,13 @@ void reset_mini_state(t_mini *mini)
 	}
 }
 
-void process_command2(t_mini *mini)
+void	process_command2(t_mini *mini)
 {
 	if (mini->is_builtin)
-	{
 		mini->status = management_builtins(mini);
-		// Actualiza el código de salida de la shell si es necesario
-		// Por ejemplo: shell.last_exit_status = status;
-	}
 	else if (mini->next == NULL)
-	{
 		execute_one_command(mini);
-	}
 	else
-	{
 		execute_multiples_command(mini);
-	}
 	reset_mini_state(mini);
 }

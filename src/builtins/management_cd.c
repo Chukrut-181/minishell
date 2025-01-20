@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 13:22:34 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:53:33 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*get_env_value(char **envp, char *var_name)
 	i = 0;
 	while (envp[i])
 	{
- 		if (ft_strncmp(envp[i], var_name, len) == 0 && envp[i][len] == '=')
+		if (ft_strncmp(envp[i], var_name, len) == 0 && envp[i][len] == '=')
 			return (&envp[i][len + 1]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:47 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/17 13:15:54 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/19 17:16:51 by eandres          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	management_builtins(t_mini *mini)
 {
-	//mini->full_path = ft_strdup(mini->full_cmd[0]);
 	if (ft_strcmp(mini->full_cmd[0], "cd") == 0)
 		mini->status = management_cd(mini);
 	else if (ft_strcmp(mini->full_cmd[0], "pwd") == 0)
