@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/22 11:19:09 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:27:06 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	execute_one_command(t_mini *mini)
 		if (mini->outfile != STDOUT_FILENO)
 			close(mini->outfile);
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			g_exit_status = WEXITSTATUS(status);
+		update_exit_status(status);
 	}
 }
