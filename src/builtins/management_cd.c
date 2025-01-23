@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:53:33 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:19:33 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int	management_cd(t_mini *mini)
 	target_dir = get_target_dir(mini);
 	if (!target_dir)
 	{
-		perror("erro in cd command");
+		perror("Error: cd: Target dir not found");
 		return (1);
 	}
 	if (chdir(target_dir) == -1)
 	{
-		perror("error in cd command");
+		perror("Error: cd: Could not change to target dir");
 		return (1);
 	}
 	update_pwd_variables(oldpwd, mini);

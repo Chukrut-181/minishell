@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:53 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 16:02:14 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:16:52 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 		name = get_name(mini->env_copy);
 		if (!name)
 		{
-			error(mini, 1, "Error: No se pudo obtener el nombre del prompt");
+			error(mini, 1, "Error: Could not get prompt name");
 			break ;
 		}
 		line = readline(name);
