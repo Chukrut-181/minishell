@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/19 17:17:33 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:55:14 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_get_full_envp(t_mini *mini, char **envp)
 		mini->env_copy[i] = ft_strdup(envp[i]);
 		if (mini->env_copy[i] == NULL)
 		{
-			error(mini, 1, "error in env");
+			error(mini, 1, "Could not copy env variables");
 			return ;
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:01:20 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/17 15:18:52 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:57:11 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_create_tmp(t_mini *node)
 
 	limiter = ft_strjoin(node->limit, "\n");
 	if (pipe(pipefd) < 0)
-		printf("Error creating here_doc\n");
+		printf("Error opening here_doc\n");
 	node->infile = pipefd[0];
 	while (true)
 	{

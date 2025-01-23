@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/23 10:13:57 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:58:08 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 		return (NULL);
 	if (ft_count_quotes(line) == -1)
 	{
-		error(mini, 2, "Error: Syntax error");
+		error(mini, 2, "Error: Unclosed quotes");
 		return (NULL);
 	}
 	array = ft_split_prompt(line, ' ');
