@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:12:40 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/23 10:19:33 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/23 10:27:37 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int	management_cd(t_mini *mini)
 	target_dir = get_target_dir(mini);
 	if (!target_dir)
 	{
-		perror("Error: cd: Target dir not found");
+		perror("Error: cd");
 		return (1);
 	}
 	if (chdir(target_dir) == -1)
 	{
-		perror("Error: cd: Could not change to target dir");
+		perror("Error: cd");
 		return (1);
 	}
 	update_pwd_variables(oldpwd, mini);

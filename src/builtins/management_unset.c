@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:10:25 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 14:33:59 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:31:27 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	management_unset(t_mini *mini)
 	if (!mini->env_copy || (is_valid(mini->full_cmd[1]) == 0))
 	{
 		g_exit_status = 1;
-		ft_putstr_fd("unset: invalid parameter name\n", 2);
+		ft_putstr_fd("Unset: Invalid parameter name\n", 2);
 		return (g_exit_status);
 	}
 	while (mini->full_cmd[i])
@@ -107,7 +107,7 @@ int	management_unset(t_mini *mini)
 		if (!find_and_remove_var(mini->env_copy, mini->full_cmd[i]))
 		{
 			g_exit_status = 1;
-			ft_putstr_fd("unset: valiable not found\n", 2);
+			ft_putstr_fd("Unset: Variable not found\n", 2);
 			return (g_exit_status);
 		}
 		i++;

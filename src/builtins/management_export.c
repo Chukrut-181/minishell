@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:06:14 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/19 17:57:11 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:36:50 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	management_export(t_mini *mini)
 	char	*value;
 
 	if ((is_valid(mini->full_cmd[1]) == -1) || !mini->env_copy)
-		return (ft_putstr_fd("no valid option\n", 2), 1);
+		return (ft_putstr_fd("Invalid env name or value\n", 2), 1);
 	value = ft_strchr(mini->full_cmd[1], '=');
 	if (value)
 	{

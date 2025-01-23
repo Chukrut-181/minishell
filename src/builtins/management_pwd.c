@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_pwd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:09:43 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 14:33:49 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:29:02 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	management_pwd(t_mini *mini)
 	}
 	else
 	{
-		perror("error whith pwd");
+		perror("Error: pwd");
 		g_exit_status = 1;
 	}
 	return (g_exit_status);
@@ -42,5 +42,5 @@ void	update_pwd(t_mini *mini)
 		mini->full_path = strdup(new_path);
 	}
 	else
-		perror("cd: error obteniendo el directorio actual");
+		perror("Error: pwd");
 }
