@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 14:34:24 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/23 11:05:33 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include <sys/wait.h>
 
 # define MAX_PATH 1024
-extern int g_exit_status;
+
+extern int	g_exit_status;
 
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
