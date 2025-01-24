@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/23 10:52:01 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:01:25 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	pipe_output(int pipefd[2])
 	if (dup2(pipefd[1], STDOUT_FILENO) == -1)
 	{
 		perror("Dup2 error: Output redirection failed");
-		exit(EXIT_FAILURE);
+		exit(9);
 	}
 	close(pipefd[1]);
 }
@@ -40,7 +40,7 @@ void	pipe_input(int last_fd)
 		if (dup2(last_fd, STDIN_FILENO) == -1)
 		{
 			perror("Dup2 error: Input redirection failed");
-			exit(EXIT_FAILURE);
+			exit(9);
 		}
 		close(last_fd);
 	}

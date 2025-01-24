@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/23 10:46:04 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/24 10:56:28 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	handle_redirection1(t_mini *mini)
 	{
 		if (dup2(mini->infile, STDIN_FILENO) == -1)
 		{
-			error(mini, 1, "Dup2 error: Input redirection failed");
-			exit(EXIT_FAILURE);
+			error(mini, 9, "Dup2 error: Input redirection failed");
+			exit(9);
 		}
 		close(mini->infile);
 	}
@@ -32,7 +32,7 @@ void	handle_redirection2(t_mini *mini)
 		if (dup2(mini->outfile, STDOUT_FILENO) == -1)
 		{
 			error(mini, 1, "Dup2 error: Output redirection failed");
-			exit(EXIT_FAILURE);
+			exit(9);
 		}
 		close(mini->outfile);
 	}
@@ -43,7 +43,7 @@ void	execute_external_command(t_mini *mini)
 	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
 	{
 		error(mini, 127, "Command not found");
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 }
 
