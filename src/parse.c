@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:44:42 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/23 10:58:08 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:28:36 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 	if (!line)
 		return (NULL);
 	if (ft_count_quotes(line) == -1)
-	{
-		error(mini, 2, "Error: Unclosed quotes");
-		return (NULL);
-	}
+		return (error(mini, 2, "Error: Unclosed quotes"), NULL);
 	array = ft_split_prompt(line, ' ');
 	if (!array || array == NULL)
 	{
@@ -48,6 +45,11 @@ t_mini	*ft_process_input(t_mini *mini, char *line, char **envp)
 	array = ft_expand(mini, array);
 	array = ft_extract_operators(array, "<|>");
 	array = ft_final_trim(array);
+	if (!ft_strncmp(array[0], "./minishell", 11))
+	{
+		error(mini, 1, "This minishell does not support that feature");
+		return (NULL);
+	}
 	mini = ft_create_structure(mini, array, envp);
 	ft_free_array(array);
 	return (mini);
