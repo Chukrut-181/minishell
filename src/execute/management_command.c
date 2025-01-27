@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/24 10:56:28 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:26:55 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	handle_redirection2(t_mini *mini)
 
 void	execute_external_command(t_mini *mini)
 {
-	if (execve(mini->full_path, mini->full_cmd, mini->envp) == -1)
+	if (execve(mini->full_path, mini->full_cmd, mini->env_copy) == -1)
 	{
 		error(mini, 127, "Command not found");
 		exit(127);
 	}
+	write(1, "coucou\n", 7);
 }
 
 void	execute_one_command(t_mini *mini)
