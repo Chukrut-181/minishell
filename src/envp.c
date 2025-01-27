@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/27 11:20:51 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:26:57 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_get_full_envp(t_mini *mini, char **envp)
 	}
 	mini->env_copy[count] = NULL;
 }
-
 
 void	ft_increment_shlvl(t_mini *mini)
 {
