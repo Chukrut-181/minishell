@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:05:06 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/27 10:26:55 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:41:27 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	execute_external_command(t_mini *mini)
 		error(mini, 127, "Command not found");
 		exit(127);
 	}
-	write(1, "coucou\n", 7);
 }
 
 void	execute_one_command(t_mini *mini)

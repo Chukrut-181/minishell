@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/23 10:55:14 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:04:21 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,26 @@ void	ft_get_full_envp(t_mini *mini, char **envp)
 		i++;
 	}
 	mini->env_copy[count] = NULL;
+}
+
+
+void	ft_increment_shlvl(t_mini *mini)
+{
+	int	i;
+	int	current_shlvl;
+
+	i = 0;
+	while (mini->env_copy[i])
+	{
+		if (ft_strncmp(mini->env_copy[i], "SHLVL=", 6) == 0)
+		{
+			current_shlvl = (ft_atoi(mini->env_copy[i] + 6));
+			current_shlvl++;
+			free(mini->env_copy[i]);
+			mini->env_copy[i] = ft_strjoin("SHLVL=", ft_itoa(current_shlvl));
+			break ;
+		}
+		else
+			i++;
+	}
 }

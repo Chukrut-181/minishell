@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_command1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eandres <eandres@student.42urdudilz.com    +#+  +:+       +#+        */
+/*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:36:18 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/20 14:34:03 by eandres          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:51:08 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ void	reset_mini_state(t_mini *mini)
 
 void	process_command2(t_mini *mini)
 {
+	if (ft_strncmp(mini->full_cmd[0], "./minishell", 11) == 0)
+	{
+		ft_increment_shlvl(mini);
+	}
+	
 	if (mini->is_builtin)
 		g_exit_status = management_builtins(mini);
 	else if (mini->next == NULL)

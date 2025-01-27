@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:19:09 by eandres           #+#    #+#             */
-/*   Updated: 2025/01/23 11:05:33 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:00:46 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char	**ft_concatenate_array(char **array, char **temp_array, int index);
 char	**ft_final_trim(char **array);
 t_mini	*ft_initialize_mini_node(char **envp);
 void	ft_get_full_envp(t_mini *node, char **envp);
+void	ft_increment_shlvl(t_mini *mini);
 void	ft_check_redirections(t_mini *node, char **array);
 t_mini	*ft_create_structure(t_mini *mini, char **array, char **envp);
 void	ft_get_full_command(t_mini *node, char **array);
