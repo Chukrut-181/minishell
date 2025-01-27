@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:09:32 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/27 11:04:21 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:20:51 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void	ft_get_full_envp(t_mini *mini, char **envp)
 
 void	ft_increment_shlvl(t_mini *mini)
 {
-	int	i;
-	int	current_shlvl;
+	int		i;
+	int		current_shlvl;
+	char	*temp;
 
 	i = 0;
 	while (mini->env_copy[i])
@@ -74,7 +75,9 @@ void	ft_increment_shlvl(t_mini *mini)
 			current_shlvl = (ft_atoi(mini->env_copy[i] + 6));
 			current_shlvl++;
 			free(mini->env_copy[i]);
-			mini->env_copy[i] = ft_strjoin("SHLVL=", ft_itoa(current_shlvl));
+			temp = ft_itoa(current_shlvl);
+			mini->env_copy[i] = ft_strjoin("SHLVL=", temp);
+			free(temp);
 			break ;
 		}
 		else
