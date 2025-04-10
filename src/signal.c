@@ -6,7 +6,7 @@
 /*   By: igchurru <igchurru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:44:38 by igchurru          #+#    #+#             */
-/*   Updated: 2025/01/23 10:40:38 by igchurru         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:09:16 by igchurru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	get_exit_status(void)
 
 void	setup_signals(void)
 {
+	rl_catch_signals = 0;
 	signal(SIGINT, ft_handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
